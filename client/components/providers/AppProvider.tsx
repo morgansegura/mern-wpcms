@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-// [Providers]
 import { ThemesProvider } from '@components/providers'
 import { AppProviderProps } from '@config/types'
 

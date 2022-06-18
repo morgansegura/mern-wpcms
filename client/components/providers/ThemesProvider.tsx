@@ -50,11 +50,13 @@ const ThemesProvider: React.FC<ThemesProviderProps> = ({ children }) => {
 	const { getStorage, setStorage } = useStorage()
 	const [themeMode, setThemeMode] = React.useState(getStorage('theme') || 'light')
 
+	setStorage('theme', themeMode)
+	console.log(themeMode)
 	const colorMode = React.useMemo(
 		() => ({
 			toggleColorMode: () => {
 				setThemeMode((prevMode: string) => (prevMode === 'light' ? 'dark' : 'light'))
-				themeMode === 'dark' ? setStorage('theme', 'light') : setStorage('theme', 'dark')
+				themeMode === 'light' ? setStorage('theme', 'dark') : setStorage('theme', 'light')
 			},
 		}),
 		[],
@@ -64,8 +66,9 @@ const ThemesProvider: React.FC<ThemesProviderProps> = ({ children }) => {
 		<ColorModeContext.Provider value={colorMode}>
 			<ThemeProvider theme={themeMode === 'light' ? themeLight : themeDark}>
 				<GlobalStyles />
-				{console.log(themeLight)}
+				<ToggleColorMode />
 				{children}
+				{console.log(themeLight)}
 			</ThemeProvider>
 		</ColorModeContext.Provider>
 	)

@@ -1,18 +1,17 @@
 import { css } from 'styled-components'
-import * as style from '@styles/config/utilities'
 
 export const setup = css`
 	html,
 	body {
 		padding: 0;
 		margin: 0;
-		font-family: ${style.font.family.sans};
-		font-size: ${style.font.base};
-		background-color: ${style.colors.gray50};
+		font-family: ${props => props.theme.typography.fontBase};
+		font-size: ${props => props.theme.typography.fontSizeBase};
+		background-color: ${props => props.theme.palette.background.default};
 		-webkit-text-size-adjust: 100%;
 		-moz-osx-font-smoothing: grayscale;
 		-webkit-font-smoothing: antialiased;
-		color: ${style.colors.gray900};
+		color: ${props => props.theme.palette.text.primary};
 	}
 
 	div,

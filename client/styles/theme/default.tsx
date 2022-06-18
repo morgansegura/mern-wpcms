@@ -14,7 +14,7 @@ import {
 } from 'styles/theme/settings'
 
 // [Interfaces]
-import { Theme } from 'styles/config/interfaces/Theme'
+import { Theme } from 'config/interfaces/Theme'
 
 const baseTheme: Theme = {
 	breakpoints: {
@@ -41,6 +41,8 @@ const baseTheme: Theme = {
 	},
 	zIndex: { ...zIndex },
 	direction: Direction,
+	palette: {},
+	typography: {},
 }
 
 export const themeLight: Theme = {
