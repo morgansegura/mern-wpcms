@@ -10,4 +10,5 @@ export interface Theme {
 	typography: Object
 	transitions: Object
 	zIndex: Object
+	theme?: Object
 }

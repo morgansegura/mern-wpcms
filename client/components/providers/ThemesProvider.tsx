@@ -17,7 +17,9 @@ const ColorModeContext = React.createContext({ toggleColorMode: () => {} })
 export function ToggleColorMode(props?: ToggleModeProps) {
 	const { getStorage } = useStorage()
 	const colorMode = React.useContext(ColorModeContext)
-	const [themeMode, setThemeMode] = React.useState(getStorage('theme') || 'light')
+	const [themeMode, setThemeMode] = React.useState(
+		getStorage('theme') === 'light' ? 'light' : 'dark',
+	)
 
 	const toggleMode = () => {
 		if (themeMode === 'dark') {
@@ -34,14 +36,11 @@ export function ToggleColorMode(props?: ToggleModeProps) {
 				toggleMode()
 			}}
 		>
-			<div>
-				{themeMode === 'dark' ? (
-					<MdBrightness7 fontSize="small" />
-				) : (
-					<MdBrightness4 fontSize="small" />
-				)}
-			</div>
-			{themeMode === 'dark' ? 'Light' : 'Dark'} Mode
+			{themeMode === 'dark' ? (
+				<MdBrightness7 fontSize="small" />
+			) : (
+				<MdBrightness4 fontSize="small" />
+			)}
 		</div>
 	)
 }
@@ -51,7 +50,7 @@ const ThemesProvider: React.FC<ThemesProviderProps> = ({ children }) => {
 	const [themeMode, setThemeMode] = React.useState(getStorage('theme') || 'light')
 
 	setStorage('theme', themeMode)
-	console.log(themeMode)
+
 	const colorMode = React.useMemo(
 		() => ({
 			toggleColorMode: () => {
@@ -66,9 +65,7 @@ const ThemesProvider: React.FC<ThemesProviderProps> = ({ children }) => {
 		<ColorModeContext.Provider value={colorMode}>
 			<ThemeProvider theme={themeMode === 'light' ? themeLight : themeDark}>
 				<GlobalStyles />
-				<ToggleColorMode />
 				{children}
-				{console.log(themeLight)}
 			</ThemeProvider>
 		</ColorModeContext.Provider>
 	)
