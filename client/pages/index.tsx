@@ -1,5 +1,5 @@
 import React from 'react'
-import { HomePageProps } from 'config/types/HomePageProps'
+import { HomePageProps } from '@config/interfaces'
 import { Menu } from '@components/layouts'
 
 const Home: React.FC<HomePageProps> = () => {

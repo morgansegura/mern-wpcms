@@ -319,11 +319,11 @@ export const device = {
 }
 export const radius = {
 	none: `0`,
-	sm: `0.125rem`,
-	base: `0.25rem`,
-	md: `0.375rem`,
-	lg: `0.5rem`,
-	xl: `0.75rem`,
+	xs: `2px`,
+	sm: `3px`,
+	md: `4px`,
+	lg: `6px`,
+	xl: `8px`,
 	'2xl': `1rem`,
 	'3xl': `1.5rem`,
 	circle: `9999px`,
@@ -370,14 +370,17 @@ export const grid = (rows: string = '12', size: string = '1fr') => {
 	`
 }
 
-export const fontSizing = (fontSize: string, lineHeight: string, fontWeight: number = 400) => {
-	const fs = readStringValue(String(fontSize), 'px') ? rem(fontSize) : fontSize
-	const lh = readStringValue(String(lineHeight), 'px') ? em(lineHeight) : lineHeight
+interface FontSizingProps {
+	fs: string
+	lh: string
+	fw?: number
+}
 
-	return css`
-		font-size: ${fs};
-		line-height: ${lh};
-		font-weight: ${fontWeight};
+export const fontSizing = (fs: string = '16px', lh: string = '24px', fw: number = 400) => {
+	return `
+		font-size: ${rem(fs)};
+		line-height: ${em(lh)};
+		font-weight: ${fw};
 	`
 }
 
