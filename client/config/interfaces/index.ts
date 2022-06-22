@@ -1,6 +1,7 @@
 export * from './AdminPageProps'
 export * from './AppProviderProps'
 export * from './Colors'
+export * from './ContainerProps'
 export * from './HomePageProps'
 export * from './MenuProps'
 export * from './SigninPageProps'

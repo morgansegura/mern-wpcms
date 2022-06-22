@@ -8,7 +8,7 @@ import * as yup from 'yup'
 // [API]
 import { authService, pathConfig as path } from 'api'
 // [Core]
-import TextField from 'core/inputs/TextField'
+import { TextField } from 'core/inputs'
 // import RippleEffect from 'core/utils/RippleEffect'
 // [Config]
 import { SigninFormProps } from '@config/interfaces'

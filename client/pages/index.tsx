@@ -1,13 +1,12 @@
 import React from 'react'
-import { HomePageProps } from '@config/interfaces'
-import { Menu } from '@components/layouts'
+// [Components]
+import { HomePageLayout } from '@components/layouts'
 
-const Home: React.FC<HomePageProps> = () => {
+const Home: React.FC = () => {
 	return (
-		<div>
-			<Menu />
+		<HomePageLayout>
 			<h1>Home Page</h1>
-		</div>
+		</HomePageLayout>
 	)
 }
 

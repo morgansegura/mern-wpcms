@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
-export interface HomePageProps {
-	title?: string
+
+export interface ContainerProps {
+	contain?: string
 	children?: ReactNode[] | ReactNode
 }

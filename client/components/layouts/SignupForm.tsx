@@ -10,7 +10,7 @@ import { authService } from 'api'
 // [Config]
 import { SignupFormProps } from '@config/interfaces'
 // [Core]
-import TextField from 'core/inputs/TextField'
+import { TextField } from 'core/inputs'
 // import RippleEffect from 'core/utils/RippleEffect'
 
 // [Styled]
