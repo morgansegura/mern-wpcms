@@ -1,16 +1,18 @@
 import React from 'react'
-import { SignupFormProps } from '@config/interfaces'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import toast, { Toaster } from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+// [API]
 import { authService } from 'api'
+// [Config]
+import { SignupFormProps } from '@config/interfaces'
 // [Core]
 import TextField from 'core/inputs/TextField'
 // import RippleEffect from 'core/utils/RippleEffect'
-import { Renderable, ValueFunction, Toast } from 'react-hot-toast/dist/core/types'
+
 // [Styled]
 import {
 	StyledForm,
@@ -52,7 +54,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ title }) => {
 				password: watch('password'),
 				passwordConfirm: watch('passwordConfirm'),
 			})
-			.then((res: { message: Renderable | ValueFunction<Renderable, Toast> }) => {
+			.then(res => {
 				setRegistered(true)
 				toast.success(res.message)
 			})

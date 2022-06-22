@@ -1,16 +1,18 @@
 import React from 'react'
-import { SigninFormProps } from '@config/interfaces'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import toast, { Toaster } from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { authService } from 'api'
+// [API]
+import { authService, pathConfig as path } from 'api'
 // [Core]
 import TextField from 'core/inputs/TextField'
 // import RippleEffect from 'core/utils/RippleEffect'
-
+// [Config]
+import { SigninFormProps } from '@config/interfaces'
+// [Styled]
 import {
 	StyledForm,
 	StyledFormAltMessage,
@@ -18,13 +20,11 @@ import {
 	StyledFormSubmitBlock,
 	StyledFormTitle,
 } from 'core/styles/inputs'
-// [Styled]
-import { Renderable, ValueFunction, Toast } from 'react-hot-toast/dist/core/types'
 
 const SigninForm: React.FC<SigninFormProps> = ({ title }) => {
 	const router = useRouter()
-	const [registered, setRegistered] = React.useState(false)
-	// const { auth } = paths
+	const [loggedIn, setLoggedIn] = React.useState(false)
+	const { auth } = path
 
 	const schema = yup.object().shape({
 		// username: yup.string().max(20).required(),
@@ -39,13 +39,11 @@ const SigninForm: React.FC<SigninFormProps> = ({ title }) => {
 				password: watch('password'),
 			})
 			.then(res => {
-				setRegistered(true)
+				setLoggedIn(true)
 				toast.success(`Welcome back ${res.user.username}`)
-				// console.log(res)
 			})
 			.catch((err: any) => {
 				toast.error(`Error ${err}`)
-				// console.log(err)
 			})
 	}
 
@@ -57,11 +55,12 @@ const SigninForm: React.FC<SigninFormProps> = ({ title }) => {
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
 
 	React.useEffect(() => {
-		if (registered) {
-			router.push('/signin')
+		console.log(loggedIn)
+		if (loggedIn) {
+			router.push(`${path.base.landing.href}`)
 			// toast.error(`📩  Please check your email to confirm registration.`)
 		}
-	}, [registered])
+	}, [loggedIn, onSubmit])
 
 	return (
 		<>
