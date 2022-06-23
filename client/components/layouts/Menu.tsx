@@ -31,7 +31,7 @@ const Menu: React.FC = () => {
 		{
 			label: (
 				<Link href="/signup">
-					<a>Signin</a>
+					<a>Signup</a>
 				</Link>
 			),
 			key: 'signup',

@@ -1,9 +1,17 @@
 import axios from 'axios'
 
 const client = (() => {
+	let API_PATH
+
+	if (typeof window === 'undefined') {
+		API_PATH = process.env.NEXT_PUBLIC_API
+	} else {
+		API_PATH = process.env.API
+	}
+
 	return axios.create({
 		withCredentials: true,
-		baseURL: process.env.apiPath,
+		baseURL: API_PATH,
 	})
 })()
 

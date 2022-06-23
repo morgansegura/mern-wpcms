@@ -3,6 +3,7 @@ import { rgba } from 'polished'
 
 export const Palette = {
 	light: {
+		name: 'light',
 		common: {
 			black: colors.black,
 			white: colors.white,
@@ -82,9 +83,10 @@ export const Palette = {
 		},
 	},
 	dark: {
+		name: 'dark',
 		common: {
-			black: colors.white,
-			white: colors.black,
+			black: colors.black,
+			white: colors.white,
 		},
 		background: {
 			default: colors.neutral50,

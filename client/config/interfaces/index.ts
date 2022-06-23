@@ -1,5 +1,6 @@
 export * from './AdminPageProps'
 export * from './AppProviderProps'
+export * from './AuthProviderProps'
 export * from './Colors'
 export * from './HeaderProps'
 export * from './DefaultLayoutProps'

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -11,7 +11,6 @@ import { authService } from 'api'
 import { SignupFormProps } from '@config/interfaces'
 // [Core]
 import { TextField } from 'core/inputs'
-// import RippleEffect from 'core/utils/RippleEffect'
 
 // [Styled]
 import {
@@ -79,6 +78,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ title }) => {
 					type="text"
 					name="fullName"
 					placeholder="Full Name"
+					error={errors.fullName?.message}
 					register={register}
 					watch={watch}
 				/>
@@ -88,6 +88,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ title }) => {
 					name="username"
 					placeholder="User Name"
 					register={register}
+					error={errors.username?.message}
 					required
 					watch={watch}
 				/>
@@ -97,6 +98,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ title }) => {
 					name="email"
 					placeholder="Email"
 					register={register}
+					error={errors.email?.message}
 					required
 					watch={watch}
 				/>
@@ -106,6 +108,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ title }) => {
 					name="password"
 					placeholder="Password"
 					register={register}
+					error={errors.password?.message}
 					required
 					watch={watch}
 				/>
@@ -115,6 +118,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ title }) => {
 					name="passwordConfirm"
 					placeholder="Confirm Password"
 					register={register}
+					error={errors.passwordConfirm?.message}
 					required
 					watch={watch}
 				/>
@@ -133,7 +137,6 @@ const SignupForm: React.FC<SignupFormProps> = ({ title }) => {
 					</Link>
 				</StyledFormAltMessage>
 			</StyledForm>
-			<Toaster />
 		</>
 	)
 }
