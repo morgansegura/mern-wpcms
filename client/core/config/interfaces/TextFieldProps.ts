@@ -1,14 +1,19 @@
 import { FocusEvent, ChangeEvent } from 'react'
 
 export interface TextFieldProps {
-	type: string
+	type?: string
 	label?: string
-	register: any
-	watch: any
+	register?: any
+	watch?: any
 	required?: boolean
 	autoComplete?: string
 	placeholder?: string
 	size?: string
 	name?: string
-	errors?: string
+	errors?: { [x: string]: any }
+	error?: boolean
+	success?: boolean
+	focus?: boolean
+	blur?: boolean
+	ref?: any
 }

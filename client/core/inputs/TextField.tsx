@@ -1,5 +1,6 @@
 import React from 'react'
 import { useClickAway } from 'react-use'
+import { emptyObject } from '@helpers/utils'
 import { TextFieldProps } from 'core/config/interfaces'
 
 // [Styled]
@@ -9,7 +10,7 @@ import {
 	StyledLabel,
 	StyledPlaceholder,
 	StyledInput,
-} from 'core/styles'
+} from 'core/styles/inputs'
 
 const TextField: React.FC<TextFieldProps> = ({
 	label,
@@ -17,12 +18,12 @@ const TextField: React.FC<TextFieldProps> = ({
 	required = false,
 	watch,
 	errors,
+	error,
 	name,
 	placeholder,
-	size = 'md',
 	type,
 }) => {
-	const inputRef = React.useRef(null)
+	const inputRef = React.useRef<HTMLDivElement>(null)
 	const [focus, setFocus] = React.useState(false)
 	const [blur, setBlur] = React.useState(true)
 
@@ -39,21 +40,22 @@ const TextField: React.FC<TextFieldProps> = ({
 	useClickAway(inputRef, () => {
 		if (watch(`${name}`).length === 0) {
 			setFocus(false)
-			setBlur(false)
+			setBlur(true)
 		}
 	})
 
 	const keyPressBlur = () => {
 		if (watch(`${name}`).length === 0) {
 			setFocus(false)
-			setBlur(false)
+			setBlur(true)
 		}
 	}
 
 	React.useEffect(() => {
 		const close = (e: any) => {
-			if (e.keyCode === 27) {
+			if (e.keyCode === 27 || e.keyCode === 9) {
 				keyPressBlur()
+				error = false
 			}
 		}
 		window.addEventListener('keydown', close)
@@ -61,20 +63,22 @@ const TextField: React.FC<TextFieldProps> = ({
 	}, [watch])
 
 	return (
-		<StyledTextFieldControl>
-			<StyledLabel>{label}</StyledLabel>
-			<StyledTextField ref={inputRef} size={size} focus={focus} blur={blur}>
-				<StyledPlaceholder>{placeholder}</StyledPlaceholder>
-				<StyledInput
-					name={name}
-					onFocus={onFocus}
-					onBlur={onBlur}
-					type={type}
-					errors={errors}
-					{...register(name, { required })}
-				/>
-			</StyledTextField>
-		</StyledTextFieldControl>
+		<>
+			<StyledTextFieldControl>
+				<StyledLabel>{label}</StyledLabel>
+				<StyledTextField ref={inputRef} focus={focus} blur={blur} error={error}>
+					<StyledPlaceholder>{placeholder}</StyledPlaceholder>
+					<StyledInput
+						name={name}
+						onFocus={onFocus}
+						onBlur={onBlur}
+						type={type}
+						errors={errors}
+						{...register(name, { required })}
+					/>
+				</StyledTextField>
+			</StyledTextFieldControl>
+		</>
 	)
 }
 

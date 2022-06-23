@@ -1,9 +1,13 @@
 import React from 'react'
-import { useStorage } from 'hooks'
-// [antd]
-import { ToggleColorMode } from '@components/providers/ThemesProvider'
 import Link from 'next/link'
-import { StyledMenu } from '@styles/components/navigation/Menu'
+// [Hooks]
+import { useStorage } from 'hooks'
+// [Components]
+import { ToggleColorMode } from '@components/providers/ThemesProvider'
+// [Config]
+import { MenuItemProps } from '@config/interfaces'
+// [Styles]
+import { StyledMenu, StyledMenuItem } from '@styles/components/layouts'
 
 const Menu: React.FC = () => {
 	const { getStorage } = useStorage()
@@ -38,7 +42,11 @@ const Menu: React.FC = () => {
 		},
 	]
 
-	return <StyledMenu mode="horizontal" items={items} />
+	return (
+		<StyledMenu>
+			{items && items.map(({ label, key }) => <StyledMenuItem key={key}>{label}</StyledMenuItem>)}
+		</StyledMenu>
+	)
 }
 
 export default Menu

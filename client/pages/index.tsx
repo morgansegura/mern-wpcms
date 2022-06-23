@@ -1,12 +1,16 @@
 import React from 'react'
+// [Core]
+import { Container } from 'core/layouts'
 // [Components]
-import { HomePageLayout } from '@components/layouts'
+import { DefaultLayout } from '@components/layouts'
 
 const Home: React.FC = () => {
 	return (
-		<HomePageLayout>
-			<h1>Home Page</h1>
-		</HomePageLayout>
+		<DefaultLayout>
+			<Container contain="xl">
+				<h1>Home Page</h1>
+			</Container>
+		</DefaultLayout>
 	)
 }
 

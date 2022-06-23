@@ -7,7 +7,7 @@ export const setup = css`
 		margin: 0;
 		font-family: ${props => props.theme.typography.fontBase};
 		font-size: ${props => props.theme.typography.fontSizeBase};
-		background-color: ${props => props.theme.palette.background.default};
+		background-color: ${props => props.theme.palette.background.body};
 		-webkit-text-size-adjust: 100%;
 		-moz-osx-font-smoothing: grayscale;
 		-webkit-font-smoothing: antialiased;

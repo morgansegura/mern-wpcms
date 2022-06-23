@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 import * as style from '@styles/config/utilities'
+import { rgba } from 'polished'
 
 // import { FormProps } from '@config/interfaces'
 
 export const StyledForm = styled.form`
-	max-width: ${style.contain.xs};
+	${style.container.xs};
 	display: flex;
 	flex-direction: column;
 	margin-right: auto;
@@ -37,7 +38,7 @@ export const StyledFormSubmit = styled.button`
 	flex: 1 0 auto;
 	align-items: center;
 	justify-content: center;
-	${style.fontSizing('14px', '60px', 600)};
+	${style.fontSizing('14px', '60px', 700)};
 	padding-right: ${style.sp['4']};
 	padding-left: ${style.sp['4']};
 	overflow: hidden;
@@ -45,15 +46,17 @@ export const StyledFormSubmit = styled.button`
 	border-color: transparent;
 	border-width: 0;
 	text-transform: uppercase;
-	background-color: ${style.colors.gray900};
-	color: ${style.colors.gray50};
+	background-color: ${props => props.theme.palette.common.black};
+	color: ${props => props.theme.palette.common.white};
+
+	transition: all 0.3s ease-out;
 
 	${style.media.lg`
 
 	`}
 
 	&:hover {
-		background-color: ${style.colors.gray800};
+		background-color: ${props => rgba(props.theme.palette.common.black, 0.85)};
 	}
 	&:active {
 		background-color: ${style.colors.black};

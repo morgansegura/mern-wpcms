@@ -1,14 +1,19 @@
 import React from 'react'
-import { SigninPageProps } from '@config/interfaces'
-import { Menu } from '@components/layouts'
+// [Core]
+import { Container } from 'core/layouts'
+// [Components]
+import { DefaultLayout, Menu } from '@components/layouts'
 import { SigninForm } from '@components/layouts'
+// [Config]
+import { SigninPageProps } from '@config/interfaces'
 
 const SigninPage: React.FC<SigninPageProps> = () => {
 	return (
-		<div>
-			<Menu />
-			<SigninForm title="Signin to your account" />
-		</div>
+		<DefaultLayout>
+			<Container contain="xl">
+				<SigninForm title="Signin to your account" />
+			</Container>
+		</DefaultLayout>
 	)
 }
 

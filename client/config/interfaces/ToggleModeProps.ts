@@ -1,3 +1,5 @@
 import React from 'react'
 
-export interface ToggleModeProps {}
+export interface ToggleModeProps {
+	theme?: string
+}

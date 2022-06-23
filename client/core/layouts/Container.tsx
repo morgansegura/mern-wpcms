@@ -1,6 +1,6 @@
 import React from 'react'
 // [Config]
-import { ContainerProps } from '@config/interfaces'
+import { ContainerProps } from 'core/config/interfaces'
 // [Styles]
 import { StyledContainer } from 'core/styles/layouts'
 

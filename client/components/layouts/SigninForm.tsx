@@ -19,6 +19,7 @@ import {
 	StyledFormSubmit,
 	StyledFormSubmitBlock,
 	StyledFormTitle,
+	StyledTextFieldWarning,
 } from 'core/styles/inputs'
 
 const SigninForm: React.FC<SigninFormProps> = ({ title }) => {
@@ -28,7 +29,7 @@ const SigninForm: React.FC<SigninFormProps> = ({ title }) => {
 
 	const schema = yup.object().shape({
 		// username: yup.string().max(20).required(),
-		email: yup.string().email().required(),
+		email: yup.string().email().required('Email is a required field.'),
 		password: yup.string().min(8).max(32).required(),
 	})
 
@@ -55,7 +56,6 @@ const SigninForm: React.FC<SigninFormProps> = ({ title }) => {
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
 
 	React.useEffect(() => {
-		console.log(loggedIn)
 		if (loggedIn) {
 			router.push(`${path.base.landing.href}`)
 			// toast.error(`📩  Please check your email to confirm registration.`)
@@ -71,19 +71,27 @@ const SigninForm: React.FC<SigninFormProps> = ({ title }) => {
 					name="email"
 					placeholder="Email"
 					register={register}
+					errors={errors}
+					error={errors.email?.message}
 					required
 					watch={watch}
 				/>
-				{errors.email?.message && <p>{errors.email?.message}</p>}
+				{errors.email?.message && (
+					<StyledTextFieldWarning>{errors.email?.message}</StyledTextFieldWarning>
+				)}
 				<TextField
 					type="password"
 					name="password"
 					placeholder="Password"
 					register={register}
+					errors={errors}
+					error={errors.password?.message}
 					required
 					watch={watch}
 				/>
-				{errors.password?.message && <p>{errors.password?.message}</p>}
+				{errors.password?.message && (
+					<StyledTextFieldWarning>{errors.password?.message}</StyledTextFieldWarning>
+				)}
 				<StyledFormSubmitBlock>
 					<StyledFormSubmit type="submit">
 						Signin

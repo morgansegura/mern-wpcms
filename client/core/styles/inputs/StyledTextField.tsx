@@ -14,14 +14,15 @@ export const StyledLabel = styled.div`
 
 export const StyledInput = styled.input`
 	position: relative;
+	padding: ${style.sp[2]};
+	z-index: 2;
 	display: flex;
+	user-select: none;
 	flex: 1 0 auto;
 	border: inherit;
-	z-index: 2;
-	user-select: none;
 	outline: inherit;
 	background-color: transparent;
-	padding: ${style.sp[3]};
+	border-radius: ${style.radius.sm};
 	${style.fontSizing('16px', '40px', 500)};
 
 	&:-internal-autofill-selected {
@@ -37,46 +38,52 @@ export const StyledInput = styled.input`
 
 export const StyledTextFieldControl = styled.div``
 
-export const StyledTextField = styled.div`
+export const StyledTextFieldWarning = styled.div`
+	${style.fontSizing('14px', '30px')};
+	color: ${props => props.theme.palette.danger.main};
+`
+
+export const StyledTextField = styled.div<TextFieldProps>`
 	position: relative;
 	z-index: 1;
 	display: flex;
 	align-items: center;
-	/* background-color: ${props => props.theme.palette.background.paper}; */
 	margin-top: ${style.sp['2']};
-
-	${StyledLabel} {
-	}
-	${StyledInput} {
-		color: ${props => props.theme.palette.text.main};
-	}
 
 	${StyledPlaceholder} {
 		left: ${style.sp[3.5]};
-		color: ${props =>
-			props.focus
-				? rgba(props.theme.palette.text.primary, 0)
-				: props.blur
-				? rgba(props.theme.palette.text.primary, 0.45)
-				: props.theme.palette.text.primary};
-		transition: transform 0.3s ease-out;
+		${props =>
+			props.blur &&
+			`
+			color: ${props.theme.palette.neutral['90']};
+		`}
+		${props =>
+			props.focus &&
+			`
+			color: ${rgba(props.theme.palette.neutral['90'], 0.0)};
+		`}
+
+
+		transition: all 0.3s ease-out;
 	}
 	${StyledInput} {
-		color: ${props =>
-			props.focus
-				? props.theme.palette.text.primary
-				: props.blur
-				? rgba(props.theme.palette.text.primary, 0.45)
-				: rgba(props.theme.palette.text.primary, 0)};
-		&:-internal-autofill-selected {
-			color: ${props =>
-				props.focus
-					? props.theme.palette.text.primary
-					: props.blur
-					? rgba(props.theme.palette.text.primary, 0.45)
-					: rgba(props.theme.palette.text.primary, 0)};
-		}
+		border: 1px solid transparent;
+		transition: all 0.3s ease-out;
 
-		border: 1px solid ${props => (props.focus ? `yellow` : props.blur ? `cyan` : `magenta`)};
+		${props =>
+			props.blur &&
+			`
+			border-color: ${rgba(props.theme.palette.neutral['10'], 0.3)};
+		`}
+		${props =>
+			props.focus &&
+			`
+			border-color: ${props.theme.palette.neutral['10']};
+		`}
+		${props =>
+			props.error &&
+			css`
+				border-color: ${props.theme.palette.danger.main};
+			`}
 	}
 `
