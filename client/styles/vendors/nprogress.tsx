@@ -7,14 +7,17 @@ export const nprogress = css`
   }
 
   #nprogress .bar {
-    background: ${style.colors.indigo700};
+    background: ${props =>
+			props.theme.palette.name === 'light'
+				? props.theme.palette.primary.main
+				: props.theme.palette.primary.main};
     position: fixed;
     z-index: 1031;
     top: 0;
     left: 0;
 
     width: 100%;
-    height: 2px;
+    height: 3px;
   }
 
   /* Fancy blur effect */
@@ -24,7 +27,10 @@ export const nprogress = css`
     right: 0px;
     width: 100px;
     height: 100%;
-    box-shadow: 0 0 10px ${style.colors.indigo700}
+    box-shadow: 0 0 10px ${props =>
+			props.theme.palette.name === 'light'
+				? props.theme.palette.primary.main
+				: props.theme.palette.primary.main}
     opacity: 1;
     -webkit-transform: rotate(3deg) translate(0px, -4px);
     -ms-transform: rotate(3deg) translate(0px, -4px);
@@ -46,8 +52,14 @@ export const nprogress = css`
     box-sizing: border-box;
 
     border: solid 2px transparent;
-    border-top-color: ${style.colors.indigo700};
-    border-left-color: ${style.colors.indigo700};
+    border-top-color: ${props =>
+			props.theme.palette.name === 'light'
+				? props.theme.palette.primary.main
+				: props.theme.palette.primary.main};
+    border-left-color: ${props =>
+			props.theme.palette.name === 'light'
+				? props.theme.palette.primary.main
+				: props.theme.palette.primary.main};
     border-radius: 50%;
 
     -webkit-animation: nprogress-spinner 400ms linear infinite;

@@ -13,6 +13,8 @@ export const StyledMenu = styled.nav`
 	${(props: MenuProps) => (props.mode ? `` : ``)}
 `
 
+export const StyledSVG = styled.div``
+
 export const StyledMenuItem = styled.div`
 	cursor: pointer;
 
@@ -20,17 +22,29 @@ export const StyledMenuItem = styled.div`
 		margin-left: ${style.sp['2']};
 	}
 
-	svg,
+	${StyledSVG},
 	a {
 		display: flex;
+		align-items: center;
+		position: relative;
+		z-index: 1;
 		color: ${props =>
 			props.theme.palette.name === 'light'
 				? props.theme.palette.neutral['40']
 				: props.theme.palette.neutral['80']};
-		background-color: transparent;
-		border: 1px solid transparent;
-		border-radius: ${style.radius.circle};
-		transition: background-color 0.6s ease-out, color 0.3s ease-out, border-color 0.6s ease-out;
+
+		&::after {
+			content: '';
+			position: absolute;
+			z-index: -1;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-color: transparent;
+			border-radius: ${style.radius.circle};
+			transition: background-color 0.45s ease-out, color 0.3s ease-out;
+		}
 
 		&:hover {
 			color: ${props =>
@@ -38,29 +52,39 @@ export const StyledMenuItem = styled.div`
 					? props.theme.palette.neutral['80']
 					: props.theme.palette.common.white};
 
-			background-color: ${props =>
+			&::after {
+				background-color: ${props =>
+					props.theme.palette.name === 'light'
+						? props.theme.palette.neutral['00']
+						: props.theme.palette.neutral['06']};
+			}
+		}
+		&:active {
+			color: ${props =>
 				props.theme.palette.name === 'light'
-					? props.theme.palette.neutral['00']
-					: props.theme.palette.neutral['06']};
+					? props.theme.palette.neutral['80']
+					: props.theme.palette.common.white};
+
+			&::after {
+				background-color: ${props =>
+					props.theme.palette.name === 'light'
+						? props.theme.palette.neutral['00']
+						: props.theme.palette.neutral['07']};
+			}
 		}
 	}
 
 	svg {
-		width: ${style.sp['2.5']};
-		height: ${style.sp['2.5']};
-		padding: ${style.sp['1']} ${rem('10px')};
+		display: flex;
+		align-items: center;
+		font-size: 16px;
+		padding: 10px ${rem('11px')};
 	}
 
 	a {
+		padding: ${style.sp['1']} ${style.sp['2']};
 		text-transform: uppercase;
 		letter-spacing: ${rem('0.5px')};
 		${style.fontSizing('12px', '20px', 700)}
-		padding: ${style.sp['1']} ${style.sp['2']};
 	}
-
-	${(props: MenuItemProps) =>
-		props.active &&
-		`
-
-	`};
 `

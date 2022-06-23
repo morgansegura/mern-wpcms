@@ -1,13 +1,12 @@
 import styled from 'styled-components'
 import * as style from '@styles/config/utilities'
-import { rem, math } from 'polished'
-import { StyledMenu } from '@styles/components/layouts'
+import { math } from 'polished'
 
 export const StyledHeader = styled.div`
 	position: relative;
 	z-index: 2;
 	${style.container.xxl}
-	margin-top: ${style.sp['1']};
+	margin-top: ${math(`${style.sp['1']} + 3px`)};
 	padding-top: ${style.sp['1.5']};
 	padding-bottom: ${style.sp['1.5']};
 	border-radius: ${style.radius.lg};
@@ -46,7 +45,16 @@ export const StyledLogoBlock = styled.div`
 		height: 45px;
 		fill: ${props =>
 			props.theme.palette.name === 'light'
-				? props.theme.palette.neutral['07']
-				: props.theme.palette.neutral['90']};
+				? props.theme.palette.neutral['40']
+				: props.theme.palette.neutral['80']};
+
+		transition: fill 0.3s ease-out;
+
+		&:hover {
+			fill: ${props =>
+				props.theme.palette.name === 'light'
+					? props.theme.palette.neutral['10']
+					: props.theme.palette.neutral['50']};
+		}
 	}
 `

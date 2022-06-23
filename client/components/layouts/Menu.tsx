@@ -2,12 +2,15 @@ import React from 'react'
 import Link from 'next/link'
 // [Hooks]
 import { useStorage } from 'hooks'
+// [Core]
+import { DrawerTrigger } from 'core/navigation'
 // [Components]
 import { ToggleColorMode } from '@components/providers/ThemesProvider'
-// [Config]
-import { MenuItemProps } from '@config/interfaces'
+import { SignOut } from '@components/inputs'
 // [Styles]
-import { StyledMenu, StyledMenuItem } from '@styles/components/layouts'
+import { StyledMenu, StyledMenuItem, StyledSVG } from '@styles/components/layouts'
+// [Icons]
+import { FaBars } from 'react-icons/fa'
 
 const Menu: React.FC = () => {
 	const { getStorage } = useStorage()
@@ -22,29 +25,59 @@ const Menu: React.FC = () => {
 	const items = [
 		{
 			label: (
-				<Link href="/signin">
-					<a>Signin</a>
-				</Link>
+				<StyledMenuItem>
+					<Link href="/signin">
+						<a>Signin</a>
+					</Link>
+				</StyledMenuItem>
 			),
 			key: 'signin',
 		},
 		{
 			label: (
-				<Link href="/signup">
-					<a>Signup</a>
-				</Link>
+				<StyledMenuItem>
+					<Link href="/signup">
+						<a>Signup</a>
+					</Link>
+				</StyledMenuItem>
 			),
 			key: 'signup',
 		},
 		{
-			label: <ToggleColorMode theme="light" />,
+			label: (
+				<StyledMenuItem>
+					<SignOut />
+				</StyledMenuItem>
+			),
+			key: 'signout',
+		},
+		{
+			label: (
+				<StyledMenuItem>
+					<StyledSVG>
+						<DrawerTrigger>
+							<FaBars />
+						</DrawerTrigger>
+					</StyledSVG>
+				</StyledMenuItem>
+			),
+			key: 'toggle-color',
+		},
+		{
+			label: (
+				<StyledMenuItem>
+					<StyledSVG>
+						<ToggleColorMode theme="light" />
+					</StyledSVG>
+				</StyledMenuItem>
+			),
 			key: 'toggle-color',
 		},
 	]
 
 	return (
 		<StyledMenu>
-			{items && items.map(({ label, key }) => <StyledMenuItem key={key}>{label}</StyledMenuItem>)}
+			{items && items.map(({ label, key }) => <React.Fragment key={key}>{label}</React.Fragment>)}
 		</StyledMenu>
 	)
 }

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 // [Core]
-import { Container } from 'core/layouts'
+import { Drawer } from 'core/navigation'
 // [Components]
 import { Header, Footer } from '@components/layouts'
 // [Config]
@@ -19,6 +19,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 				<main>{children}</main>
 				<Footer />
 			</StyledLayout>
+			<Drawer>A Menu will go here</Drawer>
 		</>
 	)
 }

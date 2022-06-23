@@ -1,6 +1,4 @@
 import styled from 'styled-components'
-import * as style from '@styles/config/utilities'
-import { StyledMenu, StyledHeader, StyledFooter } from '@styles/components/layouts'
 
 export const StyledLayout = styled.div`
 	display: flex;
@@ -10,10 +8,8 @@ export const StyledLayout = styled.div`
 	main {
 		flex: 1 0 auto;
 	}
+`
 
-	/* ${StyledHeader} {
-	}
-
-	${StyledFooter} {
-	} */
+export const StyledDrawer = styled.div`
+	position: fixed;
 `
