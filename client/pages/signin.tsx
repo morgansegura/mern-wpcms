@@ -11,7 +11,7 @@ const SigninPage: React.FC<SigninPageProps> = () => {
 	return (
 		<DefaultLayout>
 			<Container contain="xl">
-				<SigninForm title="Signin to your account" />
+				<SigninForm title="Signin to your account" copy="Your FEWCrew&trade; Account is waiting." />
 			</Container>
 		</DefaultLayout>
 	)

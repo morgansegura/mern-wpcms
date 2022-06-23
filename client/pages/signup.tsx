@@ -7,7 +7,7 @@ const SignupPage: React.FC<SignupPageProps> = () => {
 	return (
 		<div>
 			<Menu />
-			<SignupForm title="Signup" />
+			<SignupForm title="Signup" copy="Become a proud FEWCrew&trade; Member." />
 		</div>
 	)
 }

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import * as style from '@styles/config/utilities'
-import { rgba } from 'polished'
+import { rgba, rem } from 'polished'
 
 // import { FormProps } from '@config/interfaces'
 
@@ -10,28 +10,35 @@ export const StyledForm = styled.form`
 	flex-direction: column;
 	margin-right: auto;
 	margin-left: auto;
+	margin-top: 8%;
 `
 
 export const StyledFormTitle = styled.h2`
 	display: flex;
 	justify-content: center;
-	${style.fontSizing('22px', '32px', 700)}
-	margin-top: 25%;
+	${style.fontSizing('36px', '48px', 700)}
 
 	${style.media.lg`
-		${style.fontSizing('32px', '32px', 700)}
-		margin-top: 33%;
+		${style.fontSizing('32px', '60px', 700)}
+	`}
+`
+
+export const StyledFormCopy = styled.h3`
+	display: flex;
+	justify-content: center;
+	margin-top: -${rem('40px')};
+	${style.fontSizing('16px', '60px', 600)}
+
+	${style.media.lg`
+		margin-top: -${rem('45px')};
+		${style.fontSizing('18px', '60px', 600)}
 	`}
 `
 
 export const StyledFormSubmitBlock = styled.div`
-	margin-top: ${style.sp['4']};
 	display: flex;
 	justify-content: center;
-
-	${style.media.lg`
-
-	`}
+	margin-top: ${style.sp['3']};
 `
 
 export const StyledFormSubmit = styled.button`
@@ -116,8 +123,4 @@ export const StyledFormAltMessage = styled.div`
 					: props.theme.palette.secondary.main};
 		}
 	}
-
-	${style.media.lg`
-
-	`}
 `

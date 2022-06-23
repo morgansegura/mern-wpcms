@@ -11,7 +11,10 @@ export const StyledHeader = styled.div`
 	padding-top: ${style.sp['1.5']};
 	padding-bottom: ${style.sp['1.5']};
 	border-radius: ${style.radius.lg};
-	background-color: ${props => props.theme.palette.background.card};
+	background-color: ${props =>
+		props.theme.palette.name === 'light'
+			? props.theme.palette.neutral['05']
+			: props.theme.palette.neutral['07']};
 
 	a {
 		text-decoration: none;
@@ -41,6 +44,9 @@ export const StyledLogoBlock = styled.div`
 
 	svg {
 		height: 45px;
-		fill: ${props => props.theme.palette.text.primary};
+		fill: ${props =>
+			props.theme.palette.name === 'light'
+				? props.theme.palette.neutral['07']
+				: props.theme.palette.neutral['90']};
 	}
 `

@@ -19,13 +19,14 @@ import { SigninFormProps } from '@config/interfaces'
 import {
 	StyledForm,
 	StyledFormAltMessage,
+	StyledFormCopy,
 	StyledFormSubmit,
 	StyledFormSubmitBlock,
 	StyledFormTitle,
 	StyledTextFieldWarning,
 } from 'core/styles/inputs'
 
-const SigninForm: React.FC<SigninFormProps> = ({ title }) => {
+const SigninForm: React.FC<SigninFormProps> = ({ title, copy }) => {
 	const router = useRouter()
 	const { setStorage } = useStorage()
 	const [auth, setAuth] = React.useContext(AuthContext)
@@ -49,9 +50,13 @@ const SigninForm: React.FC<SigninFormProps> = ({ title }) => {
 				setAuth(res)
 				setStorage('auth', JSON.stringify(res))
 				toast.success(`Welcome back ${res.user.username}`)
+				setLoading(true)
 			})
 			.catch((err: any) => {
 				toast.error(`Error ${err}`)
+			})
+			.finally(() => {
+				setLoading(false)
 			})
 	}
 
@@ -71,7 +76,8 @@ const SigninForm: React.FC<SigninFormProps> = ({ title }) => {
 	return (
 		<>
 			<StyledForm onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-				<StyledFormTitle>{title}</StyledFormTitle>
+				{title && <StyledFormTitle>{title}</StyledFormTitle>}
+				{copy && <StyledFormCopy>{copy}</StyledFormCopy>}
 				<TextField
 					type="email"
 					name="email"

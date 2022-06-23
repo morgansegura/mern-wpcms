@@ -25,8 +25,8 @@ export const StyledMenuItem = styled.div`
 		display: flex;
 		color: ${props =>
 			props.theme.palette.name === 'light'
-				? props.theme.palette.common.black
-				: props.theme.palette.common.white};
+				? props.theme.palette.neutral['40']
+				: props.theme.palette.neutral['80']};
 		background-color: transparent;
 		border: 1px solid transparent;
 		border-radius: ${style.radius.circle};
@@ -35,12 +35,12 @@ export const StyledMenuItem = styled.div`
 		&:hover {
 			color: ${props =>
 				props.theme.palette.name === 'light'
-					? props.theme.palette.secondary.main
-					: props.theme.palette.secondary.main};
+					? props.theme.palette.neutral['80']
+					: props.theme.palette.common.white};
 
 			background-color: ${props =>
 				props.theme.palette.name === 'light'
-					? rgba(props.theme.palette.neutral['05'], 0.5)
+					? props.theme.palette.neutral['00']
 					: props.theme.palette.neutral['06']};
 		}
 	}
