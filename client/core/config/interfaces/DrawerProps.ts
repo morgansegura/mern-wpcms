@@ -4,6 +4,8 @@ export interface DrawerProps {
 	children?: ReactNode[] | ReactNode
 	open?: boolean
 	close?: boolean
+	content?: ReactNode[] | ReactNode
+	menu?: ReactNode[] | ReactNode
 }
 
 export interface DrawerTriggerProps {

@@ -3,7 +3,7 @@ import * as style from '@styles/config/utilities'
 import { rgba } from 'polished'
 import { DrawerFrameProps, DrawerProps, DrawerTriggerProps } from 'core/config'
 
-export const StyledDrawerTrigger = styled.div<DrawerTriggerProps>`
+export const DrawerTrigger = styled.div<DrawerTriggerProps>`
 	${props =>
 		props.open
 			? `
@@ -14,7 +14,7 @@ export const StyledDrawerTrigger = styled.div<DrawerTriggerProps>`
             `};
 `
 
-export const StyledDrawerFrame = styled.div<DrawerFrameProps>`
+export const DrawerFrame = styled.div<DrawerFrameProps>`
 	transform: scale(1);
 	transition: transform 0.45s ease-out;
 
@@ -28,12 +28,13 @@ export const StyledDrawerFrame = styled.div<DrawerFrameProps>`
             `};
 `
 
-export const StyledDrawerContainer = styled.div<DrawerProps>`
+export const DrawerContainer = styled.div<DrawerProps>`
 	/*
         [Base Styles]
     */
 	position: fixed;
 	z-index: ${style.zindex.top};
+
 	top: 50%;
 	left: 0;
 	width: 100%;
@@ -48,19 +49,10 @@ export const StyledDrawerContainer = styled.div<DrawerProps>`
 		props.theme.palette.name === 'light'
 			? props.theme.palette.neutral['06']
 			: props.theme.palette.neutral['70']};
-	box-shadow: 0 0 60px
-			${props =>
-				props.theme.palette.name === 'light'
-					? props.theme.palette.neutral['20']
-					: props.theme.palette.neutral['00']},
-		0 0 30px
-			${props =>
-				props.theme.palette.name === 'light'
-					? props.theme.palette.neutral['08']
-					: props.theme.palette.neutral['06']};
+	box-shadow: none;
 
 	transform: translateX(0) translateY(-50%);
-	transition: transform 0.4s ease-in;
+	transition: transform 0.4s ease-out;
 
 	/*
         [Relocate Styles]
@@ -69,6 +61,16 @@ export const StyledDrawerContainer = styled.div<DrawerProps>`
 	${props =>
 		props.open &&
 		css`
+			box-shadow: 0 0 60px
+					${props =>
+						props.theme.palette.name === 'light'
+							? props.theme.palette.neutral['20']
+							: props.theme.palette.neutral['00']},
+				0 0 30px
+					${props =>
+						props.theme.palette.name === 'light'
+							? props.theme.palette.neutral['08']
+							: props.theme.palette.neutral['06']};
 			transform: translateX(0) translateY(-50%);
 			transition: transform 0.3s ease-in;
 		`};
@@ -76,20 +78,22 @@ export const StyledDrawerContainer = styled.div<DrawerProps>`
 	${props =>
 		props.close &&
 		css`
+			box-shadow: none;
 			transform: translateX(-100%) translateY(-50%);
 			transition: transform 0.45s ease-out;
 		`};
 `
 
-export const StyledDrawerMenuContainer = styled.div`
+export const DrawerMenuContainer = styled.div`
 	padding: ${style.sp['8']} ${style.sp['11']} ${style.sp['8']} ${style.sp['6']};
 `
-export const StyledDrawerMenu = styled.nav`
+
+export const DrawerMenu = styled.nav`
 	&:not(:first-of-type) {
 		margin-top: ${style.sp['4']};
 	}
 `
-export const StyledDrawerTitle = styled.nav`
+export const DrawerMenuTitle = styled.nav`
 	${style.fontSizing('12px', '40px', 700)};
 	margin-bottom: ${style.sp['1']};
 	text-transform: uppercase;
@@ -105,7 +109,7 @@ export const StyledDrawerTitle = styled.nav`
 				? props.theme.palette.neutral['07']
 				: props.theme.palette.neutral['60']};
 `
-export const StyledDrawerMenuItem = styled.div`
+export const DrawerMenuItem = styled.div`
 	display: flex;
 
 	a {
@@ -137,7 +141,7 @@ export const StyledDrawerMenuItem = styled.div`
 		}
 	}
 `
-export const StyledDrawerMenuClose = styled.div`
+export const DrawerMenuClose = styled.div`
 	position: absolute;
 	display: flex;
 	justify-content: center;

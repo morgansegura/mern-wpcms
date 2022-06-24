@@ -25,7 +25,7 @@ import {
 	StyledFormTitle,
 	StyledTextFieldWarning,
 } from 'core/styles/inputs'
-import { StyledMenuItem } from '@styles/components/layouts'
+import { HeaderMenuItem } from '@styles/components/layouts'
 
 const SignOut: React.FC<SignOutProps> = () => {
 	const router = useRouter()
@@ -60,11 +60,11 @@ const SignOut: React.FC<SignOutProps> = () => {
 
 	return (
 		<>
-			<StyledMenuItem>
+			<HeaderMenuItem>
 				<Link href="/">
 					<a onClick={onSubmit}>Signout</a>
 				</Link>
-			</StyledMenuItem>
+			</HeaderMenuItem>
 		</>
 	)
 }

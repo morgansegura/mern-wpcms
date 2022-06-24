@@ -2,32 +2,22 @@ import styled from 'styled-components'
 import * as style from '@styles/config/utilities'
 import { rgba, rem } from 'polished'
 
-// [Config]
-import { MenuProps, MenuItemProps } from '@config/interfaces'
+// [Core Styles]
+import { MenuContainer, SVGContainer, MenuItem } from 'core/styles/navigation'
 
-export const StyledMenu = styled.nav`
-	display: flex;
-	align-items: center;
+export const HeaderMenuContainer = styled(MenuContainer)`
 	justify-self: flex-end;
-
-	${(props: MenuProps) => (props.mode ? `` : ``)}
 `
 
-export const StyledSVG = styled.div``
+export const HeaderSVG = styled(SVGContainer)``
 
-export const StyledMenuItem = styled.div`
-	cursor: pointer;
-
+export const HeaderMenuItem = styled(MenuItem)`
 	&:not(:first-child) {
-		margin-left: ${style.sp['2']};
+		margin-left: ${style.sp['1']};
 	}
 
-	${StyledSVG},
+	${HeaderSVG},
 	a {
-		display: flex;
-		align-items: center;
-		position: relative;
-		z-index: ${style.zindex['1']};
 		color: ${props =>
 			props.theme.palette.name === 'light'
 				? props.theme.palette.neutral['40']
@@ -75,8 +65,6 @@ export const StyledMenuItem = styled.div`
 	}
 
 	svg {
-		display: flex;
-		align-items: center;
 		font-size: 16px;
 		padding: 10px ${rem('11px')};
 	}

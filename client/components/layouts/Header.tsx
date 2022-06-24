@@ -7,7 +7,7 @@ import NProgress from 'nprogress'
 import { siteMetadata } from 'helpers'
 
 // [Components]
-import { Menu } from '@components/layouts'
+import { HeaderMenu } from '@components/layouts'
 import { Logo } from '@components/icons'
 // [Config]
 import { HeaderProps } from '@config/interfaces'
@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = () => {
 						</a>
 					</Link>
 				</StyledLogoBlock>
-				<Menu />
+				<HeaderMenu />
 			</StyledHeaderContainer>
 		</StyledHeader>
 	)

@@ -1,27 +1,26 @@
 import React from 'react'
 import Link from 'next/link'
-import { Router, useRouter } from 'next/router'
-
-// [Data]
-import { siteMetadata } from 'helpers'
 // [Components]
-import { Menu } from '@components/layouts'
-import { Logo } from '@components/icons'
+import { Menu } from 'core/navigation'
 // [Config]
-import { HeaderProps } from '@config/interfaces'
+import { FooterProps } from '@config/interfaces'
 // [Styles]
-import { StyledFooter, StyledFooterContainer } from '@styles/components/layouts'
+import { StyledFooter, StyledFooterContainer, StyledMenuItem } from '@styles/components/layouts'
 
-// Router.events.on('routeChangeStart', NProgress.start)
-// Router.events.on('routeChangeError', NProgress.done)
-// Router.events.on('routeChangeComplete', NProgress.done)
-
-const Footer: React.FC<HeaderProps> = () => {
+const Footer: React.FC<FooterProps> = () => {
+	const items = [
+		{
+			label: (
+				<Link href="/">
+					<a>Home</a>
+				</Link>
+			),
+			key: 'home',
+		},
+	]
 	return (
 		<StyledFooter>
-			<StyledFooterContainer>
-				<Menu />
-			</StyledFooterContainer>
+			<StyledFooterContainer>{/* <Menu items={items} /> */}</StyledFooterContainer>
 		</StyledFooter>
 	)
 }
