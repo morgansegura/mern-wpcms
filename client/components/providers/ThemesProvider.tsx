@@ -1,7 +1,7 @@
 import React from 'react'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { GlobalStyle } from '@styles/config/globalStyles'
-import { useStorage } from 'hooks'
+import { useStorage, useThemeMode } from 'hooks'
 import { themeLight, themeDark } from 'styles/theme/default'
 import { MdBrightness4, MdBrightness7 } from 'react-icons/md'
 
@@ -15,17 +15,17 @@ const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} })
 
 export function ToggleColorMode(props?: ToggleModeProps) {
-	const { getStorage } = useStorage()
+	const { getTheme, setTheme } = useThemeMode()
 	const colorMode = React.useContext(ColorModeContext)
-	const [themeMode, setThemeMode] = React.useState(
-		getStorage('theme') === 'light' ? 'light' : 'dark',
-	)
+	const [themeMode, setThemeMode] = React.useState(getTheme() === 'light' ? 'light' : 'dark')
 
 	const toggleMode = () => {
 		if (themeMode === 'dark') {
 			setThemeMode('light')
+			setTheme('light')
 		} else {
 			setThemeMode('dark')
+			setTheme('dark')
 		}
 	}
 
@@ -46,16 +46,15 @@ export function ToggleColorMode(props?: ToggleModeProps) {
 }
 
 const ThemesProvider: React.FC<ThemesProviderProps> = ({ children }) => {
-	const { getStorage, setStorage } = useStorage()
-	const [themeMode, setThemeMode] = React.useState(getStorage('theme') || 'light')
-
-	setStorage('theme', themeMode)
+	const { getTheme, setTheme } = useThemeMode()
+	const [themeMode, setThemeMode] = React.useState(getTheme())
 
 	const colorMode = React.useMemo(
 		() => ({
 			toggleColorMode: () => {
 				setThemeMode((prevMode: string) => (prevMode === 'light' ? 'dark' : 'light'))
-				themeMode === 'light' ? setStorage('theme', 'dark') : setStorage('theme', 'light')
+				themeMode === 'light' ? setTheme('dark') : setTheme('light')
+				setTheme(themeMode)
 			},
 		}),
 		[],

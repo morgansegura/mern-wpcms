@@ -8,20 +8,15 @@ import { DrawerTrigger, Menu } from 'core/navigation'
 import { ToggleColorMode } from '@components/providers/ThemesProvider'
 import { SignOut } from '@components/inputs'
 // [Styles]
-import { HeaderMenuContainer, HeaderMenuItem, HeaderSVG } from '@styles/components/layouts'
+import { HeaderMenuItem, HeaderSVG } from '@styles/components/layouts'
 // [Icons]
 import { FaBars } from 'react-icons/fa'
 import { AuthContext } from '@components/providers'
 
 const HeaderMenu: React.FC = () => {
-	const { getStorage } = useStorage()
 	const [auth, setAuth] = React.useContext(AuthContext)
-	const [theme, setTheme] = React.useState(getStorage('theme') || 'dark')
 
-	React.useEffect(() => {
-		setTheme(getStorage('theme') === 'light' ? 'light' : 'dark')
-		console.log(theme)
-	}, [getStorage('theme')])
+	React.useEffect(() => {}, [auth])
 
 	const unauthItems = [
 		{
@@ -48,6 +43,16 @@ const HeaderMenu: React.FC = () => {
 			label: (
 				<HeaderMenuItem>
 					<HeaderSVG>
+						<ToggleColorMode theme="light" />
+					</HeaderSVG>
+				</HeaderMenuItem>
+			),
+			key: 'open-drawer',
+		},
+		{
+			label: (
+				<HeaderMenuItem>
+					<HeaderSVG>
 						<DrawerTrigger>
 							<FaBars />
 						</DrawerTrigger>
@@ -55,16 +60,6 @@ const HeaderMenu: React.FC = () => {
 				</HeaderMenuItem>
 			),
 			key: 'toggle-color',
-		},
-		{
-			label: (
-				<HeaderMenuItem>
-					<HeaderSVG>
-						<ToggleColorMode theme="light" />
-					</HeaderSVG>
-				</HeaderMenuItem>
-			),
-			key: 'open-drawer',
 		},
 	]
 	const authItems = [
@@ -80,6 +75,16 @@ const HeaderMenu: React.FC = () => {
 			label: (
 				<HeaderMenuItem>
 					<HeaderSVG>
+						<ToggleColorMode theme="light" />
+					</HeaderSVG>
+				</HeaderMenuItem>
+			),
+			key: 'open-drawer',
+		},
+		{
+			label: (
+				<HeaderMenuItem>
+					<HeaderSVG>
 						<DrawerTrigger>
 							<FaBars />
 						</DrawerTrigger>
@@ -88,19 +93,11 @@ const HeaderMenu: React.FC = () => {
 			),
 			key: 'toggle-color',
 		},
-		{
-			label: (
-				<HeaderMenuItem>
-					<HeaderSVG>
-						<ToggleColorMode theme="light" />
-					</HeaderSVG>
-				</HeaderMenuItem>
-			),
-			key: 'open-drawer',
-		},
 	]
 
-	return <>{auth && auth === null ? <Menu items={unauthItems} /> : <Menu items={authItems} />}</>
+	return (
+		<>{auth && auth.user === null ? <Menu items={unauthItems} /> : <Menu items={authItems} />}</>
+	)
 }
 
 export default HeaderMenu

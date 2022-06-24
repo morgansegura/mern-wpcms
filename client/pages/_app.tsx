@@ -1,7 +1,7 @@
 import React from 'react'
 import { Toaster } from 'react-hot-toast'
 import { AppProps } from 'next/app'
-import { AppProvider, AuthProvider } from '@components/providers'
+import { AppProvider } from '@components/providers'
 
 export default function App({ Component, pageProps, ...delegated }: AppProps) {
 	const [hasMounted, setHasMounted] = React.useState(false)
@@ -14,9 +14,7 @@ export default function App({ Component, pageProps, ...delegated }: AppProps) {
 	return (
 		<div {...delegated}>
 			<AppProvider>
-				<AuthProvider>
-					<Component {...pageProps} />
-				</AuthProvider>
+				<Component {...pageProps} />
 			</AppProvider>
 			<Toaster />
 		</div>

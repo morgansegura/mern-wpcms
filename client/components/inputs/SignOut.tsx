@@ -5,10 +5,8 @@ import toast from 'react-hot-toast'
 
 // [API]
 import { pathConfig as path } from 'api'
-// [Components]
-import { AuthContext } from '@components/providers'
 // [Hooks]
-import { useSignout, useStorage } from 'hooks'
+import { useSignout } from 'hooks'
 // [Config]
 import { SignOutProps } from '@config/interfaces'
 

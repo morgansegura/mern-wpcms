@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 // [Core]
 import { Drawer, DrawerProvider } from 'core/navigation'
 // [Components]
-import { AuthContext } from '@components/providers'
 import { Header, Footer, DrawerMenu } from '@components/layouts'
 // [Config]
 import { LayoutProps } from '@config/interfaces'
@@ -11,8 +10,6 @@ import { LayoutProps } from '@config/interfaces'
 import { StyledLayout } from '@styles/components/layouts'
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-	const [auth, setAuth] = useContext(AuthContext)
-
 	return (
 		<>
 			<DrawerProvider>
