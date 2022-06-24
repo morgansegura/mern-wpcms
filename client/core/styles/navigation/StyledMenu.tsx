@@ -1,18 +1,19 @@
 import styled, { css } from 'styled-components'
 import * as style from '@styles/config/utilities'
 // [Config]
-import { MenuProps, MenuItemProps } from '@config/interfaces'
+import { MenuProps, MenuItemProps } from 'core/config/interfaces'
 
 export const MenuContainer = styled.div<MenuProps>`
 	display: flex;
-	align-items: center;
 
 	${props =>
 		props.mode === 'stacked'
 			? css`
 					flex-direction: column;
 			  `
-			: css``}
+			: css`
+					align-items: center;
+			  `}
 `
 
 export const SVGContainer = styled.div``
