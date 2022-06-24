@@ -1,6 +1,5 @@
 import React from 'react'
 import { useClickAway } from 'react-use'
-import { emptyObject } from '@helpers/utils'
 import { TextFieldProps } from 'core/config/interfaces'
 
 // [Styled]

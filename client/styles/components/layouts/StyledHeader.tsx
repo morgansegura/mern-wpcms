@@ -4,7 +4,7 @@ import { math } from 'polished'
 
 export const StyledHeader = styled.div`
 	position: relative;
-	z-index: 2;
+	z-index: ${style.zindex['2']};
 	${style.container.xxl}
 	margin-top: ${math(`${style.sp['1']} + 3px`)};
 	padding-top: ${style.sp['1.5']};
@@ -42,7 +42,9 @@ export const StyledLogoBlock = styled.div`
 	color: ${props => props.theme.palette.text.primary};
 
 	svg {
-		height: 45px;
+		display: flex;
+		height: 40px;
+		padding-bottom: ${style.sp['0.5']};
 		fill: ${props =>
 			props.theme.palette.name === 'light'
 				? props.theme.palette.neutral['40']

@@ -3,12 +3,33 @@ import React from 'react'
 import { Container } from 'core/layouts'
 // [Components]
 import { DefaultLayout } from '@components/layouts'
+import {
+	StyledContentBlock,
+	StyledCopy,
+	StyledCopyBold,
+	StyledCopyLarge,
+	StyledCopySmall,
+	StyledCopySmallBold,
+	StyledH1,
+	StyledH2,
+	StyledH3,
+	StyledH4,
+	StyledH5,
+	StyledH6,
+} from '@styles/components/layouts'
 
 const Home: React.FC = () => {
 	return (
 		<DefaultLayout>
 			<Container contain="xl">
-				<h1>Home Page</h1>
+				<StyledContentBlock>
+					<StyledH1>Home Page</StyledH1>
+					<StyledCopy>Home Page</StyledCopy>
+				</StyledContentBlock>
+				<StyledContentBlock>
+					<StyledH2>Second Block </StyledH2>
+					<StyledCopy>Home Page</StyledCopy>
+				</StyledContentBlock>
 			</Container>
 		</DefaultLayout>
 	)

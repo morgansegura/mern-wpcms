@@ -71,7 +71,7 @@ const Menu: React.FC = () => {
 					</StyledSVG>
 				</StyledMenuItem>
 			),
-			key: 'toggle-color',
+			key: 'open-drawer',
 		},
 	]
 

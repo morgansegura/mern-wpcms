@@ -27,7 +27,7 @@ export const StyledMenuItem = styled.div`
 		display: flex;
 		align-items: center;
 		position: relative;
-		z-index: 1;
+		z-index: ${style.zindex['1']};
 		color: ${props =>
 			props.theme.palette.name === 'light'
 				? props.theme.palette.neutral['40']
@@ -36,7 +36,7 @@ export const StyledMenuItem = styled.div`
 		&::after {
 			content: '';
 			position: absolute;
-			z-index: -1;
+			z-index: ${style.zindex.bottom};
 			top: 0;
 			right: 0;
 			bottom: 0;
@@ -68,7 +68,7 @@ export const StyledMenuItem = styled.div`
 			&::after {
 				background-color: ${props =>
 					props.theme.palette.name === 'light'
-						? props.theme.palette.neutral['00']
+						? props.theme.palette.neutral['05']
 						: props.theme.palette.neutral['07']};
 			}
 		}

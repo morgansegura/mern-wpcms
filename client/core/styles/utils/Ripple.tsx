@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components'
+import * as style from '@styles/config/utilities'
 import { rippleEffect } from 'core/styles/utils/keyframes'
 
 export const StyledRipple = styled.div`
 	&.RippleContainer-root {
 		position: relative;
-		z-index: 2;
+		z-index: ${style.zindex['2']};
 		overflow: hidden;
 		cursor: pointer;
 		${props =>
@@ -44,7 +45,7 @@ export const StyledRipple = styled.div`
 		position: absolute;
 		overflow: hidden;
 		display: flex;
-		z-index: 2;
+		z-index: ${style.zindex['2']};
 		width: 20px;
 		height: 20px;
 		content: '';
@@ -56,6 +57,6 @@ export const StyledRipple = styled.div`
 	& > .RippleContent-root {
 		display: flex;
 		position: relative;
-		z-index: 3;
+		z-index: ${style.zindex['3']};
 	}
 `

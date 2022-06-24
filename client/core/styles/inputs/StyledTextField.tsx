@@ -5,7 +5,7 @@ import { TextFieldProps } from 'core/config'
 
 export const StyledPlaceholder = styled.div`
 	position: absolute;
-	z-index: 1;
+	z-index: ${style.zindex['1']};
 	${style.fontSizing('16px', '40px', 500)};
 `
 export const StyledLabel = styled.div`
@@ -14,8 +14,8 @@ export const StyledLabel = styled.div`
 	display: inline-flex;
 	top: ${rem('13px')};
 	right: ${style.sp[2]};
-	padding-right: ${style.sp[1]};
-	padding-left: ${style.sp[1]};
+	padding-right: ${style.sp['1']};
+	padding-left: ${style.sp['1']};
 	border-radius: ${style.radius.md};
 	${style.fontSizing('12px', '28px', 600)};
 
@@ -31,8 +31,8 @@ export const StyledLabel = styled.div`
 
 export const StyledInput = styled.input`
 	position: relative;
-	padding: ${style.sp[2]};
-	z-index: 2;
+	padding: ${style.sp['2']};
+	z-index: ${style.zindex['2']};
 	display: flex;
 	user-select: none;
 	flex: 1 0 auto;
@@ -71,7 +71,7 @@ export const StyledTextFieldWarning = styled.div`
 
 export const StyledTextField = styled.div<TextFieldProps>`
 	position: relative;
-	z-index: 1;
+	z-index: ${style.zindex['1']};
 	display: flex;
 	align-items: center;
 	/* margin-top: ${style.sp['1']}; */

@@ -236,6 +236,14 @@ export const fw = {
 	8: 800,
 	9: 900,
 }
+export const zindex = {
+	bottom: -1,
+	1: 1,
+	2: 2,
+	3: 3,
+	high: 1000,
+	top: 1001,
+}
 
 export const grid = (rows: string = '12', size: string = '1fr') => {
 	return css`
@@ -546,8 +554,7 @@ export const tag = {
 		font-weight: 400;
 	`,
 	important: css`
-	import { Colors } from './utilities.d';
-	font-size: ${rem('12px')};
+		font-size: ${rem('12px')};
 		line-height: 1.2;
 		font-weight: 600;
 		letter-spacing: 1px;
