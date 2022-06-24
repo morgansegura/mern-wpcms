@@ -55,20 +55,17 @@ const SignupForm: React.FC<SignupFormProps> = ({ title, copy }) => {
 				password: watch('password'),
 				passwordConfirm: watch('passwordConfirm'),
 			})
-			.then(res => {
+			.then(() => {
 				setRegistered(true)
-				toast.success(res.message)
 			})
 			.catch((err: any) => {
 				toast.error(`Error ${err}`)
-				// console.log(err)
 			})
 	}
 
 	React.useEffect(() => {
 		if (registered) {
 			router.push('/signin')
-			// toast.error(`📩  Please check your email to confirm registration.`)
 		}
 	}, [registered])
 

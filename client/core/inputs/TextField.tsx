@@ -65,7 +65,7 @@ const TextField: React.FC<TextFieldProps> = ({
 		<>
 			<StyledTextFieldControl>
 				<StyledTextField ref={inputRef} focus={focus} blur={blur} error={error}>
-					{label && <StyledLabel>{label}</StyledLabel>}
+					{label && focus && <StyledLabel>{label}</StyledLabel>}
 					{placeholder && <StyledPlaceholder>{placeholder}</StyledPlaceholder>}
 					<StyledInput
 						name={name}
