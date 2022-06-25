@@ -10,6 +10,7 @@ const siteMetadata = {
 	linkedin: 'https://www.linkedin.com/in/example.page',
 	siteLogoSquare: '',
 	cssResetType: 'normalize',
+	adminSecret: 'RobertIsAwesome',
 }
 
 export default siteMetadata

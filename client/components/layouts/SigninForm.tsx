@@ -75,7 +75,7 @@ const SigninForm: React.FC<SigninFormProps> = ({ title, copy }) => {
 
 	React.useEffect(() => {
 		if (hasAuth) {
-			authRedirect(`${path.base.landing.href}`)
+			authRedirect(`${path.admin.base.landing.href}`)
 		}
 	}, [hasAuth, onSubmit])
 

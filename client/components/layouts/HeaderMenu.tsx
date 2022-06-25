@@ -46,28 +46,8 @@ const HeaderMenu: React.FC = () => {
 			),
 			key: 'open-drawer',
 		},
-		{
-			label: (
-				<HeaderMenuItem>
-					<HeaderSVG>
-						<DrawerTrigger>
-							<FaBars />
-						</DrawerTrigger>
-					</HeaderSVG>
-				</HeaderMenuItem>
-			),
-			key: 'toggle-color',
-		},
 	]
 	const authItems = [
-		{
-			label: (
-				<HeaderMenuItem>
-					<SignOut />
-				</HeaderMenuItem>
-			),
-			key: 'signout',
-		},
 		{
 			label: (
 				<HeaderMenuItem>

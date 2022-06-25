@@ -9,6 +9,7 @@ import {
 	DrawerMenuTitle,
 	DrawerMenuItem,
 	DrawerMenuClose,
+	DrawerMenuIcon,
 } from 'core/styles/navigation'
 
 // [Core Styles]
@@ -18,5 +19,6 @@ export const StyledDrawerMenuContainer = styled(DrawerMenuContainer)``
 export const StyledDrawerFrame = styled(DrawerFrame)``
 export const StyledDrawerMenu = styled(DrawerMenu)``
 export const StyledDrawerMenuTitle = styled(DrawerMenuTitle)``
+export const StyledDrawerMenuIcon = styled(DrawerMenuIcon)``
 export const StyledDrawerMenuItem = styled(DrawerMenuItem)``
 export const StyledDrawerMenuClose = styled(DrawerMenuClose)``

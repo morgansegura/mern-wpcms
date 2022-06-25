@@ -46,19 +46,27 @@ export const pathConfig = {
 			href: '/admin/docs',
 			label: 'Documentation',
 			title: 'Documentation',
-			level: 'guest',
+			level: 'admin',
 		},
 		styleGuide: {
 			href: '/admin/docs/style-guide',
 			label: 'Style Guide',
 			title: 'Style Guide',
-			level: 'guest',
+			level: 'admin',
 		},
 		siteMap: {
 			href: '/admin/docs/sitemap',
 			label: 'Site Map',
 			title: 'Site Map',
-			level: 'guest',
+			level: 'admin',
+		},
+		base: {
+			landing: {
+				href: '/admin',
+				label: 'Admin Landing Page',
+				title: 'Admin Landing Page',
+				level: 'admin',
+			},
 		},
 	},
 

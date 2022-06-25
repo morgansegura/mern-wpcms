@@ -8,8 +8,8 @@ import { pathConfig as path } from 'api'
 // [Hooks]
 import { useAuth } from 'hooks'
 // [Config]
-import { SignOutProps } from '@config/interfaces'
-
+import { SignOutProps } from '@config/interfaces/FormProps'
+// [Components]
 import { HeaderMenuItem } from '@styles/components/layouts'
 
 const SignOut: React.FC<SignOutProps> = () => {

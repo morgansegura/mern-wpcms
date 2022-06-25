@@ -5,14 +5,17 @@ import { useAuth } from 'hooks'
 // [Core]
 import { Menu } from 'core/navigation'
 // [Components]
-import { AuthContext } from '@components/providers'
+import { SignOut } from '@components/inputs'
+// [Styles]
 import {
 	StyledDrawerMenu,
 	StyledDrawerMenuContainer,
 	StyledDrawerMenuItem,
 	StyledDrawerMenuTitle,
+	StyledDrawerMenuIcon,
 } from '@styles/components/layouts'
-import { SignOut } from '@components/inputs'
+// [Icons]
+import { AuthIcon, PostsIcon } from '@components/icons'
 
 const DrawerMenu: React.FC = () => {
 	const { hasAuth } = useAuth()
@@ -35,8 +38,26 @@ const DrawerMenu: React.FC = () => {
 	]
 	const authItems = [
 		{
-			label: <StyledDrawerMenuTitle>authLinks</StyledDrawerMenuTitle>,
-			key: 'title',
+			label: (
+				<StyledDrawerMenuTitle>
+					<StyledDrawerMenuIcon>
+						<PostsIcon />
+					</StyledDrawerMenuIcon>
+					Posts
+				</StyledDrawerMenuTitle>
+			),
+			key: 'posts-title',
+		},
+		{
+			label: (
+				<StyledDrawerMenuTitle>
+					<StyledDrawerMenuIcon>
+						<AuthIcon />
+					</StyledDrawerMenuIcon>
+					Admin Settings
+				</StyledDrawerMenuTitle>
+			),
+			key: 'posts-title',
 		},
 		{
 			label: (

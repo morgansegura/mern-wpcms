@@ -10,18 +10,19 @@ const useAuth = () => {
 	const [auth, setAuth] = useContext(AuthContext)
 	const { removeStorage } = useStorage()
 
-	const hasAuth = auth && auth.user === null ? false : true
-
-	const authRedirect = (path: string = '/signin') => {
-		router.push(path)
-	}
-
 	const signout = (path: string = '/') => {
 		removeStorage('auth')
 		setAuth({
 			user: null,
 			token: '',
 		})
+		console.log('Signout function deployed')
+		router.push(path)
+	}
+
+	const hasAuth = auth && auth.user === null ? false : true
+
+	const authRedirect = (path: string = '/signin') => {
 		router.push(path)
 	}
 

@@ -94,6 +94,7 @@ export const DrawerMenu = styled.nav`
 	}
 `
 export const DrawerMenuTitle = styled.nav`
+	position: realtive;
 	${style.fontSizing('12px', '40px', 700)};
 	margin-bottom: ${style.sp['1']};
 	text-transform: uppercase;
@@ -110,6 +111,7 @@ export const DrawerMenuTitle = styled.nav`
 				: props.theme.palette.neutral['60']};
 `
 export const DrawerMenuItem = styled.div`
+	position: relative;
 	display: flex;
 
 	a {
@@ -200,3 +202,4 @@ export const DrawerMenuClose = styled.div`
 		}
 	}
 `
+export const DrawerMenuIcon = styled.div``

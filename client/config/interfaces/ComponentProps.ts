@@ -17,3 +17,7 @@ export interface BackdropProps {
 export interface ToggleModeProps {
 	theme?: string
 }
+
+export interface LoadingPageProps {
+	type?: string
+}
