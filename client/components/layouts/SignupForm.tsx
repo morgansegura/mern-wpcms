@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 // [API]
-import { authService } from 'api'
+import { authService, pathConfig as path } from 'api'
 // [Config]
 import { SignupFormProps } from '@config/interfaces'
 // [Core]
@@ -37,7 +37,7 @@ const schema = yup.object().shape({
 const SignupForm: React.FC<SignupFormProps> = ({ title, copy }) => {
 	const router = useRouter()
 	const [registered, setRegistered] = React.useState(false)
-	// const { auth } = paths
+	const [loding, setLoading] = React.useState(false)
 
 	const {
 		register,
@@ -55,17 +55,23 @@ const SignupForm: React.FC<SignupFormProps> = ({ title, copy }) => {
 				password: watch('password'),
 				passwordConfirm: watch('passwordConfirm'),
 			})
-			.then(() => {
-				setRegistered(true)
+			.then(res => {
+				if (res?.error) {
+					toast.error(`Something went wrong. Please try again.`)
+					setLoading(false)
+				} else {
+					setRegistered(true)
+					setLoading(true)
+				}
 			})
 			.catch((err: any) => {
-				toast.error(`Error ${err}`)
+				console.log(`Error ${err?.message}`)
 			})
 	}
 
 	React.useEffect(() => {
 		if (registered) {
-			router.push('/signin')
+			router.push(`${path.auth.signin.href}`)
 		}
 	}, [registered])
 
@@ -152,8 +158,8 @@ const SignupForm: React.FC<SignupFormProps> = ({ title, copy }) => {
 				</StyledFormSubmitBlock>
 				<StyledFormAltMessage>
 					Already a member?{' '}
-					<Link href="/signin">
-						<a>Signin </a>
+					<Link href={path.auth.signin.href}>
+						<a>{`${path.auth.signin.label}`}</a>
 					</Link>
 				</StyledFormAltMessage>
 			</StyledForm>

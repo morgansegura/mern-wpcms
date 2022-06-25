@@ -45,15 +45,21 @@ const SigninForm: React.FC<SigninFormProps> = ({ title, copy }) => {
 				email: watch('email'),
 				password: watch('password'),
 			})
-			.then(res => {
-				setLoggedIn(true)
-				setAuth(res)
-				setStorage('auth', JSON.stringify(res))
-				toast.success(`Welcome back ${res.user.username}`)
-				setLoading(true)
+			.then((res: { user: { username: string }; error: string }) => {
+				if (res?.error) {
+					toast.error(`The credentials given are incorrect.`)
+					setLoading(false)
+				} else {
+					setLoggedIn(true)
+					setAuth(res)
+					setStorage('auth', JSON.stringify(res))
+					toast.success(`Welcome back ${res.user.username}`)
+					setLoading(true)
+				}
 			})
-			.catch((err: any) => {
-				toast.error(`Error ${err}`)
+			.catch(err => {
+				console.log(`Error ${err?.message}`)
+				setLoading(false)
 			})
 			.finally(() => {
 				setLoading(false)
@@ -111,12 +117,12 @@ const SigninForm: React.FC<SigninFormProps> = ({ title, copy }) => {
 				</StyledFormSubmitBlock>
 				<StyledFormAltMessage>
 					Need a membership?
-					<Link href="/signup">
-						<a>Signup </a>
+					<Link href={`${path.auth.signup.href}`}>
+						<a>{path.auth.signup.label}</a>
 					</Link>
 					<StyledForgotPassword>
 						<Link href="/forgot-password">
-							<a>Forgot password </a>
+							<a>Forgot password</a>
 						</Link>
 					</StyledForgotPassword>
 				</StyledFormAltMessage>

@@ -75,7 +75,7 @@ export const pathConfig = {
 			title: 'Signout',
 			level: 'admin',
 		},
-		register: {
+		signup: {
 			href: '/register',
 			label: 'Register',
 			title: 'Register',

@@ -49,13 +49,18 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ title, cop
 				password: watch('password'),
 				passwordConfirm: watch('passwordConfirm'),
 			})
-			.then(res => {
-				setAuth(res)
-				toast.success(`Password successfully updated! Please login with yout new credentials.`)
-				setLoading(true)
+			.then((res: { user: { username: string }; error: string }) => {
+				if (res?.error) {
+					toast.error(`Reset password failed. Please try again.`)
+					setLoading(false)
+				} else {
+					setAuth(res)
+					toast.success(`Password successfully updated! Please login with yout new credentials.`)
+					setLoading(true)
+				}
 			})
 			.catch((err: any) => {
-				toast.error(`Forgot password reset failed. Try again.`)
+				console.log(`Reset password failed. Please try again.`)
 				setLoading(false)
 			})
 			.finally(() => {
@@ -143,11 +148,11 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ title, cop
 				</StyledFormSubmitBlock>
 				<StyledFormAltMessage>
 					Alternative options.
-					<Link href="/signin">
-						<a>Signin </a>
+					<Link href={`${path.auth.signin.href}`}>
+						<a>{path.auth.signin.label}</a>
 					</Link>
-					<Link href="/signup">
-						<a>Signup </a>
+					<Link href={`${path.auth.signup.href}`}>
+						<a>{path.auth.signup.label}</a>
 					</Link>
 				</StyledFormAltMessage>
 			</StyledForm>
@@ -171,12 +176,17 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ title, copy }) 
 				email: watch('email'),
 			})
 			.then(res => {
-				toast.success(`Password reset code was sent to your email.`)
-				setLoading(true)
-				setResetPasswordVisible(true)
+				if (res?.error) {
+					toast.error(`Something went wrong. Please Try again.`)
+					setLoading(false)
+				} else {
+					toast.success(`Password reset code was sent to your email.`)
+					setLoading(true)
+					setResetPasswordVisible(true)
+				}
 			})
 			.catch((err: any) => {
-				toast.error(`Forgot password failed. Try again.`)
+				console.log(`Error ${err?.messsage}`)
 				setLoading(false)
 			})
 			.finally(() => {
@@ -223,11 +233,11 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ title, copy }) 
 					</StyledFormSubmitBlock>
 					<StyledFormAltMessage>
 						Alternative options.
-						<Link href="/signin">
-							<a>Signin </a>
+						<Link href={`${path.auth.signin.href}`}>
+							<a>{path.auth.signup.href}</a>
 						</Link>
-						<Link href="/signup">
-							<a>Signup </a>
+						<Link href={`${path.auth.signup.href}`}>
+							<a>{path.auth.signup.label}</a>
 						</Link>
 					</StyledFormAltMessage>
 				</StyledForm>

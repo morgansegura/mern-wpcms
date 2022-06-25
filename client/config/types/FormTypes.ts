@@ -18,3 +18,9 @@ export type ResetPasswordType = {
 	password?: string
 	passwordConfirm?: string
 }
+export type UserType = {
+	email?: string
+	resetCode?: string
+	password?: string
+	passwordConfirm?: string
+}
