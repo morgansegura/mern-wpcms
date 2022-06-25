@@ -1,16 +1,22 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 // [Hooks]
 import { useStorage } from 'hooks'
 // [Components]
 import { AuthContext } from '@components/providers'
 
-const useSignout = (path: string = '/') => {
+const useAuth = () => {
 	const router = useRouter()
 	const [auth, setAuth] = useContext(AuthContext)
 	const { removeStorage } = useStorage()
 
-	const signout = () => {
+	const hasAuth = auth && auth.user === null ? false : true
+
+	const authRedirect = (path: string = '/signin') => {
+		router.push(path)
+	}
+
+	const signout = (path: string = '/') => {
 		removeStorage('auth')
 		setAuth({
 			user: null,
@@ -19,7 +25,7 @@ const useSignout = (path: string = '/') => {
 		router.push(path)
 	}
 
-	return { signout }
+	return { hasAuth, authRedirect, signout }
 }
 
-export default useSignout
+export default useAuth

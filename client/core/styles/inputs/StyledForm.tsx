@@ -38,7 +38,7 @@ export const StyledFormCopy = styled.h3`
 export const StyledFormSubmitBlock = styled.div`
 	display: flex;
 	justify-content: center;
-	margin-top: ${style.sp['3']};
+	margin-top: ${style.sp['2']};
 `
 
 export const StyledFormSubmit = styled.button`
@@ -123,4 +123,8 @@ export const StyledFormAltMessage = styled.div`
 					: props.theme.palette.secondary.main};
 		}
 	}
+`
+
+export const StyledForgotPassword = styled(StyledFormAltMessage)`
+	margin-top: unset;
 `

@@ -74,7 +74,11 @@ const Drawer: React.FC<DrawerProps> = ({ content, menu }) => {
 				open={toggle.open}
 				close={toggle.close}
 			/>
-			<style.DrawerContainer open={toggle.open} close={toggle.close}>
+			<style.DrawerContainer
+				open={toggle.open}
+				close={toggle.close}
+				onClick={() => setToggle({ open: false, close: true })}
+			>
 				<style.DrawerMenuClose onClick={() => setToggle({ open: false, close: true })}>
 					<FaLongArrowAltLeft />
 				</style.DrawerMenuClose>

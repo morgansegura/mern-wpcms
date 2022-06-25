@@ -5,6 +5,7 @@ export interface MenuProps {
 	items?: MenuItemProps[]
 	children?: ReactNode[] | ReactNode
 }
+
 export interface MenuItemProps {
 	label?: ReactNode[] | ReactNode
 	active?: boolean

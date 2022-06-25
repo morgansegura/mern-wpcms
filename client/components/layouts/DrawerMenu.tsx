@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 // [Hooks]
-import { useStorage } from 'hooks'
+import { useAuth } from 'hooks'
 // [Core]
 import { Menu } from 'core/navigation'
 // [Components]
@@ -12,9 +12,10 @@ import {
 	StyledDrawerMenuItem,
 	StyledDrawerMenuTitle,
 } from '@styles/components/layouts'
+import { SignOut } from '@components/inputs'
 
 const DrawerMenu: React.FC = () => {
-	const [auth, setAuth] = React.useContext(AuthContext)
+	const { hasAuth } = useAuth()
 
 	const unauthItems = [
 		{
@@ -29,7 +30,7 @@ const DrawerMenu: React.FC = () => {
 					</Link>
 				</StyledDrawerMenuItem>
 			),
-			key: 'signout',
+			key: 'link1',
 		},
 	]
 	const authItems = [
@@ -45,6 +46,14 @@ const DrawerMenu: React.FC = () => {
 					</Link>
 				</StyledDrawerMenuItem>
 			),
+			key: 'link2',
+		},
+		{
+			label: (
+				<StyledDrawerMenuItem>
+					<SignOut />
+				</StyledDrawerMenuItem>
+			),
 			key: 'signout',
 		},
 	]
@@ -52,7 +61,7 @@ const DrawerMenu: React.FC = () => {
 	return (
 		<>
 			<StyledDrawerMenuContainer>
-				{auth && auth === null ? (
+				{!hasAuth ? (
 					<>
 						<StyledDrawerMenu>
 							<Menu mode="stacked" items={unauthItems} />

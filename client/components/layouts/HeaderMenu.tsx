@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 // [Hooks]
-import { useStorage } from 'hooks'
+import { useAuth } from 'hooks'
 // [Core]
 import { DrawerTrigger, Menu } from 'core/navigation'
 // [Components]
@@ -11,12 +11,9 @@ import { SignOut } from '@components/inputs'
 import { HeaderMenuItem, HeaderSVG } from '@styles/components/layouts'
 // [Icons]
 import { FaBars } from 'react-icons/fa'
-import { AuthContext } from '@components/providers'
 
 const HeaderMenu: React.FC = () => {
-	const [auth, setAuth] = React.useContext(AuthContext)
-
-	React.useEffect(() => {}, [auth])
+	const { hasAuth } = useAuth()
 
 	const unauthItems = [
 		{
@@ -95,9 +92,7 @@ const HeaderMenu: React.FC = () => {
 		},
 	]
 
-	return (
-		<>{auth && auth.user === null ? <Menu items={unauthItems} /> : <Menu items={authItems} />}</>
-	)
+	return <>{!hasAuth ? <Menu items={unauthItems} /> : <Menu items={authItems} />}</>
 }
 
 export default HeaderMenu

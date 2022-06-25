@@ -4,8 +4,7 @@ export interface LayoutProps {
 	children?: ReactNode[] | ReactNode
 }
 
-export interface BackdropProps {
+export interface DefaultLayoutProps {
+	title?: string
 	children?: ReactNode[] | ReactNode
-	open?: boolean
-	close?: boolean
 }

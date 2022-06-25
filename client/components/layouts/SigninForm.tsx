@@ -1,5 +1,4 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
@@ -12,11 +11,12 @@ import { TextField } from 'core/inputs'
 // [Components]
 import { AuthContext } from '@components/providers'
 // [Hooks]
-import { useStorage } from 'hooks'
+import { useAuth, useStorage } from 'hooks'
 // [Config]
 import { SigninFormProps } from '@config/interfaces'
 // [Styled]
 import {
+	StyledForgotPassword,
 	StyledForm,
 	StyledFormAltMessage,
 	StyledFormCopy,
@@ -27,7 +27,7 @@ import {
 } from 'core/styles/inputs'
 
 const SigninForm: React.FC<SigninFormProps> = ({ title, copy }) => {
-	const router = useRouter()
+	const { hasAuth, authRedirect } = useAuth()
 	const { setStorage } = useStorage()
 	const [auth, setAuth] = React.useContext(AuthContext)
 
@@ -68,10 +68,10 @@ const SigninForm: React.FC<SigninFormProps> = ({ title, copy }) => {
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
 
 	React.useEffect(() => {
-		if (loggedIn) {
-			router.push(`${path.base.landing.href}`)
+		if (hasAuth) {
+			authRedirect(`${path.base.landing.href}`)
 		}
-	}, [loggedIn, onSubmit])
+	}, [hasAuth, onSubmit])
 
 	return (
 		<>
@@ -83,6 +83,7 @@ const SigninForm: React.FC<SigninFormProps> = ({ title, copy }) => {
 					name="email"
 					placeholder="Email"
 					register={register}
+					label="Email"
 					errors={errors}
 					error={errors.email?.message}
 					required
@@ -94,6 +95,7 @@ const SigninForm: React.FC<SigninFormProps> = ({ title, copy }) => {
 				<TextField
 					type="password"
 					name="password"
+					label="Password"
 					placeholder="Password"
 					register={register}
 					errors={errors}
@@ -105,16 +107,18 @@ const SigninForm: React.FC<SigninFormProps> = ({ title, copy }) => {
 					<StyledTextFieldWarning>{errors.password?.message}</StyledTextFieldWarning>
 				)}
 				<StyledFormSubmitBlock>
-					<StyledFormSubmit type="submit">
-						Signin
-						{/* <RippleEffect color="primary" /> */}
-					</StyledFormSubmit>
+					<StyledFormSubmit type="submit">Signin</StyledFormSubmit>
 				</StyledFormSubmitBlock>
 				<StyledFormAltMessage>
 					Need a membership?
 					<Link href="/signup">
 						<a>Signup </a>
 					</Link>
+					<StyledForgotPassword>
+						<Link href="/forgot-password">
+							<a>Forgot password </a>
+						</Link>
+					</StyledForgotPassword>
 				</StyledFormAltMessage>
 			</StyledForm>
 		</>

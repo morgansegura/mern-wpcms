@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 // [API]
 import { pathConfig as path } from 'api'
 // [Hooks]
-import { useSignout } from 'hooks'
+import { useAuth } from 'hooks'
 // [Config]
 import { SignOutProps } from '@config/interfaces'
 
@@ -14,7 +14,7 @@ import { HeaderMenuItem } from '@styles/components/layouts'
 
 const SignOut: React.FC<SignOutProps> = () => {
 	const router = useRouter()
-	const { signout } = useSignout()
+	const { signout } = useAuth()
 
 	const [loggedIn, setLoggedIn] = React.useState(false)
 	const [loding, setLoading] = React.useState(false)

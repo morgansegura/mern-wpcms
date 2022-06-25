@@ -1,5 +1,5 @@
 import { fetchWrapper } from './fetchWrapper'
-import { SigninType, RegisterType } from 'core/config'
+import { SigninType, RegisterType, ForgotPasswordType, ResetPasswordType } from 'core/config/types'
 
 const baseUrl = ''
 
@@ -8,6 +8,8 @@ export const authService = {
 	signout,
 	signin,
 	signup,
+	forgotPassword,
+	resetPassword,
 }
 
 function authUser() {
@@ -24,4 +26,12 @@ function signup(params: RegisterType) {
 
 function signin(params: SigninType) {
 	return fetchWrapper.post(`${baseUrl}/signin`, params)
+}
+
+function forgotPassword(params: ForgotPasswordType) {
+	return fetchWrapper.post(`${baseUrl}/forgot-password`, params)
+}
+
+function resetPassword(params: ResetPasswordType) {
+	return fetchWrapper.post(`${baseUrl}/reset-password`, params)
 }

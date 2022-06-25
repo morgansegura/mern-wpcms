@@ -64,19 +64,19 @@ export const pathConfig = {
 
 	auth: {
 		signin: {
-			href: '/auth/signin',
+			href: '/signin',
 			label: 'Login',
 			title: 'Login',
 			level: 'guest',
 		},
 		signout: {
-			href: '/auth/signout',
+			href: '/signout',
 			label: 'Signout',
 			title: 'Signout',
 			level: 'admin',
 		},
 		register: {
-			href: '/auth/register',
+			href: '/register',
 			label: 'Register',
 			title: 'Register',
 			level: 'guest',

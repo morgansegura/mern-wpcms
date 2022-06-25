@@ -1,3 +1,35 @@
+export interface Theme {
+	breakpoints: Object
+	direction: 'ltr'
+	components: Object
+	palette: Object
+	spacing: Object
+	shape: Object
+	mixins: Object
+	shadows: Object
+	typography: Object
+	transitions: Object
+	zIndex: Object
+	theme?: Object
+}
+
+export interface Spacing {
+	p: number
+	py: number
+	px: number
+	pt: number
+	pr: number
+	pb: number
+	pl: number
+	m: number
+	my: number
+	mx: number
+	mt: number
+	mr: number
+	mb: number
+	ml: number
+}
+
 export interface Colors {
 	white?: string
 	black?: string

@@ -184,7 +184,7 @@ export const DrawerMenuClose = styled.div`
 			background-color: ${props =>
 				props.theme.palette.name === 'light'
 					? props.theme.palette.neutral['05']
-					: props.theme.palette.neutral['90']};
+					: props.theme.palette.neutral['80']};
 		}
 	}
 	&:active {
@@ -196,7 +196,7 @@ export const DrawerMenuClose = styled.div`
 			background-color: ${props =>
 				props.theme.palette.name === 'light'
 					? props.theme.palette.neutral['06']
-					: props.theme.palette.neutral['80']};
+					: props.theme.palette.neutral['70']};
 		}
 	}
 `
