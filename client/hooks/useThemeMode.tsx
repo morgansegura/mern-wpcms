@@ -1,39 +1,27 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 // [Hooks]
 import { useStorage } from 'hooks'
-// [Components]
-import { AuthContext } from '@components/providers'
 
 const useThemeMode = () => {
 	const { getStorage, setStorage } = useStorage()
-	const [auth, setAuth] = useContext(AuthContext)
-	const defaultTheme = getStorage('auth') && JSON.parse(getStorage('auth'))
-	const [themeMode, setThemeMode] = useState(defaultTheme?.preferences?.theme || 'dark')
+	const { theme } = getStorage('settings') && JSON.parse(getStorage('settings'))
+	const [themeMode, setThemeMode] = useState(theme ? theme : 'dark')
 
-	const setTheme = (themeOptions: string = 'dark') => {
+	console.log({ theme })
+
+	const setTheme = (themeOptions: string) => {
 		setThemeMode(themeOptions)
 
-		setAuth({
-			...auth,
-			preferences: {
-				theme: themeMode,
-			},
-		})
-
 		setStorage(
-			'auth',
+			'settings',
 			JSON.stringify({
-				...auth,
-				preferences: {
-					theme: themeMode,
-				},
+				theme: themeMode,
 			}),
 		)
 	}
 
 	const getTheme = (): string => {
-		const defaultTheme = getStorage('auth') && JSON.parse(getStorage('auth'))
-		const theme = defaultTheme?.preferences?.theme || 'dark'
+		const theme = themeMode
 		return theme
 	}
 

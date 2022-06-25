@@ -7,7 +7,7 @@ import { MdBrightness4, MdBrightness7 } from 'react-icons/md'
 
 import { ThemesProviderProps, ToggleModeProps } from '@config/interfaces'
 
-type ThemeType = { theme: any }
+type ThemeType = { theme: 'light' | 'dark' }
 
 const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
   ${GlobalStyle}
@@ -47,7 +47,7 @@ export function ToggleColorMode(props?: ToggleModeProps) {
 
 const ThemesProvider: React.FC<ThemesProviderProps> = ({ children }) => {
 	const { getTheme, setTheme } = useThemeMode()
-	const [themeMode, setThemeMode] = React.useState(getTheme())
+	const [themeMode, setThemeMode] = React.useState(getTheme() === 'light' ? 'light' : 'dark')
 
 	const colorMode = React.useMemo(
 		() => ({
