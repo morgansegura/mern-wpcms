@@ -1,12 +1,12 @@
-import React from 'react'
+import { FC } from 'react'
 // [Core]
-import { Container } from 'core/layouts'
+import { Container } from 'core/layout'
 // [Components]
 import { Layout } from '@components/layouts'
 // [Config]
 import { DefaultLayoutProps } from '@config/interfaces'
 
-const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
+const DefaultLayout: FC<DefaultLayoutProps> = ({ children }) => {
 	return (
 		<>
 			<Layout>

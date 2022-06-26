@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
@@ -7,7 +7,7 @@ import * as yup from 'yup'
 // [API]
 import { authService, pathConfig as path } from 'api'
 // [Core]
-import { TextField } from 'core/inputs'
+import { TextField, TextFieldWarning } from 'core/inputs'
 // [Components]
 import { AuthContext } from '@components/providers'
 // [Hooks]
@@ -23,16 +23,15 @@ import {
 	StyledFormSubmit,
 	StyledFormSubmitBlock,
 	StyledFormTitle,
-	StyledTextFieldWarning,
 } from 'core/styles/inputs'
 
-const SigninForm: React.FC<SigninFormProps> = ({ title, copy }) => {
+const SigninForm: FC<SigninFormProps> = ({ title, copy }) => {
 	const { hasAuth, authRedirect } = useAuth()
 	const { setStorage } = useStorage()
-	const [auth, setAuth] = React.useContext(AuthContext)
+	const [auth, setAuth] = useContext(AuthContext)
 
-	const [loggedIn, setLoggedIn] = React.useState(false)
-	const [loding, setLoading] = React.useState(false)
+	const [loggedIn, setLoggedIn] = useState(false)
+	const [loding, setLoading] = useState(false)
 
 	const schema = yup.object().shape({
 		email: yup.string().email().required('Email is a required field.'),
@@ -73,7 +72,7 @@ const SigninForm: React.FC<SigninFormProps> = ({ title, copy }) => {
 		formState: { errors },
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (hasAuth) {
 			authRedirect(`${path.admin.base.landing.href}`)
 		}
@@ -95,9 +94,7 @@ const SigninForm: React.FC<SigninFormProps> = ({ title, copy }) => {
 					required
 					watch={watch}
 				/>
-				{errors.email?.message && (
-					<StyledTextFieldWarning>{errors.email?.message}</StyledTextFieldWarning>
-				)}
+				{errors.email?.message && <TextFieldWarning>{errors.email?.message}</TextFieldWarning>}
 				<TextField
 					type="password"
 					name="password"
@@ -110,7 +107,7 @@ const SigninForm: React.FC<SigninFormProps> = ({ title, copy }) => {
 					watch={watch}
 				/>
 				{errors.password?.message && (
-					<StyledTextFieldWarning>{errors.password?.message}</StyledTextFieldWarning>
+					<TextFieldWarning>{errors.password?.message}</TextFieldWarning>
 				)}
 				<StyledFormSubmitBlock>
 					<StyledFormSubmit type="submit">Signin</StyledFormSubmit>

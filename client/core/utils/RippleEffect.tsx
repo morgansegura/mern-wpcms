@@ -2,24 +2,24 @@ import React, { MouseEvent } from 'react'
 import { StyledRipple } from 'core/styles/utils/Ripple'
 
 interface RippleEffectProps {
-	children?: React.ReactChild | React.ReactChild[]
+	children?: ReactChild | ReactChild[]
 	as?: any
 	color?: any
 	onClick?: (e: MouseEvent<HTMLButtonElement>) => unknown
 }
 
-const RippleEffect: React.FC<RippleEffectProps> = ({ as = 'div', children, color, onClick }) => {
-	const [coords, setCoords] = React.useState({ x: -1, y: -1 })
-	const [isRippling, setIsRippling] = React.useState(false)
+const RippleEffect: FC<RippleEffectProps> = ({ as = 'div', children, color, onClick }) => {
+	const [coords, setCoords] = useState({ x: -1, y: -1 })
+	const [isRippling, setIsRippling] = useState(false)
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (coords.x !== -1 && coords.y !== -1) {
 			setIsRippling(true)
 			setTimeout(() => setIsRippling(false), 300)
 		} else setIsRippling(false)
 	}, [coords])
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (!isRippling) setCoords({ x: -1, y: -1 })
 	}, [isRippling])
 

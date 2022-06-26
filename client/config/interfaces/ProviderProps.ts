@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 
 export interface AppProviderProps {
-	children?: React.ReactNode
+	children?: ReactNode
 }
 
 export interface AuthProviderProps {
@@ -9,5 +9,5 @@ export interface AuthProviderProps {
 }
 
 export interface ThemesProviderProps {
-	children?: React.ReactNode[] | React.ReactNode
+	children?: ReactNode[] | ReactNode
 }

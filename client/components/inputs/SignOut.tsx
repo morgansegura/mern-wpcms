@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
@@ -12,12 +12,12 @@ import { SignOutProps } from '@config/interfaces/FormProps'
 // [Components]
 import { HeaderMenuItem } from '@styles/components/layouts'
 
-const SignOut: React.FC<SignOutProps> = () => {
+const SignOut: FC<SignOutProps> = () => {
 	const router = useRouter()
 	const { signout } = useAuth()
 
-	const [loggedIn, setLoggedIn] = React.useState(false)
-	const [loding, setLoading] = React.useState(false)
+	const [loggedIn, setLoggedIn] = useState(false)
+	const [loding, setLoading] = useState(false)
 
 	const onSubmit = async () => {
 		try {
@@ -31,7 +31,7 @@ const SignOut: React.FC<SignOutProps> = () => {
 		setLoading(false)
 	}
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (loggedIn) {
 			router.push(`${path.base.landing.href}`)
 		}

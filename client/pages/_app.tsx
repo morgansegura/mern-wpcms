@@ -1,12 +1,12 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { AppProps } from 'next/app'
 import { AppProvider } from '@components/providers'
 
 export default function App({ Component, pageProps, ...delegated }: AppProps) {
-	const [hasMounted, setHasMounted] = React.useState(false)
+	const [hasMounted, setHasMounted] = useState(false)
 
-	React.useEffect(() => {
+	useEffect(() => {
 		setHasMounted(true)
 	}, [])
 

@@ -1,6 +1,6 @@
-import React from 'react'
+import { FC } from 'react'
 // [Core]
-import { Container } from 'core/layouts'
+import { Container } from 'core/layout'
 // [Components]
 import { DefaultLayout } from '@components/layouts'
 import {
@@ -18,7 +18,7 @@ import {
 	StyledH6,
 } from '@styles/components/layouts'
 
-const Home: React.FC = () => {
+const Home: FC = () => {
 	return (
 		<DefaultLayout>
 			<Container contain="xl">

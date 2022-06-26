@@ -1,10 +1,10 @@
-import React from 'react'
+import { FC } from 'react'
 // [Core]
-import { Container } from 'core/layouts'
+import { Container } from 'core/layout'
 // [Components]
 import { DefaultLayout, ForgotPasswordForm } from '@components/layouts'
 
-const ForgotPassword: React.FC = () => {
+const ForgotPassword: FC = () => {
 	return (
 		<DefaultLayout>
 			<Container contain="xl">

@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import Link from 'next/link'
 // [Hooks]
 import { useAuth } from 'hooks'
@@ -15,9 +15,9 @@ import {
 	StyledDrawerMenuIcon,
 } from '@styles/components/layouts'
 // [Icons]
-import { AuthIcon, PostsIcon } from '@components/icons'
+import { AuthIcon, PostsIcon } from '@components/data-display/icons'
 
-const DrawerMenu: React.FC = () => {
+const DrawerMenu: FC = () => {
 	const { hasAuth } = useAuth()
 
 	const unauthItems = [
@@ -50,6 +50,16 @@ const DrawerMenu: React.FC = () => {
 		},
 		{
 			label: (
+				<StyledDrawerMenuItem>
+					<Link href="/admin/posts">
+						<a>Posts</a>
+					</Link>
+				</StyledDrawerMenuItem>
+			),
+			key: 'Posts',
+		},
+		{
+			label: (
 				<StyledDrawerMenuTitle>
 					<StyledDrawerMenuIcon>
 						<AuthIcon />
@@ -57,22 +67,14 @@ const DrawerMenu: React.FC = () => {
 					Admin Settings
 				</StyledDrawerMenuTitle>
 			),
-			key: 'posts-title',
+			key: 'admin-title',
 		},
 		{
 			label: (
 				<StyledDrawerMenuItem>
 					<Link href="/">
-						<a>Auth Link1</a>
+						<a>Signout</a>
 					</Link>
-				</StyledDrawerMenuItem>
-			),
-			key: 'link2',
-		},
-		{
-			label: (
-				<StyledDrawerMenuItem>
-					<SignOut />
 				</StyledDrawerMenuItem>
 			),
 			key: 'signout',
@@ -91,7 +93,7 @@ const DrawerMenu: React.FC = () => {
 				) : (
 					<>
 						<StyledDrawerMenu>
-							<Menu mode="stacked" items={authItems} />
+							<Menu mode="stacked-accordion" items={authItems} />
 						</StyledDrawerMenu>
 					</>
 				)}

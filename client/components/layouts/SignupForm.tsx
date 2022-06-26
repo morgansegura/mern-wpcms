@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import toast from 'react-hot-toast'
@@ -10,7 +10,7 @@ import { authService, pathConfig as path } from 'api'
 // [Config]
 import { SignupFormProps } from '@config/interfaces'
 // [Core]
-import { TextField } from 'core/inputs'
+import { TextField, TextFieldWarning } from 'core/inputs'
 
 // [Styled]
 import {
@@ -20,7 +20,6 @@ import {
 	StyledFormCopy,
 	StyledFormSubmitBlock,
 	StyledFormSubmit,
-	StyledTextFieldWarning,
 } from 'core/styles/inputs'
 
 const schema = yup.object().shape({
@@ -34,10 +33,10 @@ const schema = yup.object().shape({
 		.required('Password confirmation is required'),
 })
 
-const SignupForm: React.FC<SignupFormProps> = ({ title, copy }) => {
+const SignupForm: FC<SignupFormProps> = ({ title, copy }) => {
 	const router = useRouter()
-	const [registered, setRegistered] = React.useState(false)
-	const [loding, setLoading] = React.useState(false)
+	const [registered, setRegistered] = useState(false)
+	const [loding, setLoading] = useState(false)
 
 	const {
 		register,
@@ -69,7 +68,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ title, copy }) => {
 			})
 	}
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (registered) {
 			router.push(`${path.auth.signin.href}`)
 		}
@@ -91,7 +90,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ title, copy }) => {
 					watch={watch}
 				/>
 				{errors.fullName?.message && (
-					<StyledTextFieldWarning>{errors.fullName?.message}</StyledTextFieldWarning>
+					<TextFieldWarning>{errors.fullName?.message}</TextFieldWarning>
 				)}
 				<TextField
 					type="text"
@@ -105,7 +104,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ title, copy }) => {
 					watch={watch}
 				/>
 				{errors.username?.message && (
-					<StyledTextFieldWarning>{errors.username?.message}</StyledTextFieldWarning>
+					<TextFieldWarning>{errors.username?.message}</TextFieldWarning>
 				)}
 				<TextField
 					type="email"
@@ -118,9 +117,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ title, copy }) => {
 					required
 					watch={watch}
 				/>
-				{errors.email?.message && (
-					<StyledTextFieldWarning>{errors.email?.message}</StyledTextFieldWarning>
-				)}
+				{errors.email?.message && <TextFieldWarning>{errors.email?.message}</TextFieldWarning>}
 				<TextField
 					type="password"
 					name="password"
@@ -133,7 +130,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ title, copy }) => {
 					watch={watch}
 				/>
 				{errors.password?.message && (
-					<StyledTextFieldWarning>{errors.password?.message}</StyledTextFieldWarning>
+					<TextFieldWarning>{errors.password?.message}</TextFieldWarning>
 				)}
 				<TextField
 					type="password"
@@ -147,7 +144,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ title, copy }) => {
 					watch={watch}
 				/>
 				{errors.passwordConfirm?.message && (
-					<StyledTextFieldWarning>{errors.passwordConfirm?.message}</StyledTextFieldWarning>
+					<TextFieldWarning>{errors.passwordConfirm?.message}</TextFieldWarning>
 				)}
 
 				<StyledFormSubmitBlock>

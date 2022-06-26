@@ -1,13 +1,13 @@
-import React from 'react'
+import { createContext, FC, useEffect, useState } from 'react'
 import axios from 'axios'
 import { useStorage } from 'hooks'
 import { AuthProviderProps } from '@config/interfaces'
 
-const AuthContext = React.createContext<any | null>(null)
+const AuthContext = createContext<any | null>(null)
 
-const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 	const { getStorage, setStorage } = useStorage()
-	const [auth, setAuth] = React.useState({
+	const [auth, setAuth] = useState({
 		user: null,
 		token: '',
 	})
@@ -29,7 +29,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		}
 	}
 
-	React.useEffect(() => {
+	useEffect(() => {
 		setAuthState()
 	}, [])
 

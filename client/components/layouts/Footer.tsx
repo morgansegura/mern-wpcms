@@ -1,13 +1,13 @@
-import React from 'react'
+import { FC } from 'react'
 import Link from 'next/link'
 // [Components]
 import { Menu } from 'core/navigation'
 // [Config]
 import { FooterProps } from '@config/interfaces'
 // [Styles]
-import { StyledFooter, StyledFooterContainer, StyledMenuItem } from '@styles/components/layouts'
+import { StyledFooter, StyledFooterContainer } from '@styles/components/layouts'
 
-const Footer: React.FC<FooterProps> = () => {
+const Footer: FC<FooterProps> = () => {
 	const items = [
 		{
 			label: (

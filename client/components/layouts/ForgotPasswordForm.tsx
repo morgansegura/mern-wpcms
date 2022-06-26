@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
@@ -7,7 +7,7 @@ import * as yup from 'yup'
 // [API]
 import { authService, pathConfig as path } from 'api'
 // [Core]
-import { TextField } from 'core/inputs'
+import { TextField, TextFieldWarning } from 'core/inputs'
 // [Components]
 import { AuthContext } from '@components/providers'
 // [Hooks]
@@ -22,14 +22,13 @@ import {
 	StyledFormSubmit,
 	StyledFormSubmitBlock,
 	StyledFormTitle,
-	StyledTextFieldWarning,
 } from 'core/styles/inputs'
 
-export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ title, copy }) => {
+export const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ title, copy }) => {
 	const { hasAuth, authRedirect } = useAuth()
-	const [auth, setAuth] = React.useContext(AuthContext)
+	const [auth, setAuth] = useContext(AuthContext)
 
-	const [loding, setLoading] = React.useState(false)
+	const [loding, setLoading] = useState(false)
 
 	const schema = yup.object().shape({
 		email: yup.string().email().required('Email is a required field.'),
@@ -75,7 +74,7 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ title, cop
 		formState: { errors },
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
 
-	React.useEffect(() => {
+	useEffect(() => {
 		if (hasAuth) {
 			authRedirect(`${path.auth.signin.href}`)
 		}
@@ -97,9 +96,7 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ title, cop
 					required
 					watch={watch}
 				/>
-				{errors.email?.message && (
-					<StyledTextFieldWarning>{errors.email?.message}</StyledTextFieldWarning>
-				)}
+				{errors.email?.message && <TextFieldWarning>{errors.email?.message}</TextFieldWarning>}
 				<TextField
 					type="resetCode"
 					name="resetCode"
@@ -112,7 +109,7 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ title, cop
 					watch={watch}
 				/>
 				{errors.resetCode?.message && (
-					<StyledTextFieldWarning>{errors.resetCode?.message}</StyledTextFieldWarning>
+					<TextFieldWarning>{errors.resetCode?.message}</TextFieldWarning>
 				)}
 				<TextField
 					type="password"
@@ -126,7 +123,7 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ title, cop
 					watch={watch}
 				/>
 				{errors.password?.message && (
-					<StyledTextFieldWarning>{errors.password?.message}</StyledTextFieldWarning>
+					<TextFieldWarning>{errors.password?.message}</TextFieldWarning>
 				)}
 				<TextField
 					type="password"
@@ -140,7 +137,7 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ title, cop
 					watch={watch}
 				/>
 				{errors.passwordConfirm?.message && (
-					<StyledTextFieldWarning>{errors.passwordConfirm?.message}</StyledTextFieldWarning>
+					<TextFieldWarning>{errors.passwordConfirm?.message}</TextFieldWarning>
 				)}
 
 				<StyledFormSubmitBlock>
@@ -160,11 +157,11 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ title, cop
 	)
 }
 
-const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ title, copy }) => {
+const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({ title, copy }) => {
 	const { hasAuth, authRedirect } = useAuth()
-	const [auth, setAuth] = React.useContext(AuthContext)
-	const [loding, setLoading] = React.useState(false)
-	const [resetPasswordVisible, setResetPasswordVisible] = React.useState(false)
+	const [auth, setAuth] = useContext(AuthContext)
+	const [loding, setLoading] = useState(false)
+	const [resetPasswordVisible, setResetPasswordVisible] = useState(false)
 
 	const schema = yup.object().shape({
 		email: yup.string().email().required('Email is a required field.'),
@@ -224,9 +221,7 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ title, copy }) 
 						required
 						watch={watch}
 					/>
-					{errors.email?.message && (
-						<StyledTextFieldWarning>{errors.email?.message}</StyledTextFieldWarning>
-					)}
+					{errors.email?.message && <TextFieldWarning>{errors.email?.message}</TextFieldWarning>}
 
 					<StyledFormSubmitBlock>
 						<StyledFormSubmit type="submit">Submit</StyledFormSubmit>

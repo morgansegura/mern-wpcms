@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import Link from 'next/link'
 // [Hooks]
 import { useAuth } from 'hooks'
@@ -12,7 +12,7 @@ import { HeaderMenuItem, HeaderSVG } from '@styles/components/layouts'
 // [Icons]
 import { FaBars } from 'react-icons/fa'
 
-const HeaderMenu: React.FC = () => {
+const HeaderMenu: FC = () => {
 	const { hasAuth } = useAuth()
 
 	const unauthItems = [

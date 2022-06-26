@@ -1,13 +1,13 @@
-import React from 'react'
+import { FC } from 'react'
 // [Core]
-import { Container } from 'core/layouts'
+import { Container } from 'core/layout'
 // [Components]
 import { DefaultLayout } from '@components/layouts'
 import { SigninForm } from '@components/layouts'
 // [Config]
 import { SigninPageProps } from '@config/interfaces'
 
-const SigninPage: React.FC<SigninPageProps> = () => {
+const SigninPage: FC<SigninPageProps> = () => {
 	return (
 		<DefaultLayout>
 			<Container contain="xl">

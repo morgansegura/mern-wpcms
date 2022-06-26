@@ -1,9 +1,9 @@
-import React from 'react'
+import { FC } from 'react'
 
 export interface FormProps {
 	type: string
 	autoComplete?: string
-	children?: React.ReactNode[] | React.ReactNode
+	children?: ReactNode[] | ReactNode
 }
 
 export interface TextFieldProps {

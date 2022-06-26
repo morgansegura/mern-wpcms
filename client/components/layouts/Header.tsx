@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 import Link from 'next/link'
 import { Router, useRouter } from 'next/router'
 import NProgress from 'nprogress'
@@ -8,7 +8,7 @@ import { siteMetadata } from 'helpers'
 
 // [Components]
 import { HeaderMenu } from '@components/layouts'
-import { Logo } from '@components/icons'
+import { Logo } from '@components/data-display/icons'
 // [Config]
 import { HeaderProps } from '@config/interfaces'
 // [Styles]
@@ -22,7 +22,7 @@ Router.events.on('routeChangeStart', NProgress.start)
 Router.events.on('routeChangeError', NProgress.done)
 Router.events.on('routeChangeComplete', NProgress.done)
 
-const Header: React.FC<HeaderProps> = () => {
+const Header: FC<HeaderProps> = () => {
 	return (
 		<StyledHeader>
 			<StyledHeaderContainer>

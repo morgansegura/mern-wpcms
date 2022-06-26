@@ -3,7 +3,7 @@ import * as style from '@styles/config/utilities'
 import { rgba, rem } from 'polished'
 
 // [Core Styles]
-import { MenuContainer, SVGContainer, MenuItem } from 'core/styles/navigation'
+import { MenuContainer, SVGContainer, MenuItem } from 'core/navigation'
 
 export const HeaderMenuContainer = styled(MenuContainer)`
 	justify-self: flex-end;

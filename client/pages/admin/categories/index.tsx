@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { pathConfig as path } from 'api'
 import { StyledContentBlock, StyledH2 } from '@styles/components/layouts'
 import { DefaultLayout } from '@components/layouts'
-import { Container } from 'core/layouts'
+import { Container } from 'core/layout'
 import { useAuth } from 'hooks'
 import LoadingScreen from '@components/layouts/LoadingScreen'
 
-const CategoriesPage: React.FC = () => {
+const CategoriesPage: FC = () => {
 	const { hasAuth, authRedirect } = useAuth()
 	const [roleCheck, setRoleCheck] = useState(hasAuth)
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import { FC } from 'react'
 
 // [Core]
 import { Drawer, DrawerProvider } from 'core/navigation'
@@ -9,7 +9,7 @@ import { LayoutProps } from '@config/interfaces'
 // [Styles]
 import { StyledLayout } from '@styles/components/layouts'
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: FC<LayoutProps> = ({ children }) => {
 	return (
 		<>
 			<DrawerProvider>
