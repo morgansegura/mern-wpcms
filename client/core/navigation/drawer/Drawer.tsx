@@ -1,7 +1,7 @@
 import { createContext, FC, useContext, useEffect, useRef, useState } from 'react'
 
 import { Backdrop } from 'core/feedback'
-import { LongArrowLeft } from 'core/data-display'
+import { IconLongArrowLeft } from 'core/data-display'
 // [Interfaces]
 import { IDrawer, IDrawerTrigger, IDrawerProvider } from './Drawer.interfaces'
 // [Styles]
@@ -56,7 +56,10 @@ export const DrawerTrigger: FC<IDrawerTrigger> = ({ children }) => {
 			close={toggle.close}
 			onClick={toggleDrawer}
 		>
-			{children}
+			<>
+				{console.log('clicked')}
+				{children}
+			</>
 		</s.DrawerTrigger>
 	)
 }
@@ -79,7 +82,7 @@ const Drawer: FC<IDrawer> = ({ content, menu }) => {
 				onClick={() => setToggle({ open: false, close: true })}
 			>
 				<s.DrawerMenuClose onClick={() => setToggle({ open: false, close: true })}>
-					<LongArrowLeft />
+					<IconLongArrowLeft />
 				</s.DrawerMenuClose>
 				{menu}
 			</s.DrawerContainer>

@@ -1,7 +1,0 @@
-export * from './ComponentProps'
-export * from './FormProps'
-export * from './LayoutProps'
-export * from './MenuProps'
-export * from './ThemeProps'
-export * from './ProviderProps'
-export * from './PageProps'

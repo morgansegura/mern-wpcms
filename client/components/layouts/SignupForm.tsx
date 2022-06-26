@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import toast from 'react-hot-toast'
@@ -8,19 +8,12 @@ import * as yup from 'yup'
 // [API]
 import { authService, pathConfig as path } from 'api'
 // [Config]
-import { SignupFormProps } from '@config/interfaces'
+import { ISignupForm } from './form/Form.interfaces'
 // [Core]
 import { TextField, TextFieldWarning } from 'core/inputs'
 
 // [Styled]
-import {
-	StyledForm,
-	StyledFormAltMessage,
-	StyledFormTitle,
-	StyledFormCopy,
-	StyledFormSubmitBlock,
-	StyledFormSubmit,
-} from 'core/styles/inputs'
+import * as s from './form/Form.styled'
 
 const schema = yup.object().shape({
 	fullName: yup.string().required(),
@@ -33,7 +26,7 @@ const schema = yup.object().shape({
 		.required('Password confirmation is required'),
 })
 
-const SignupForm: FC<SignupFormProps> = ({ title, copy }) => {
+const SignupForm: FC<ISignupForm> = ({ title, copy }) => {
 	const router = useRouter()
 	const [registered, setRegistered] = useState(false)
 	const [loding, setLoading] = useState(false)
@@ -76,9 +69,9 @@ const SignupForm: FC<SignupFormProps> = ({ title, copy }) => {
 
 	return (
 		<>
-			<StyledForm onSubmit={handleSubmit(onSubmit)}>
-				{title && <StyledFormTitle>{title}</StyledFormTitle>}
-				{copy && <StyledFormCopy>{copy}</StyledFormCopy>}
+			<s.Form onSubmit={handleSubmit(onSubmit)}>
+				{title && <s.FormTitle>{title}</s.FormTitle>}
+				{copy && <s.FormCopy>{copy}</s.FormCopy>}
 				<TextField
 					type="text"
 					name="fullName"
@@ -147,19 +140,19 @@ const SignupForm: FC<SignupFormProps> = ({ title, copy }) => {
 					<TextFieldWarning>{errors.passwordConfirm?.message}</TextFieldWarning>
 				)}
 
-				<StyledFormSubmitBlock>
-					<StyledFormSubmit type="submit">
+				<s.FormSubmitBlock>
+					<s.FormSubmit type="submit">
 						Signup
 						{/* <RippleEffect color="primary" /> */}
-					</StyledFormSubmit>
-				</StyledFormSubmitBlock>
-				<StyledFormAltMessage>
+					</s.FormSubmit>
+				</s.FormSubmitBlock>
+				<s.FormAltMessage>
 					Already a member?{' '}
 					<Link href={path.auth.signin.href}>
 						<a>{`${path.auth.signin.label}`}</a>
 					</Link>
-				</StyledFormAltMessage>
-			</StyledForm>
+				</s.FormAltMessage>
+			</s.Form>
 		</>
 	)
 }

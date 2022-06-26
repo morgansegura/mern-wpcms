@@ -1,6 +1,0 @@
-export * from './StyledLayout'
-export * from './StyledFooter'
-export * from './StyledHeader'
-export * from './StyledHeaderMenu'
-export * from './StyledDrawerMenu'
-export * from './StyledLoadingScreen'

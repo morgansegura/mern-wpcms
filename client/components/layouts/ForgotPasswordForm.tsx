@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
@@ -13,18 +13,11 @@ import { AuthContext } from '@components/providers'
 // [Hooks]
 import { useAuth, useStorage } from 'hooks'
 // [Config]
-import { ForgotPasswordFormProps, ResetPasswordFormProps } from '@config/interfaces'
+import { IForgotPasswordForm, IResetPasswordForm } from './form/Form.interfaces'
 // [Styled]
-import {
-	StyledForm,
-	StyledFormAltMessage,
-	StyledFormCopy,
-	StyledFormSubmit,
-	StyledFormSubmitBlock,
-	StyledFormTitle,
-} from 'core/styles/inputs'
+import * as s from './form/Form.styled'
 
-export const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ title, copy }) => {
+export const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
 	const { hasAuth, authRedirect } = useAuth()
 	const [auth, setAuth] = useContext(AuthContext)
 
@@ -82,9 +75,9 @@ export const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ title, copy }) =
 
 	return (
 		<>
-			<StyledForm onSubmit={handleSubmit(onSubmit)}>
-				{title && <StyledFormTitle>{title}</StyledFormTitle>}
-				{copy && <StyledFormCopy>{copy}</StyledFormCopy>}
+			<s.Form onSubmit={handleSubmit(onSubmit)}>
+				{title && <s.FormTitle>{title}</s.FormTitle>}
+				{copy && <s.FormCopy>{copy}</s.FormCopy>}
 				<TextField
 					type="email"
 					name="email"
@@ -140,10 +133,10 @@ export const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ title, copy }) =
 					<TextFieldWarning>{errors.passwordConfirm?.message}</TextFieldWarning>
 				)}
 
-				<StyledFormSubmitBlock>
-					<StyledFormSubmit type="submit">Submit</StyledFormSubmit>
-				</StyledFormSubmitBlock>
-				<StyledFormAltMessage>
+				<s.FormSubmitBlock>
+					<s.FormSubmit type="submit">Submit</s.FormSubmit>
+				</s.FormSubmitBlock>
+				<s.FormAltMessage>
 					Alternative options.
 					<Link href={`${path.auth.signin.href}`}>
 						<a>{path.auth.signin.label}</a>
@@ -151,13 +144,13 @@ export const ResetPasswordForm: FC<ResetPasswordFormProps> = ({ title, copy }) =
 					<Link href={`${path.auth.signup.href}`}>
 						<a>{path.auth.signup.label}</a>
 					</Link>
-				</StyledFormAltMessage>
-			</StyledForm>
+				</s.FormAltMessage>
+			</s.Form>
 		</>
 	)
 }
 
-const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({ title, copy }) => {
+const ForgotPasswordForm: FC<IForgotPasswordForm> = ({ title, copy }) => {
 	const { hasAuth, authRedirect } = useAuth()
 	const [auth, setAuth] = useContext(AuthContext)
 	const [loding, setLoading] = useState(false)
@@ -206,9 +199,9 @@ const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({ title, copy }) => {
 					copy="Enter the reset code along with your credentials."
 				/>
 			) : (
-				<StyledForm onSubmit={handleSubmit(onSubmit)}>
-					{title && <StyledFormTitle>{title}</StyledFormTitle>}
-					{copy && <StyledFormCopy>{copy}</StyledFormCopy>}
+				<s.Form onSubmit={handleSubmit(onSubmit)}>
+					{title && <s.FormTitle>{title}</s.FormTitle>}
+					{copy && <s.FormCopy>{copy}</s.FormCopy>}
 					<TextField
 						type="email"
 						name="email"
@@ -223,10 +216,10 @@ const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({ title, copy }) => {
 					/>
 					{errors.email?.message && <TextFieldWarning>{errors.email?.message}</TextFieldWarning>}
 
-					<StyledFormSubmitBlock>
-						<StyledFormSubmit type="submit">Submit</StyledFormSubmit>
-					</StyledFormSubmitBlock>
-					<StyledFormAltMessage>
+					<s.FormSubmitBlock>
+						<s.FormSubmit type="submit">Submit</s.FormSubmit>
+					</s.FormSubmitBlock>
+					<s.FormAltMessage>
 						Alternative options.
 						<Link href={`${path.auth.signin.href}`}>
 							<a>{path.auth.signup.href}</a>
@@ -234,8 +227,8 @@ const ForgotPasswordForm: FC<ForgotPasswordFormProps> = ({ title, copy }) => {
 						<Link href={`${path.auth.signup.href}`}>
 							<a>{path.auth.signup.label}</a>
 						</Link>
-					</StyledFormAltMessage>
-				</StyledForm>
+					</s.FormAltMessage>
+				</s.Form>
 			)}
 		</>
 	)

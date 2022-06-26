@@ -1,2 +1,2 @@
-export { DrawerProvider, default as Drawer } from './Drawer'
+export { DrawerProvider, DrawerTrigger, ActiveDrawerContext, default as Drawer } from './Drawer'
 export * from './Drawer.styled'

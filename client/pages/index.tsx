@@ -2,7 +2,8 @@ import { FC } from 'react'
 // [Core]
 import { Container } from 'core/layout'
 // [Components]
-import { DefaultLayout } from '@components/layouts'
+import { Layout } from '@components/layouts'
+
 import {
 	StyledContentBlock,
 	StyledCopy,
@@ -16,11 +17,11 @@ import {
 	StyledH4,
 	StyledH5,
 	StyledH6,
-} from '@styles/components/layouts'
+} from '@components/layouts'
 
 const Home: FC = () => {
 	return (
-		<DefaultLayout>
+		<Layout>
 			<Container contain="xl">
 				<StyledContentBlock>
 					<StyledH1>Home Page</StyledH1>
@@ -31,7 +32,7 @@ const Home: FC = () => {
 					<StyledCopy>Home Page</StyledCopy>
 				</StyledContentBlock>
 			</Container>
-		</DefaultLayout>
+		</Layout>
 	)
 }
 

@@ -1,14 +1,14 @@
-import React, { MouseEvent } from 'react'
+import React, { FC, MouseEvent, ReactNode, useEffect, useState } from 'react'
 import { StyledRipple } from 'core/styles/utils/Ripple'
 
-interface RippleEffectProps {
-	children?: ReactChild | ReactChild[]
+interface IRippleEffect {
+	children?: ReactNode[] | ReactNode
 	as?: any
-	color?: any
+	color?: string
 	onClick?: (e: MouseEvent<HTMLButtonElement>) => unknown
 }
 
-const RippleEffect: FC<RippleEffectProps> = ({ as = 'div', children, color, onClick }) => {
+const RippleEffect: FC<IRippleEffect> = ({ as = 'div', children, color, onClick }) => {
 	const [coords, setCoords] = useState({ x: -1, y: -1 })
 	const [isRippling, setIsRippling] = useState(false)
 

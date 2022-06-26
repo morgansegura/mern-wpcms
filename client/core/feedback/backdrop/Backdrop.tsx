@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 // [Interfaces]
 import { IBackdrop } from './Backdrop.interfaces'

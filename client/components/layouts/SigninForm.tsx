@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
@@ -13,19 +13,11 @@ import { AuthContext } from '@components/providers'
 // [Hooks]
 import { useAuth, useStorage } from 'hooks'
 // [Config]
-import { SigninFormProps } from '@config/interfaces'
+import { ISigninForm } from './form/Form.interfaces'
 // [Styled]
-import {
-	StyledForgotPassword,
-	StyledForm,
-	StyledFormAltMessage,
-	StyledFormCopy,
-	StyledFormSubmit,
-	StyledFormSubmitBlock,
-	StyledFormTitle,
-} from 'core/styles/inputs'
+import * as s from './form/Form.styled'
 
-const SigninForm: FC<SigninFormProps> = ({ title, copy }) => {
+const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 	const { hasAuth, authRedirect } = useAuth()
 	const { setStorage } = useStorage()
 	const [auth, setAuth] = useContext(AuthContext)
@@ -80,9 +72,9 @@ const SigninForm: FC<SigninFormProps> = ({ title, copy }) => {
 
 	return (
 		<>
-			<StyledForm onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-				{title && <StyledFormTitle>{title}</StyledFormTitle>}
-				{copy && <StyledFormCopy>{copy}</StyledFormCopy>}
+			<s.Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+				{title && <s.FormTitle>{title}</s.FormTitle>}
+				{copy && <s.FormCopy>{copy}</s.FormCopy>}
 				<TextField
 					type="email"
 					name="email"
@@ -109,21 +101,21 @@ const SigninForm: FC<SigninFormProps> = ({ title, copy }) => {
 				{errors.password?.message && (
 					<TextFieldWarning>{errors.password?.message}</TextFieldWarning>
 				)}
-				<StyledFormSubmitBlock>
-					<StyledFormSubmit type="submit">Signin</StyledFormSubmit>
-				</StyledFormSubmitBlock>
-				<StyledFormAltMessage>
+				<s.FormSubmitBlock>
+					<s.FormSubmit type="submit">Signin</s.FormSubmit>
+				</s.FormSubmitBlock>
+				<s.FormAltMessage>
 					Need a membership?
 					<Link href={`${path.auth.signup.href}`}>
 						<a>{path.auth.signup.label}</a>
 					</Link>
-					<StyledForgotPassword>
+					<s.ForgotPassword>
 						<Link href="/forgot-password">
 							<a>Forgot password</a>
 						</Link>
-					</StyledForgotPassword>
-				</StyledFormAltMessage>
-			</StyledForm>
+					</s.ForgotPassword>
+				</s.FormAltMessage>
+			</s.Form>
 		</>
 	)
 }
