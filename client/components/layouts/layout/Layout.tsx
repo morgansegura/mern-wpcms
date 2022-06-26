@@ -87,7 +87,7 @@ const DrawerMenu: FC = () => {
 				) : (
 					<>
 						<s.StyledDrawerMenu>
-							<Menu mode="stacked-accordion" items={authItems} />
+							<Menu mode="stacked" items={authItems} />
 						</s.StyledDrawerMenu>
 					</>
 				)}

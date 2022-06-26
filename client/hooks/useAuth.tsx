@@ -16,7 +16,6 @@ const useAuth = () => {
 			user: null,
 			token: '',
 		})
-		console.log('Signout function deployed')
 		router.push(path)
 	}
 

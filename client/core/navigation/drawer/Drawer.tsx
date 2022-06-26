@@ -72,9 +72,9 @@ const Drawer: FC<IDrawer> = ({ content, menu }) => {
 				{content}
 			</s.DrawerFrame>
 			<Backdrop
-				onClick={() => setToggle({ open: false, close: true })}
 				open={toggle.open}
 				close={toggle.close}
+				onClick={() => setToggle({ open: false, close: true })}
 			/>
 			<s.DrawerContainer
 				open={toggle.open}

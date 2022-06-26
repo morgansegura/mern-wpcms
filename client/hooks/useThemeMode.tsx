@@ -7,8 +7,6 @@ const useThemeMode = () => {
 	const { theme } = getStorage('settings') && JSON.parse(getStorage('settings'))
 	const [themeMode, setThemeMode] = useState(theme ? theme : 'dark')
 
-	console.log({ theme })
-
 	const setTheme = (themeOptions: string) => {
 		setThemeMode(themeOptions)
 
