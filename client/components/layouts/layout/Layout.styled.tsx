@@ -140,9 +140,6 @@ export const LayoutContainer = styled.div`
 	}
 `
 
-export const StyledDrawerMenuIcon = styled(DrawerMenuIcon)``
-export const StyledDrawerMenuItem = styled(DrawerMenuItem)``
-
 export const StyledH1 = styled.h2`
 	${style.h1}
 `
@@ -151,16 +148,16 @@ export const StyledH2 = styled.h2`
 	${style.h2}
 `
 
-export const StyledH3 = styled.h2`
+export const StyledH3 = styled.h3`
 	${style.h2}
 `
 
-export const StyledH4 = styled.h2`
+export const StyledH4 = styled.h4`
 	${style.h2}
 `
 
-export const StyledH5 = styled.h2`
-	${style.h2}
+export const StyledH5 = styled.h5`
+	${style.h5}
 `
 
 export const StyledH6 = styled.h6`

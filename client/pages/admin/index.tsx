@@ -5,6 +5,7 @@ import { Layout, StyledContentBlock, StyledH2 } from '@components/layouts'
 import { Container } from 'core/layout'
 import { useAuth } from 'hooks'
 import { AuthContext } from '@components/providers'
+import { Typography } from 'core/data-display'
 
 const Admin: FC = () => {
 	const router = useRouter()
@@ -17,11 +18,17 @@ const Admin: FC = () => {
 			<Layout>
 				<Container contain="xl">
 					<StyledContentBlock>
-						{auth && auth.user === null ? (
-							<StyledH2>Nice Try!</StyledH2>
-						) : (
-							<StyledH2>Admin</StyledH2>
-						)}
+						<Typography as="h6" view="h1">
+							This is an H1
+						</Typography>
+						<Typography as="h2" view="h2">
+							This is an H2
+						</Typography>
+						<Typography view="h3">This is an H3</Typography>
+						<Typography view="h4">This is an H4</Typography>
+						<Typography view="h5">This is an H5</Typography>
+						<Typography view="h6">This is an H6</Typography>
+						<Typography view="p">This is an p</Typography>
 					</StyledContentBlock>
 				</Container>
 			</Layout>
