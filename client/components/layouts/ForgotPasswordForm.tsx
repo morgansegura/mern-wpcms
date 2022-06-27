@@ -69,7 +69,7 @@ export const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
 
 	useEffect(() => {
 		if (hasAuth) {
-			authRedirect(`${path.auth.signin.href}`)
+			authRedirect(`/signin`)
 		}
 	}, [hasAuth, onSubmit])
 
@@ -222,7 +222,7 @@ const ForgotPasswordForm: FC<IForgotPasswordForm> = ({ title, copy }) => {
 					<s.FormAltMessage>
 						Alternative options.
 						<Link href={`${path.auth.signin.href}`}>
-							<a>{path.auth.signup.href}</a>
+							<a>{path.auth.signup.label}</a>
 						</Link>
 						<Link href={`${path.auth.signup.href}`}>
 							<a>{path.auth.signup.label}</a>

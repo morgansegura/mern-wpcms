@@ -24,7 +24,7 @@ export const Backdrop = styled.div<IBackdrop>`
 			z-index: ${style.zindex.high};
 			background-color: ${props =>
 				props.theme.palette.name === 'light'
-					? rgba(props.theme.palette.neutral['10'], 0.95)
+					? rgba(props.theme.palette.neutral['06'], 0.95)
 					: rgba(props.theme.palette.neutral['00'], 0.95)};
 			transition: all 0.3s ease-in;
 		`}

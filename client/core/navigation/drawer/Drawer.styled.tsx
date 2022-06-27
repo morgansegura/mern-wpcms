@@ -30,35 +30,120 @@ export const DrawerFrame = styled.div<IDrawerFrame>`
 `
 
 export const DrawerContainer = styled.div<IDrawer>`
-	/*
-        [Base Styles]
-    */
 	position: fixed;
 	z-index: ${style.zindex.top};
-
-	top: 50%;
-	left: 0;
-	width: 100%;
-	max-width: 350px;
-	height: 95vh;
-	border-radius: 0 10px 10px 0;
-	color: ${props =>
-		props.theme.palette.name === 'light'
-			? props.theme.palette.neutral['80']
-			: props.theme.palette.neutral['08']};
+	box-shadow: none;
+	padding-top: ${style.sp['8']};
 	background-color: ${props =>
 		props.theme.palette.name === 'light'
-			? props.theme.palette.neutral['06']
-			: props.theme.palette.neutral['70']};
-	box-shadow: none;
+			? props.theme.palette.neutral['05']
+			: props.theme.palette.neutral['50']};
 
-	transform: translateX(0) translateY(-50%);
 	transition: transform 0.4s ease-out;
 
-	/*
-        [Relocate Styles]
-    */
+	/* [TOP] */
+	${props =>
+		props.direction === 'top' &&
+		css`
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: auto;
+			width: 100%;
+			transform: translateX(0) translateY(-100%);
+		`}
+	${props =>
+		props.open &&
+		props.direction === 'top' &&
+		css`
+			transform: translateX(0) translateY(0);
+		`}
+	${props =>
+		props.close &&
+		props.direction &&
+		props.direction === 'top' &&
+		css`
+			transform: translateX(0) translateY(-100%);
+		`}
 
+	/* [Right] */
+	${props =>
+		props.direction &&
+		props.direction === 'right' &&
+		css`
+			top: 0;
+			left: auto;
+			right: 0;
+			bottom: 0;
+			width: 100%;
+			max-width: 320px;
+			transform: translateX(100%) translateY(0);
+		`}
+	${props =>
+		props.open &&
+		props.direction === 'right' &&
+		css`
+			transform: translateX(0) translateY(0);
+		`}
+	${props =>
+		props.close &&
+		props.direction === 'right' &&
+		css`
+			transform: translateX(100%) translateY(0);
+		`}
+
+	/* [Bottom] */
+	${props =>
+		props.direction === 'bottom' &&
+		css`
+			top: auto;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			width: 100%;
+			transform: translateX(0) translateY(0);
+		`}
+	${props =>
+		props.open &&
+		props.direction === 'bottom' &&
+		css`
+			transform: translateX(0) translateY(-100%);
+		`}
+	${props =>
+		props.close &&
+		props.direction === 'bottom' &&
+		css`
+			transform: translateX(0) translateY(100%);
+		`}
+
+	/* [Left] */
+	${props =>
+		props.direction === 'left' &&
+		css`
+			top: 0;
+			left: 0;
+			right: auto;
+			bottom: 0;
+			width: 100%;
+			max-width: 320px;
+			transform: translateX(-100%) translateY(0);
+		`}
+	${props =>
+		props.open &&
+		props.direction === 'left' &&
+		css`
+			transform: translateX(0) translateY(0);
+		`}
+	${props =>
+		props.close &&
+		props.direction === 'left' &&
+		css`
+			transform: translateX(-100%) translateY(0);
+		`}
+
+
+
+	/* [Open] */
 	${props =>
 		props.open &&
 		css`
@@ -72,21 +157,20 @@ export const DrawerContainer = styled.div<IDrawer>`
 						props.theme.palette.name === 'light'
 							? props.theme.palette.neutral['08']
 							: props.theme.palette.neutral['06']};
-			transform: translateX(0) translateY(-50%);
 			transition: transform 0.3s ease-in;
 		`};
 
+	/* [Closed] */
 	${props =>
 		props.close &&
 		css`
 			box-shadow: none;
-			transform: translateX(-100%) translateY(-50%);
 			transition: transform 0.45s ease-out;
 		`};
 `
 
 export const DrawerMenuContainer = styled.div`
-	padding: ${style.sp['8']} ${style.sp['11']} ${style.sp['8']} ${style.sp['6']};
+	padding: ${style.sp['8']} ${style.sp['2']};
 `
 
 export const DrawerMenu = styled.nav`
@@ -97,11 +181,13 @@ export const DrawerMenu = styled.nav`
 export const DrawerMenuTitle = styled.nav`
 	position: relative;
 	display: flex;
-	${style.fontSizing('14px', '40px', 700)};
+	align-items: center;
+	${style.fontSizing('16px', '32px', 700)};
 	margin-bottom: ${style.sp['1']};
-	text-transform: uppercase;
-	font-weight: 800;
-	border-bottom: 1px solid transparent;
+
+	svg {
+		display: flex;
+	}
 `
 export const DrawerMenuItem = styled.div`
 	position: relative;

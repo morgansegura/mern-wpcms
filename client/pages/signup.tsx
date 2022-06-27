@@ -1,12 +1,14 @@
 import { FC } from 'react'
-import { DefaultLayout } from '@components/layouts'
-import { SignupForm } from '@components/layouts'
+import { Layout, SignupForm } from '@components/layouts'
+import { siteMetadata } from 'helpers'
 
 const SignupPage: FC = () => {
+	const { signupTitle, signupCopy } = siteMetadata.signupForm
+
 	return (
-		<DefaultLayout>
-			<SignupForm title="Signup" copy="Become a proud FEWCrew&trade; Member." />
-		</DefaultLayout>
+		<Layout>
+			<SignupForm title={signupTitle} copy={signupCopy} />
+		</Layout>
 	)
 }
 

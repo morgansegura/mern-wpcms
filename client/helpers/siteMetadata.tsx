@@ -11,6 +11,11 @@ const siteMetadata = {
 	siteLogoSquare: '',
 	cssResetType: 'normalize',
 	adminSecret: 'RobertIsAwesome',
+
+	signupForm: {
+		signupTitle: 'Signup for a lifetime',
+		signupCopy: 'Become a proud FEWCrew™ Member.',
+	},
 }
 
 export default siteMetadata

@@ -70,8 +70,10 @@ export const HeaderMenuContainer = styled(MenuContainer)`
 export const HeaderSVG = styled(SVGContainer)``
 
 export const HeaderMenuItem = styled(MenuItem)`
+	display: flex;
+
 	&:not(:first-child) {
-		margin-left: ${style.sp['1']};
+		margin-left: ${style.sp['0.5']};
 	}
 
 	${HeaderSVG},
@@ -128,9 +130,18 @@ export const HeaderMenuItem = styled(MenuItem)`
 	}
 
 	a {
-		padding: ${style.sp['1']} ${style.sp['2']};
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: ${style.sp['1']} ${style.sp['1.5']};
 		text-transform: uppercase;
 		letter-spacing: ${rem('0.5px')};
 		${style.fontSizing('12px', '20px', 700)}
+
+		svg {
+			display: flex;
+			padding: 0;
+			margin-right: ${style.sp['1']};
+		}
 	}
 `

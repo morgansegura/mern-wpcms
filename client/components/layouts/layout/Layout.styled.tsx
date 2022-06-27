@@ -1,18 +1,136 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import * as style from '@styles/config/utilities'
+import { math } from 'polished'
 
 import {
+	DrawerMenuItem,
+	DrawerMenuIcon,
 	DrawerContainer,
 	DrawerFrame,
-	DrawerMenuContainer,
-	DrawerMenu,
-	DrawerMenuTitle,
-	DrawerMenuItem,
-	DrawerMenuClose,
-	DrawerMenuIcon,
-} from 'core/navigation'
+} from 'core/navigation/drawer'
+
+import {
+	AccordionContainer,
+	AccordionTab,
+	AccordionTabContainer,
+	AccordionTabTitleIcon,
+	AccordionTabActionIcon,
+	AccordionTabContentMenuLink,
+	AccordionContentItem,
+	Accordion,
+} from 'core/surfaces/accordion'
 
 export const Layout = styled.div`
+	${AccordionContainer} => {
+		position: absolute;
+		top: ${style.sp['8']};
+		right: 0;
+		bottom: auto;
+		left: 0;
+		padding-bottom: ${style.sp['2']};
+	}
+
+	${AccordionTab} {
+		user-select: none;
+		padding: ${style.sp['1']} ${style.sp['2']};
+		/* border-radius: ${style.radius.lg}; */
+		color: ${props =>
+			props.theme.palette.name === 'light'
+				? props.theme.palette.neutral['06']
+				: props.theme.palette.neutral['70']};
+		background-color: ${props =>
+			props.theme.palette.name === 'light'
+				? props.theme.palette.neutral['60']
+				: props.theme.palette.neutral['05']};
+
+		border-bottom: 1px solid
+			${props =>
+				props.theme.palette.name === 'light'
+					? props.theme.palette.neutral['60']
+					: props.theme.palette.neutral['07']};
+
+		${AccordionTabTitleIcon} {
+			svg {
+				width: ${style.sp['2']};
+			}
+		}
+	}
+
+	${AccordionContentItem} {
+		${AccordionTabContentMenuLink} {
+			a {
+				padding-top: ${style.sp['1.5']};
+				padding-bottom: ${style.sp['1.5']};
+				color: ${props =>
+					props.theme.palette.name === 'light'
+						? props.theme.palette.neutral['06']
+						: props.theme.palette.neutral['60']};
+
+				&:hover {
+					color: ${props =>
+						props.theme.palette.name === 'light'
+							? props.theme.palette.neutral['06']
+							: props.theme.palette.neutral['60']};
+				}
+			}
+		}
+		&:first-child {
+			a {
+				padding-top: ${style.sp['2']};
+			}
+		}
+		&:last-child {
+			a {
+				color: orange;
+				padding-bottom: ${style.sp['2.5']};
+			}
+		}
+	}
+
+	/* [Drawer] */
+
+	${DrawerContainer} => {
+		position: fixed;
+		top: ${style.sp['11']};
+		bottom: 0;
+		left: auto;
+		right: 0;
+		border-radius: ${style.radius.lg} 0 0 0;
+		height: calc(100vh - ${style.sp['11']});
+		transform: translateX(100%) translateY(0);
+
+		${props =>
+			props.open &&
+			css`
+				box-shadow: 0 0 60px
+						${props =>
+							props.theme.palette.name === 'light'
+								? props.theme.palette.neutral['20']
+								: props.theme.palette.neutral['00']},
+					0 0 30px
+						${props =>
+							props.theme.palette.name === 'light'
+								? props.theme.palette.neutral['08']
+								: props.theme.palette.neutral['06']};
+				transform: translateX(0) translateY(0);
+				transition: transform 0.3s ease-in;
+			`};
+
+		${props =>
+			props.close &&
+			css`
+				box-shadow: none;
+				transform: translateX(100%) translateY(0);
+				transition: transform 0.45s ease-out;
+			`};
+	}
+
+	${DrawerFrame} {
+		/* transform: translateX(${style.sp['7.5']}); */
+	}
+`
+
+export const LayoutContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
@@ -22,42 +140,8 @@ export const Layout = styled.div`
 	}
 `
 
-export const StyledDrawer = styled.div`
-	position: fixed;
-`
-export const StyledDrawerContainer = styled(DrawerContainer)``
-
-export const StyledDrawerMenuContainer = styled(DrawerMenuContainer)``
-export const StyledDrawerFrame = styled(DrawerFrame)``
-export const StyledDrawerMenu = styled(DrawerMenu)``
-export const StyledDrawerMenuTitle = styled(DrawerMenuTitle)`
-	${style.fontSizing('14px', '40px', 700)};
-	margin-bottom: ${style.sp['1']};
-	text-transform: uppercase;
-	color: ${props =>
-		props.theme.palette.name === 'light'
-			? props.theme.palette.neutral['20']
-			: props.theme.palette.neutral['30']};
-	border-bottom-color: ${props =>
-		props.theme.palette.name === 'light'
-			? props.theme.palette.neutral['07']
-			: props.theme.palette.neutral['60']};
-`
-export const StyledDrawerMenuIcon = styled(DrawerMenuIcon)`
-	display: inline-flex;
-	align-self: center;
-
-	svg {
-		font-size: 18px;
-		margin-right: ${style.sp['1']};
-		color: ${props =>
-			props.theme.palette.name === 'light'
-				? props.theme.palette.neutral['60']
-				: props.theme.palette.neutral['00']};
-	}
-`
+export const StyledDrawerMenuIcon = styled(DrawerMenuIcon)``
 export const StyledDrawerMenuItem = styled(DrawerMenuItem)``
-export const StyledDrawerMenuClose = styled(DrawerMenuClose)``
 
 export const StyledH1 = styled.h2`
 	${style.h1}

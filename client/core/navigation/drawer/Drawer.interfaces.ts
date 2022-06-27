@@ -2,8 +2,10 @@ import { MouseEventHandler, ReactNode } from 'react'
 
 export interface IDrawer {
 	children?: ReactNode[] | ReactNode
+	direction?: string
 	open?: boolean
 	close?: boolean
+	closeIcon?: ReactNode[] | ReactNode
 	content?: ReactNode[] | ReactNode
 	menu?: ReactNode[] | ReactNode
 }

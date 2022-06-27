@@ -1,3 +1,4 @@
+import { ScrollBar } from 'core/surfaces/accordion/Accordion.styled'
 import { css } from 'styled-components'
 
 export const setup = css`
@@ -8,6 +9,7 @@ export const setup = css`
 		font-family: ${props => props.theme.typography.fontBase};
 		font-size: ${props => props.theme.typography.fontSizeBase};
 		background-color: ${props => props.theme.palette.background.body};
+		${ScrollBar};
 		-webkit-text-size-adjust: 100%;
 		-moz-osx-font-smoothing: grayscale;
 		-webkit-font-smoothing: antialiased;
