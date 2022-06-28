@@ -5,8 +5,8 @@ import NProgress from 'nprogress'
 import siteMetadata from '@helpers/siteMetadata'
 
 // [Components]
-import { Logo } from '@components/logo'
-import { HeaderMenu } from '@components/layouts'
+import { Logo } from '@components/icons/logo'
+import { HeaderMenu } from '@components/menus'
 // [Interfaces]
 import { IHeader } from './Header.interfaces'
 // [Styles]

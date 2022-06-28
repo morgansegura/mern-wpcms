@@ -3,16 +3,18 @@ import { useAuth } from 'hooks'
 import Link from 'next/link'
 
 // [Core]
-import { DrawerTrigger } from 'core/navigation/drawer'
-import { IconDashboard, IconHamburger, IconSignout } from '@components/icons'
-import { Menu } from 'core/navigation/menu'
+import { DrawerTrigger } from '@core/navigation/drawer'
+import { Menu } from '@core/navigation/menu'
 // [Components]
-import { ToggleColorMode } from '@components/providers/ThemesProvider'
-// [Styles]
-import * as s from '@components/layouts/header/Header.styled'
-import { AuthContext } from '@components/providers'
+import { IconDashboard, IconHamburger, IconSignout } from '@components/icons'
+import { AuthContext, ToggleColorMode } from '@components/providers'
+// [Interfaces]
+import { IHeaderMenu } from './HeaderMenu.interfaces'
 
-const HeaderMenu: FC = () => {
+// [Styles]
+import * as s from './HeaderMenu.styled'
+
+const HeaderMenu: FC<IHeaderMenu> = () => {
 	const { signout } = useAuth()
 	const { hasAuth, getUserRole, roleBasedPath } = useAuth()
 	const [auth, setAuth] = useContext(AuthContext)

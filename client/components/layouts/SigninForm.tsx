@@ -7,15 +7,15 @@ import * as yup from 'yup'
 // [API]
 import { authService, pathConfig as path } from 'api'
 // [Core]
-import { TextField, TextFieldWarning } from 'core/inputs'
+import { TextField, TextFieldWarning, Form } from '@core/inputs'
 // [Components]
 import { AuthContext } from '@components/providers'
 // [Hooks]
 import { useAuth, useStorage } from 'hooks'
 // [Config]
-import { ISigninForm } from './form/Form.interfaces'
+import { ISigninForm } from '../../core/inputs/form/Form.interfaces'
 // [Styled]
-import * as s from './form/Form.styled'
+import * as s from '../../core/inputs/form/Form.styled'
 
 const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 	const { roleBasedRedirect, hasToken } = useAuth()
@@ -72,7 +72,7 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 
 	return (
 		<>
-			<s.Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+			<Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
 				{title && <s.FormTitle>{title}</s.FormTitle>}
 				{copy && <s.FormCopy>{copy}</s.FormCopy>}
 				<TextField
@@ -115,7 +115,7 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 						</Link>
 					</s.ForgotPassword>
 				</s.FormAltMessage>
-			</s.Form>
+			</Form>
 		</>
 	)
 }

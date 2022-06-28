@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 // [Hooks]
 import { useStorage } from 'hooks'
+// [Helpers]
+import { siteMetadata as meta } from 'helpers'
 // [Components]
 import { AuthContext } from '@components/providers'
 
@@ -26,18 +28,7 @@ const useAuth = () => {
 	}
 
 	const roleBasedPath = () => {
-		let path: string
-		if (getUserRole() === 'Admin') {
-			path = '/admin'
-		} else if (getUserRole() === 'Author') {
-			path = '/author'
-		} else if (getUserRole() === 'Subscriber') {
-			path = '/subscriber'
-		} else {
-			path = '/'
-		}
-
-		return path
+		return meta?.config.roleType.admins.includes(getUserRole()) ? '/admin' : '/'
 	}
 
 	const authRedirect = (path: string = '/signin') => {
@@ -46,15 +37,9 @@ const useAuth = () => {
 
 	const roleBasedRedirect = () => {
 		if (hasAuth) {
-			if (getUserRole() === 'Admin') {
-				authRedirect('/admin')
-			} else if (getUserRole() === 'Author') {
-				authRedirect('/author')
-			} else if (getUserRole() === 'Subscriber') {
-				authRedirect('/subscriber')
-			} else {
-				authRedirect('/')
-			}
+			meta?.config.roleType.admins.includes(getUserRole())
+				? authRedirect('/admin')
+				: authRedirect('/')
 		} else {
 			authRedirect('/')
 		}

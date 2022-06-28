@@ -7,7 +7,7 @@ import { Drawer, DrawerProvider } from 'core/navigation'
 import { Accordion } from 'core/surfaces'
 // [Components]
 import { Header, Footer } from '@components/layouts'
-import { IconAdmin, IconChevronDown, IconClose, IconThumbTack } from '@components/icons'
+import { IconChevronDown, IconClose, IconThumbTack } from '@components/icons'
 // [Interfaces]
 import { IAdminLayout } from './AdminLayout.interfaces'
 // [Styles]
@@ -163,6 +163,7 @@ const AdminLayout: FC<IAdminLayout> = ({ children }) => {
 			.catch(err => {
 				console.log(err)
 				roleBasedRedirect()
+				setLoading(true)
 			})
 	}
 

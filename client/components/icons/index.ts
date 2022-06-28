@@ -21,3 +21,5 @@ export {
 	MdLogout as IconSignout,
 	MdClose as IconClose,
 }
+
+export * from './logo'

@@ -14,11 +14,17 @@ const siteMetadata = {
 
 	config: {
 		apiURL: 'http://localhost:8000/api/',
-	},
-
-	signupForm: {
-		signupTitle: 'Signup for a lifetime',
-		signupCopy: 'Become a proud FEWCrew™ Member.',
+		roleType: { admins: ['Admin', 'Author', 'Subscriber'], guest: 'Guest' },
+		paths: {
+			landing: '/',
+			adminLanding: '/admin',
+			signin: '/signin',
+			signup: '/signup',
+		},
+		signupForm: {
+			signupTitle: 'Signup for a lifetime',
+			signupCopy: 'Become a proud FEWCrew™ Member.',
+		},
 	},
 }
 

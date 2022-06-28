@@ -7,15 +7,16 @@ import * as yup from 'yup'
 // [API]
 import { authService, pathConfig as path } from 'api'
 // [Core]
-import { TextField, TextFieldWarning } from 'core/inputs'
+import { Form, TextField, TextFieldWarning } from 'core/inputs'
+
 // [Components]
 import { AuthContext } from '@components/providers'
 // [Hooks]
-import { useAuth, useStorage } from 'hooks'
+import { useAuth } from 'hooks'
+
 // [Config]
-import { IForgotPasswordForm, IResetPasswordForm } from './form/Form.interfaces'
+import { IForgotPasswordForm, IResetPasswordForm } from '@core/inputs/form/Form.interfaces'
 // [Styled]
-import * as s from './form/Form.styled'
 
 export const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
 	const { hasAuth, authRedirect } = useAuth()
@@ -70,9 +71,7 @@ export const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
 
 	return (
 		<>
-			<s.Form onSubmit={handleSubmit(onSubmit)}>
-				{title && <s.FormTitle>{title}</s.FormTitle>}
-				{copy && <s.FormCopy>{copy}</s.FormCopy>}
+			<Form onSubmit={handleSubmit(onSubmit)} title={title} copy={copy}>
 				<TextField
 					type="email"
 					name="email"
@@ -140,7 +139,7 @@ export const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
 						<a>{path.auth.signup.label}</a>
 					</Link>
 				</s.FormAltMessage>
-			</s.Form>
+			</Form>
 		</>
 	)
 }

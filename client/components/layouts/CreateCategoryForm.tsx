@@ -5,17 +5,16 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 // [API]
-import { categoryService, pathConfig as path } from 'api'
+import { categoryService } from 'api'
 // [Core]
-import { TextField, TextFieldWarning } from 'core/inputs'
+import { TextField, TextFieldWarning, Form } from '@core/inputs'
 // [Components]
-import { AuthContext } from '@components/providers'
 // [Hooks]
 import { useAuth, useStorage } from 'hooks'
 // [Config]
-import { ICreateCategoryForm } from './form/Form.interfaces'
+import { ICreateCategoryForm } from '../../core/inputs/form/Form.interfaces'
 // [Styled]
-import * as s from './form/Form.styled'
+import * as s from '../../core/inputs/form/Form.styled'
 
 const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
 	const [loading, setLoading] = useState(false)
@@ -43,9 +42,6 @@ const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
 				console.log(`Error ${err?.message}`)
 				setLoading(false)
 			})
-			.finally(() => {
-				setLoading(false)
-			})
 	}
 
 	const {
@@ -63,7 +59,7 @@ const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
 
 	return (
 		<>
-			<s.Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+			<Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
 				{title && <s.FormTitle>{title}</s.FormTitle>}
 				{copy && <s.FormCopy>{copy}</s.FormCopy>}
 				<TextField
@@ -84,7 +80,7 @@ const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
 						Create
 					</s.FormSubmit>
 				</s.FormSubmitBlock>
-			</s.Form>
+			</Form>
 		</>
 	)
 }

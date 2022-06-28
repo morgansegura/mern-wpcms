@@ -1,10 +1,14 @@
 import { FC } from 'react'
-import { Layout, SignupForm } from '@components/layouts'
-import { siteMetadata } from 'helpers'
-import { Container } from 'core/layout/container'
+// [Core]
+import { Container } from '@core/layout'
+// [Components]
+import { Layout } from '@components/layouts'
+import { SignupForm } from '@components/forms'
+// [Helpers]
+import { siteMetadata as meta } from 'helpers'
 
 const SignupPage: FC = () => {
-	const { signupTitle, signupCopy } = siteMetadata.signupForm
+	const { signupTitle, signupCopy } = meta.config.signupForm
 
 	return (
 		<Layout>
