@@ -19,6 +19,7 @@ import {
 	AccordionContentItem,
 	Accordion,
 } from 'core/surfaces/accordion'
+import { IGrid, IGridColumn } from './Layout.interfaces'
 
 export const Layout = styled.div`
 	${AccordionContainer} => {
@@ -190,4 +191,16 @@ export const StyledContentBlock = styled.div`
 	&:first-of-type {
 		margin-top: ${style.sp['10']};
 	}
+`
+
+/*
+	Grid Layouts
+*/
+
+export const Grid = styled.div<IGrid>`
+	${style.grid()};
+`
+
+export const Col = styled.div<IGridColumn>`
+	grid-column: ${props => props.start && props.start} / ${props => props.end && props.end};
 `

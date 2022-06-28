@@ -5,7 +5,7 @@ import { rgba, rem } from 'polished'
 // import { FormProps } from '@config/interfaces'
 
 export const Form = styled.form`
-	${style.container.xs};
+	/* ${style.container.xs}; */
 	display: flex;
 	flex-direction: column;
 	margin-right: auto;

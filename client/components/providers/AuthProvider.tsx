@@ -1,11 +1,11 @@
 import { createContext, FC, useEffect, useState } from 'react'
 import axios from 'axios'
 import { useStorage } from 'hooks'
-import { AuthProviderProps } from '@config/interfaces'
+import { IAuthProvider } from '@components/providers/Provider.interfaces'
 
 const AuthContext = createContext<any | null>(null)
 
-const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
+const AuthProvider: FC<IAuthProvider> = ({ children }) => {
 	const { getStorage, setStorage } = useStorage()
 	const [auth, setAuth] = useState({
 		user: null,
@@ -23,14 +23,12 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 	const setAuthState = () => {
 		if (getStorage('auth')) {
 			setAuth(JSON.parse(getStorage('auth')))
-		} else {
-			setAuth(auth)
-			setStorage('auth', JSON.stringify(auth))
 		}
 	}
 
 	useEffect(() => {
 		setAuthState()
+		console.log('auth.token', auth.token)
 	}, [])
 
 	return <AuthContext.Provider value={[auth, setAuth]}>{children}</AuthContext.Provider>

@@ -123,7 +123,7 @@ export const forgotPassword = async (req, res) => {
     from: process.env.EMAIL_FROM,
     to: user.email,
     subject: "Password reset code",
-    html: "<h1>Your password  reset code is: {resetCode}</h1>",
+    html: `<h1>Your password  reset code is: ${resetCode}</h1>`,
   };
   // send email
   try {
@@ -146,9 +146,9 @@ export const resetPassword = async (req, res) => {
       return res.json({ error: "Email or reset code is invalid" });
     }
     // if password is short
-    if (!password || password.length < 6) {
+    if (!password || password.length < 8) {
       return res.json({
-        error: "Password is required and should be 6 characters long",
+        error: "Password is required and should be 8 characters long",
       });
     }
     // hash password

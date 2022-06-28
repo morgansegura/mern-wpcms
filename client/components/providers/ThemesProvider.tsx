@@ -5,7 +5,7 @@ import { useStorage, useThemeMode } from 'hooks'
 import { themeLight, themeDark } from 'styles/theme/default'
 import { MdBrightness4, MdBrightness7 } from 'react-icons/md'
 
-import { ThemesProviderProps, ToggleModeProps } from '@config/interfaces'
+import { IThemesProvider, IThemesProviderToggle } from '@components/providers/Provider.interfaces'
 
 type ThemeType = { theme: 'light' | 'dark' }
 
@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
 `
 const ColorModeContext = createContext({ toggleColorMode: () => {} })
 
-export function ToggleColorMode(props?: ToggleModeProps) {
+export function ToggleColorMode(props?: IThemesProviderToggle) {
 	const { getTheme, setTheme } = useThemeMode()
 	const colorMode = useContext(ColorModeContext)
 	const [themeMode, setThemeMode] = useState(getTheme() === 'light' ? 'light' : 'dark')
@@ -45,7 +45,7 @@ export function ToggleColorMode(props?: ToggleModeProps) {
 	)
 }
 
-const ThemesProvider: FC<ThemesProviderProps> = ({ children }) => {
+const ThemesProvider: FC<IThemesProvider> = ({ children }) => {
 	const { getTheme, setTheme } = useThemeMode()
 	const [themeMode, setThemeMode] = useState(getTheme() === 'light' ? 'light' : 'dark')
 

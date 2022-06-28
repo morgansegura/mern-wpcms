@@ -1,4 +1,3 @@
-
 import express from "express";
 
 const router = express.Router();
@@ -13,7 +12,7 @@ const {
 
 router.get("/", (req, res) => {
   return res.json({
-    data: "hello world from kaloraat auth API",
+    data: "hello world from Morgan Segura auth API",
   });
 });
 router.post("/signup", signup);

@@ -6,7 +6,7 @@ import { IForm } from './Form.interfaces'
 import * as s from './Form.styled'
 
 const Form: FC<IForm> = ({ children }) => {
-	return <s.FormContainer>{children}</s.FormContainer>
+	return <s.Form>{children}</s.Form>
 }
 
 export default Form

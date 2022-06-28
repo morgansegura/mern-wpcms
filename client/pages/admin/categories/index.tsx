@@ -4,19 +4,28 @@ import { useAuth } from 'hooks'
 // [Core]
 import { Container } from 'core/layout'
 // [Components]
-import { Layout } from '@components/layouts/layout'
+
+import { CreateCategoryForm, Layout, StyledContentBlock } from '@components/layouts'
+import { Typography } from 'core/data-display'
 
 // [Styled]
-import { StyledContentBlock, StyledH2 } from '@components/layouts/layout/Layout.styled'
+import * as s from '@components/layouts/layout/Layout.styled'
 
 const CategoriesPage: FC = () => {
 	return (
 		<>
 			<Layout>
 				<Container contain="xl">
-					<StyledContentBlock>
-						<StyledH2>Categories Page</StyledH2>
-					</StyledContentBlock>
+					<s.Grid>
+						<s.Col start={1} end={9}>
+							<Typography as="h3" view="h4" children="Categories" />
+							<Typography as="p" view="p" children="Add New Category" />
+							<CreateCategoryForm />
+						</s.Col>
+						<s.Col start={9} end={13}>
+							Other content
+						</s.Col>
+					</s.Grid>
 				</Container>
 			</Layout>
 		</>
