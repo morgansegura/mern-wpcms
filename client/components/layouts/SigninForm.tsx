@@ -18,7 +18,7 @@ import { ISigninForm } from './form/Form.interfaces'
 import * as s from './form/Form.styled'
 
 const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
-	const { roleBasedRedirect, hasToken, getToken } = useAuth()
+	const { roleBasedRedirect, hasToken } = useAuth()
 	const { setStorage } = useStorage()
 	const [auth, setAuth] = useContext(AuthContext)
 
@@ -40,7 +40,6 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 					toast.error(`The credentials given are incorrect.`)
 					setLoading(true)
 				} else {
-					console.log(res)
 					setAuth(res)
 					setStorage('auth', JSON.stringify(res))
 					toast.success(`Successfully signed in.`)
@@ -54,11 +53,11 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 			})
 	}
 
-	// useEffect(() => {
-	// 	if (hasToken()) {
-	// 		roleBasedRedirect()
-	// 	}
-	// }, [hasToken])
+	useEffect(() => {
+		if (hasToken()) {
+			roleBasedRedirect()
+		}
+	}, [hasToken])
 
 	const {
 		register,
@@ -66,6 +65,10 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 		watch,
 		formState: { errors },
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
+
+	if (loading) {
+		return <>Loading...</>
+	}
 
 	return (
 		<>

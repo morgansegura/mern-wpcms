@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -14,6 +13,7 @@ import { TextField, TextFieldWarning } from 'core/inputs'
 
 // [Styled]
 import * as s from './form/Form.styled'
+import useAuth from '@hooks/useAuth'
 
 const schema = yup.object().shape({
 	fullName: yup.string().required(),
@@ -27,9 +27,8 @@ const schema = yup.object().shape({
 })
 
 const SignupForm: FC<ISignupForm> = ({ title, copy }) => {
-	const router = useRouter()
-	const [registered, setRegistered] = useState(false)
-	const [loding, setLoading] = useState(false)
+	const [loading, setLoading] = useState(true)
+	const { roleBasedRedirect, hasToken } = useAuth()
 
 	const {
 		register,
@@ -52,20 +51,24 @@ const SignupForm: FC<ISignupForm> = ({ title, copy }) => {
 					toast.error(`Something went wrong. Please try again.`)
 					setLoading(false)
 				} else {
-					setRegistered(true)
 					setLoading(true)
 				}
 			})
-			.catch((err: any) => {
-				console.log(`Error ${err?.message}`)
+			.catch(err => {
+				console.log(err)
+				setLoading(false)
 			})
 	}
 
 	useEffect(() => {
-		if (registered) {
-			router.push(`${path.auth.signin.href}`)
+		if (hasToken()) {
+			roleBasedRedirect()
 		}
-	}, [registered])
+	}, [hasToken])
+
+	if (loading) {
+		return <>Loading...</>
+	}
 
 	return (
 		<>
