@@ -1,4 +1,5 @@
-import { FC, useContext, useEffect, useState } from 'react'
+import { FC, useContext, useState } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
@@ -18,6 +19,7 @@ import { ISigninForm } from './form/Form.interfaces'
 import * as s from './form/Form.styled'
 
 const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
+	const router = useRouter()
 	const { hasAuth, authRedirect } = useAuth()
 	const { setStorage } = useStorage()
 	const [auth, setAuth] = useContext(AuthContext)
@@ -36,7 +38,7 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 				email: watch('email'),
 				password: watch('password'),
 			})
-			.then((res: { user: { username: string }; error: string }) => {
+			.then(res => {
 				if (res?.error) {
 					toast.error(`The credentials given are incorrect.`)
 					setLoading(false)
@@ -46,6 +48,14 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 					setStorage('auth', JSON.stringify(res))
 					toast.success(`Welcome back ${res.user.username}`)
 					setLoading(true)
+
+					if (res?.user?.role === 'Admin') {
+						router.push('/admin')
+					} else if (res?.user?.role === 'Author') {
+						router.push('/author')
+					} else {
+						router.push('/')
+					}
 				}
 			})
 			.catch(err => {
@@ -63,12 +73,6 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 		watch,
 		formState: { errors },
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
-
-	useEffect(() => {
-		if (hasAuth) {
-			authRedirect(`${path.admin.base.landing.href}`)
-		}
-	}, [hasAuth, onSubmit])
 
 	return (
 		<>
