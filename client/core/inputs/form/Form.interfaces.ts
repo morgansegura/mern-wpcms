@@ -6,3 +6,6 @@ export interface IForm {
 	title?: string
 	copy?: string
 }
+export interface IFormSubmit {
+	label?: ReactNode[] | ReactNode
+}

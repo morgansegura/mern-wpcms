@@ -8,7 +8,7 @@ import useAuth from '@hooks/useAuth'
 // [API]
 import { authService, pathConfig as path } from 'api'
 // [Core]
-import { TextField, TextFieldWarning, Form } from '@core/inputs'
+import { TextField, TextFieldWarning, Form, FormSubmit } from '@core/inputs'
 // [Config]
 import { ISignupForm } from './SignupForm.interfaces'
 // [Styled]
@@ -145,12 +145,8 @@ const SignupForm: FC<ISignupForm> = ({ title, copy }) => {
 						<TextFieldWarning>{errors.passwordConfirm?.message}</TextFieldWarning>
 					)}
 
-					<sf.FormSubmitBlock>
-						<sf.FormSubmit type="submit">
-							Signup
-							{/* <RippleEffect color="primary" /> */}
-						</sf.FormSubmit>
-					</sf.FormSubmitBlock>
+					<FormSubmit label="Signup" />
+
 					<sf.FormAltMessage>
 						Already a member?{' '}
 						<Link href={path.auth.signin.href}>

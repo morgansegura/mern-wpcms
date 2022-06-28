@@ -2,18 +2,18 @@ import { FC } from 'react'
 // [Core]
 import { Container } from 'core/layout'
 // [Components]
-import { Layout, SigninForm } from '@components/layouts'
-// [Config]
+import { Layout } from '@components/layouts'
+import { SigninForm } from '@components/forms'
+// [Helpers]
+import { siteMetadata as meta } from 'helpers'
 
 const SigninPage: FC = () => {
+	const { title, copy } = meta.config.signupForm
 	return (
 		<Layout>
 			<Container contain="xl">
 				<Container contain="sm">
-					<SigninForm
-						title="Signin to your account"
-						copy="Your FEWCrew&trade; Account is waiting."
-					/>
+					<SigninForm title={title} copy={copy} />
 				</Container>
 			</Container>
 		</Layout>

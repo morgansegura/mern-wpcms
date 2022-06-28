@@ -8,13 +8,15 @@ import { SignupForm } from '@components/forms'
 import { siteMetadata as meta } from 'helpers'
 
 const SignupPage: FC = () => {
-	const { signupTitle, signupCopy } = meta.config.signupForm
+	const { title, copy } = meta.config.signupForm
+
+	console.log(title)
 
 	return (
 		<Layout>
 			<Container contain="xl">
 				<Container contain="sm">
-					<SignupForm title={signupTitle} copy={signupCopy} />
+					<SignupForm title={title} copy={copy} />
 				</Container>
 			</Container>
 		</Layout>

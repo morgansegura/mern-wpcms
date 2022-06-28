@@ -7,18 +7,19 @@ import * as yup from 'yup'
 // [API]
 import { authService, pathConfig as path } from 'api'
 // [Core]
-import { TextField, TextFieldWarning, Form } from '@core/inputs'
+import { TextField, TextFieldWarning, Form, FormSubmit } from '@core/inputs'
 // [Components]
 import { AuthContext } from '@components/providers'
 // [Hooks]
 import { useAuth, useStorage } from 'hooks'
 // [Config]
-import { ISigninForm } from '../../core/inputs/form/Form.interfaces'
+import { ISigninForm } from './SigninForm.interfaces'
 // [Styled]
-import * as s from '../../core/inputs/form/Form.styled'
+import * as sf from '@core/inputs/form/Form.styled'
+import * as s from './SigninForm.styled'
 
 const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
-	const { roleBasedRedirect, hasToken } = useAuth()
+	const { roleBasedRedirect, hasAuth } = useAuth()
 	const { setStorage } = useStorage()
 	const [auth, setAuth] = useContext(AuthContext)
 
@@ -54,10 +55,12 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 	}
 
 	useEffect(() => {
-		if (hasToken()) {
+		if (hasAuth) {
 			roleBasedRedirect()
+		} else {
+			setLoading(false)
 		}
-	}, [hasToken])
+	}, [hasAuth])
 
 	const {
 		register,
@@ -72,50 +75,50 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 
 	return (
 		<>
-			<Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-				{title && <s.FormTitle>{title}</s.FormTitle>}
-				{copy && <s.FormCopy>{copy}</s.FormCopy>}
-				<TextField
-					type="email"
-					name="email"
-					placeholder="Email"
-					register={register}
-					label="Email"
-					errors={errors}
-					error={errors.email?.message}
-					required
-					watch={watch}
-				/>
-				{errors.email?.message && <TextFieldWarning>{errors.email?.message}</TextFieldWarning>}
-				<TextField
-					type="password"
-					name="password"
-					label="Password"
-					placeholder="Password"
-					register={register}
-					errors={errors}
-					error={errors.password?.message}
-					required
-					watch={watch}
-				/>
-				{errors.password?.message && (
-					<TextFieldWarning>{errors.password?.message}</TextFieldWarning>
-				)}
-				<s.FormSubmitBlock>
-					<s.FormSubmit type="submit">Signin</s.FormSubmit>
-				</s.FormSubmitBlock>
-				<s.FormAltMessage>
-					Need a membership?
-					<Link href={`${path.auth.signup.href}`}>
-						<a>{path.auth.signup.label}</a>
-					</Link>
-					<s.ForgotPassword>
-						<Link href="/forgot-password">
-							<a>Forgot password</a>
+			<s.SigninForm>
+				<Form onSubmit={handleSubmit(onSubmit)} title={title} copy={copy}>
+					<TextField
+						type="email"
+						name="email"
+						placeholder="Email"
+						register={register}
+						label="Email"
+						errors={errors}
+						error={errors.email?.message}
+						required
+						watch={watch}
+					/>
+					{errors.email?.message && <TextFieldWarning>{errors.email?.message}</TextFieldWarning>}
+					<TextField
+						type="password"
+						name="password"
+						label="Password"
+						placeholder="Password"
+						register={register}
+						errors={errors}
+						error={errors.password?.message}
+						required
+						watch={watch}
+					/>
+					{errors.password?.message && (
+						<TextFieldWarning>{errors.password?.message}</TextFieldWarning>
+					)}
+
+					<FormSubmit label="Signin" />
+
+					<sf.FormAltMessage>
+						Need a membership?
+						<Link href={`${path.auth.signup.href}`}>
+							<a>{path.auth.signup.label}</a>
 						</Link>
-					</s.ForgotPassword>
-				</s.FormAltMessage>
-			</Form>
+						<sf.ForgotPassword>
+							<Link href="/forgot-password">
+								<a>Forgot password</a>
+							</Link>
+						</sf.ForgotPassword>
+					</sf.FormAltMessage>
+				</Form>
+			</s.SigninForm>
 		</>
 	)
 }

@@ -22,8 +22,12 @@ const siteMetadata = {
 			signup: '/signup',
 		},
 		signupForm: {
-			signupTitle: 'Signup for a lifetime',
-			signupCopy: 'Become a proud FEWCrew™ Member.',
+			title: 'Signup for a lifetime',
+			copy: 'Become a proud FEWCrew™ Member.',
+		},
+		signinForm: {
+			title: 'Signup for a lifetime',
+			copy: 'Become a proud FEWCrew™ Member.',
 		},
 	},
 }

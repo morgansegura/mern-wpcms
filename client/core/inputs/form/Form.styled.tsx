@@ -10,7 +10,6 @@ export const Form = styled.form`
 	flex-direction: column;
 	margin-right: auto;
 	margin-left: auto;
-	margin-top: 8%;
 `
 
 export const FormTitle = styled.h2`
