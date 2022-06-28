@@ -1,25 +1,13 @@
+import { AuthContext } from '@components/providers'
 import axios from 'axios'
-import { useStorage } from 'hooks'
+import { useAuth, useStorage } from 'hooks'
+import { useContext } from 'react'
 
 const client = (() => {
-	let API_PATH
-
-	if (typeof window === 'undefined') {
-		API_PATH = process.env.NEXT_PUBLIC_API
-	} else {
-		API_PATH = process.env.API
-	}
-
 	return axios.create({
 		withCredentials: true,
-		baseURL: API_PATH,
 	})
 })()
-
-const { getStorage } = useStorage()
-const { token } = getStorage('auth') ? JSON.parse(getStorage('auth')) : ''
-
-client.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
 export const fetchWrapper = {
 	get,

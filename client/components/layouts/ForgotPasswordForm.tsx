@@ -49,6 +49,7 @@ export const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
 					setAuth(res)
 					toast.success(`Password successfully updated! Please login with yout new credentials.`)
 					setLoading(true)
+					authRedirect('/signin')
 				}
 			})
 			.catch((err: any) => {
@@ -66,12 +67,6 @@ export const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
 		watch,
 		formState: { errors },
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
-
-	useEffect(() => {
-		if (hasAuth) {
-			authRedirect(`/signin`)
-		}
-	}, [hasAuth, onSubmit])
 
 	return (
 		<>

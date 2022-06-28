@@ -1,5 +1,4 @@
-import { FC, useContext, useState } from 'react'
-import { useRouter } from 'next/router'
+import { FC, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
@@ -19,13 +18,11 @@ import { ISigninForm } from './form/Form.interfaces'
 import * as s from './form/Form.styled'
 
 const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
-	const router = useRouter()
-	const { hasAuth, authRedirect } = useAuth()
+	const { roleBasedRedirect, hasToken, getToken } = useAuth()
 	const { setStorage } = useStorage()
 	const [auth, setAuth] = useContext(AuthContext)
 
-	const [loggedIn, setLoggedIn] = useState(false)
-	const [loding, setLoading] = useState(false)
+	const [loading, setLoading] = useState(true)
 
 	const schema = yup.object().shape({
 		email: yup.string().email().required('Email is a required field.'),
@@ -33,7 +30,7 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 	})
 
 	const onSubmit = async () => {
-		authService
+		await authService
 			.signin({
 				email: watch('email'),
 				password: watch('password'),
@@ -41,31 +38,28 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 			.then(res => {
 				if (res?.error) {
 					toast.error(`The credentials given are incorrect.`)
-					setLoading(false)
+					setLoading(true)
 				} else {
-					setLoggedIn(true)
+					console.log(res)
 					setAuth(res)
 					setStorage('auth', JSON.stringify(res))
-					toast.success(`Welcome back ${res.user.username}`)
-					setLoading(true)
-
-					if (res?.user?.role === 'Admin') {
-						router.push('/admin')
-					} else if (res?.user?.role === 'Author') {
-						router.push('/author')
-					} else {
-						router.push('/')
-					}
+					toast.success(`Successfully signed in.`)
+					setLoading(false)
+					roleBasedRedirect()
 				}
 			})
 			.catch(err => {
-				console.log(`Error ${err?.message}`)
-				setLoading(false)
+				console.log(err)
+				setLoading(true)
 			})
-			.finally(() => {
-				setLoading(false)
-			})
+			.finally()
 	}
+
+	// useEffect(() => {
+	// 	if (hasToken()) {
+	// 		roleBasedRedirect()
+	// 	}
+	// }, [hasToken])
 
 	const {
 		register,

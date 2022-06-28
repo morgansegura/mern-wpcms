@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-export interface ILayout {
+export interface IAdminLayout {
 	children?: ReactNode[] | ReactNode
 	role?: string
 }

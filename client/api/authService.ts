@@ -1,10 +1,10 @@
 import { fetchWrapper } from './fetchWrapper'
-import { SigninType, RegisterType, ForgotPasswordType, ResetPasswordType } from 'core/config/types'
+import { TSignin, TRegister, TForgotPassword, TResetPassword } from 'api/types'
 
 const baseUrl = ''
 
 export const authService = {
-	authUser,
+	getCurrentAdmin,
 	signout,
 	signin,
 	signup,
@@ -12,26 +12,26 @@ export const authService = {
 	resetPassword,
 }
 
-function authUser() {
-	return fetchWrapper.get(`${baseUrl}`)
+function getCurrentAdmin() {
+	return fetchWrapper.get(`${baseUrl}/current-user`)
 }
 
 function signout() {
 	return fetchWrapper.post(`${baseUrl}/signout`, {})
 }
 
-function signup(params: RegisterType) {
+function signup(params: TRegister) {
 	return fetchWrapper.post(`${baseUrl}/signup`, params)
 }
 
-function signin(params: SigninType) {
+function signin(params: TSignin) {
 	return fetchWrapper.post(`${baseUrl}/signin`, params)
 }
 
-function forgotPassword(params: ForgotPasswordType) {
+function forgotPassword(params: TForgotPassword) {
 	return fetchWrapper.post(`${baseUrl}/forgot-password`, params)
 }
 
-function resetPassword(params: ResetPasswordType) {
+function resetPassword(params: TResetPassword) {
 	return fetchWrapper.post(`${baseUrl}/reset-password`, params)
 }

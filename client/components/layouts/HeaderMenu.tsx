@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useContext } from 'react'
 import { useAuth } from 'hooks'
 import Link from 'next/link'
 
@@ -10,9 +10,12 @@ import { Menu } from 'core/navigation/menu'
 import { ToggleColorMode } from '@components/providers/ThemesProvider'
 // [Styles]
 import * as s from '@components/layouts/header/Header.styled'
+import { AuthContext } from '@components/providers'
 
 const HeaderMenu: FC = () => {
-	const { hasAuth, signout } = useAuth()
+	const { signout } = useAuth()
+	const { hasAuth, getUserRole, roleBasedPath } = useAuth()
+	const [auth, setAuth] = useContext(AuthContext)
 
 	const unauthItems = [
 		{
@@ -50,10 +53,9 @@ const HeaderMenu: FC = () => {
 		{
 			label: (
 				<s.HeaderMenuItem>
-					<Link href="/admin">
+					<Link href={roleBasedPath()}>
 						<a>
-							<IconDashboard />
-							Dashboard
+							<IconDashboard /> {auth?.user?.username || `Dashboard`}
 						</a>
 					</Link>
 				</s.HeaderMenuItem>

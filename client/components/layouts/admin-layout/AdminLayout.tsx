@@ -1,16 +1,17 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useAuth } from 'hooks'
+import { authService } from 'api'
 // [Core]
-import { Drawer, DrawerProvider, Menu } from 'core/navigation'
+import { Drawer, DrawerProvider } from 'core/navigation'
 import { Accordion } from 'core/surfaces'
 // [Components]
 import { Header, Footer } from '@components/layouts'
 import { IconAdmin, IconChevronDown, IconClose, IconThumbTack } from '@components/icons'
 // [Interfaces]
-import { ILayout } from './Layout.interfaces'
+import { IAdminLayout } from './AdminLayout.interfaces'
 // [Styles]
-import * as s from './Layout.styled'
+import * as s from '@components/layouts/layout/Layout.styled'
 import * as ac from 'core/surfaces/accordion/Accordion.styled'
 
 const DrawerMenu: FC = () => {
@@ -145,7 +146,30 @@ const DrawerMenu: FC = () => {
 	return <Accordion items={accordionItems} />
 }
 
-const Layout: FC<ILayout> = ({ children }) => {
+const AdminLayout: FC<IAdminLayout> = ({ children }) => {
+	const { getToken, roleBasedRedirect } = useAuth()
+	const [loading, setLoading] = useState(true)
+
+	useEffect(() => {
+		getCurrentAdmin()
+	}, [getToken()])
+
+	const getCurrentAdmin = async () => {
+		authService
+			.getCurrentAdmin()
+			.then(res => {
+				setLoading(false)
+			})
+			.catch(err => {
+				console.log(err)
+				roleBasedRedirect()
+			})
+	}
+
+	if (loading) {
+		return <>Loading...</>
+	}
+
 	return (
 		<s.Layout>
 			<DrawerProvider>
@@ -166,4 +190,4 @@ const Layout: FC<ILayout> = ({ children }) => {
 	)
 }
 
-export default Layout
+export default AdminLayout

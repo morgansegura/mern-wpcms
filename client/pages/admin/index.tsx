@@ -1,21 +1,13 @@
 import { FC, useContext, useEffect } from 'react'
-import Router, { useRouter } from 'next/router'
-import { pathConfig as path } from 'api'
-import { Layout, StyledContentBlock, StyledH2 } from '@components/layouts'
+import { AdminLayout, StyledContentBlock } from '@components/layouts'
 import { Container } from 'core/layout'
 import { useAuth } from 'hooks'
-import { AuthContext } from '@components/providers'
 import { Typography } from 'core/data-display'
 
-const Admin: FC = () => {
-	const router = useRouter()
-	const [auth, setAuth] = useContext(AuthContext)
-
-	useEffect(() => {}, [])
-
+const AdminPage: FC = () => {
 	return (
 		<>
-			<Layout>
+			<AdminLayout>
 				<Container contain="xl">
 					<StyledContentBlock>
 						<Typography as="h6" view="h1">
@@ -31,9 +23,9 @@ const Admin: FC = () => {
 						<Typography view="p">This is an p</Typography>
 					</StyledContentBlock>
 				</Container>
-			</Layout>
+			</AdminLayout>
 		</>
 	)
 }
 
-export default Admin
+export default AdminPage

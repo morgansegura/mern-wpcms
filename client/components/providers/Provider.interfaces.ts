@@ -14,4 +14,5 @@ export interface IThemesProvider {
 
 export interface IThemesProviderToggle {
 	children?: ReactNode[] | ReactNode
+	theme?: string
 }

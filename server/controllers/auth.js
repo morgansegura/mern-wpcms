@@ -71,7 +71,7 @@ export const signup = async (req, res) => {
 };
 
 export const signin = async (req, res) => {
-  // console.log(req.body);
+  console.log("HIT SIGNIN");
   try {
     const { email, password } = req.body;
     // check if our db has user with that email
@@ -95,6 +95,7 @@ export const signin = async (req, res) => {
 
     user.password = undefined;
     user.secret = undefined;
+
     res.json({
       token,
       user,
@@ -157,6 +158,15 @@ export const resetPassword = async (req, res) => {
     user.resetCode = "";
     user.save();
     return res.json({ ok: true });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const currentUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    res.json({ ok: true });
   } catch (err) {
     console.log(err);
   }
