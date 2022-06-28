@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useStorage } from 'hooks'
 
 const client = (() => {
 	let API_PATH
@@ -14,6 +15,11 @@ const client = (() => {
 		baseURL: API_PATH,
 	})
 })()
+
+const { getStorage } = useStorage()
+const { token } = getStorage('auth') ? JSON.parse(getStorage('auth')) : ''
+
+client.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
 export const fetchWrapper = {
 	get,

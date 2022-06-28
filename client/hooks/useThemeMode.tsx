@@ -4,9 +4,9 @@ import { useStorage } from 'hooks'
 
 const useThemeMode = () => {
 	const { getStorage, setStorage } = useStorage()
-	const presetTheme = 'dark'
-	const defaultTheme = getStorage('settings') ? JSON.parse(getStorage('settings')) : presetTheme
-	const [themeMode, setThemeMode] = useState(defaultTheme)
+	const { theme } = getStorage('settings') ? JSON.parse(getStorage('settings')) : { theme: 'dark' }
+
+	const [themeMode, setThemeMode] = useState(theme)
 
 	const setTheme = (themeOptions: string) => {
 		setThemeMode(themeOptions)
@@ -14,7 +14,7 @@ const useThemeMode = () => {
 		setStorage(
 			'settings',
 			JSON.stringify({
-				theme: themeMode,
+				theme,
 			}),
 		)
 	}
@@ -26,7 +26,7 @@ const useThemeMode = () => {
 
 	useEffect(() => {
 		setTheme(themeMode)
-	}, [themeMode])
+	}, [])
 
 	return { setTheme, getTheme }
 }

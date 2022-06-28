@@ -1,13 +1,18 @@
 import { FC } from 'react'
 import { Layout, SignupForm } from '@components/layouts'
 import { siteMetadata } from 'helpers'
+import { Container } from 'core/layout/container'
 
 const SignupPage: FC = () => {
 	const { signupTitle, signupCopy } = siteMetadata.signupForm
 
 	return (
 		<Layout>
-			<SignupForm title={signupTitle} copy={signupCopy} />
+			<Container contain="xl">
+				<Container contain="sm">
+					<SignupForm title={signupTitle} copy={signupCopy} />
+				</Container>
+			</Container>
 		</Layout>
 	)
 }

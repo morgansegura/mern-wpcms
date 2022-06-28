@@ -9,7 +9,12 @@ const SigninPage: FC = () => {
 	return (
 		<Layout>
 			<Container contain="xl">
-				<SigninForm title="Signin to your account" copy="Your FEWCrew&trade; Account is waiting." />
+				<Container contain="sm">
+					<SigninForm
+						title="Signin to your account"
+						copy="Your FEWCrew&trade; Account is waiting."
+					/>
+				</Container>
 			</Container>
 		</Layout>
 	)

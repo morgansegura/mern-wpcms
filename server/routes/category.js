@@ -1,11 +1,11 @@
 import express from "express";
-import { requireAuth } from "../middlewares";
+import { isAdmin, requireSignin } from "../middlewares";
 
 const router = express.Router();
 
 // controllers
 const { create } = require("../controllers/category");
 
-router.post("/category", requireAuth, create);
+router.post("/category", requireSignin, isAdmin, create);
 
 export default router;
