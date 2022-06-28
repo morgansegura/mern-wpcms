@@ -1,8 +1,9 @@
 import axios from 'axios'
-import { useAuth, useStorage } from 'hooks'
+import { siteMetadata as meta } from 'helpers'
 
 const client = (() => {
 	return axios.create({
+		baseURL: `${meta.config.apiURL}`,
 		withCredentials: true,
 	})
 })()
@@ -24,7 +25,7 @@ function get(url: string, credentials: boolean = true) {
 	return request(options, { withCredentials: credentials })
 }
 
-function post(url: string, data: any | null, credentials: boolean = true) {
+function post(url: string, data: any, credentials: boolean = true) {
 	const options = {
 		url,
 		method: 'post',

@@ -12,6 +12,10 @@ const siteMetadata = {
 	cssResetType: 'normalize',
 	adminSecret: 'RobertIsAwesome',
 
+	config: {
+		apiURL: 'http://localhost:8000/api/',
+	},
+
 	signupForm: {
 		signupTitle: 'Signup for a lifetime',
 		signupCopy: 'Become a proud FEWCrew™ Member.',

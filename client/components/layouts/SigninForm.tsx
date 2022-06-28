@@ -29,8 +29,8 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 		password: yup.string().min(8).max(32).required(),
 	})
 
-	const onSubmit = () => {
-		authService
+	const onSubmit = async () => {
+		await authService
 			.signin({
 				email: watch('email'),
 				password: watch('password'),
@@ -41,8 +41,8 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 					setLoading(true)
 				} else {
 					console.log(res)
-					// setAuth(res)
-					// setStorage('auth', JSON.stringify(res))
+					setAuth(res)
+					setStorage('auth', JSON.stringify(res))
 					toast.success(`Successfully signed in.`)
 					setLoading(false)
 					roleBasedRedirect()
@@ -52,7 +52,6 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 				console.log(err)
 				setLoading(true)
 			})
-			.finally()
 	}
 
 	// useEffect(() => {

@@ -15,19 +15,17 @@ const AuthProvider: FC<IAuthProvider> = ({ children }) => {
 
 	if (typeof window === 'undefined') {
 		axios.defaults.baseURL = 'http://localhost:8000/api'
-		// axios.defaults.headers.common['Authorization'] = `Bearer ${auth?.token}`
+		axios.defaults.headers.common['Authorization'] = `Bearer ${auth?.token}`
 	} else {
 		axios.defaults.baseURL = 'http://localhost:8000/api'
-		// axios.defaults.headers.common['Authorization'] = `Bearer ${auth?.token}`
+		axios.defaults.headers.common['Authorization'] = `Bearer ${auth?.token}`
 	}
 
 	useEffect(() => {
 		if (getStorage('auth')) {
 			setAuth(JSON.parse(getStorage('auth')))
-		} else {
-			setAuth(auth)
 		}
-	}, [auth])
+	}, [])
 
 	return <AuthContext.Provider value={[auth, setAuth]}>{children}</AuthContext.Provider>
 }
