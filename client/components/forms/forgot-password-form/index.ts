@@ -1,2 +1,2 @@
-export { default as HeaderMenu } from './HeaderMenu'
-export * from './HeaderMenu.styled'
+export { default as ForgotPasswordForm } from './ForgotPasswordForm'
+export * from './ForgotPasswordForm.styled'

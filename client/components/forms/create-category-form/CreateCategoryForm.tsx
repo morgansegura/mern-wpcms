@@ -7,17 +7,17 @@ import * as yup from 'yup'
 // [API]
 import { categoryService } from 'api'
 // [Core]
-import { TextField, TextFieldWarning, Form } from '@core/inputs'
+import { TextField, TextFieldWarning, Form, FormSubmit } from '@core/inputs'
 // [Components]
 // [Hooks]
 import { useAuth, useStorage } from 'hooks'
 // [Config]
-import { ICreateCategoryForm } from '../../core/inputs/form/Form.interfaces'
+import { ICreateCategoryForm } from './CreateCategoryForm.interfaces'
 // [Styled]
-import * as s from '../../core/inputs/form/Form.styled'
+import * as s from './CreateCategoryForm.styled'
 
 const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(true)
 
 	const schema = yup.object().shape({
 		name: yup.string().required(),
@@ -32,15 +32,15 @@ const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
 			.then((res: { user: { username: string }; error: string }) => {
 				if (res?.error) {
 					toast.error(`The credentials given are incorrect.`)
-					setLoading(false)
+					setLoading(true)
 				} else {
 					toast.success(`Category created successfully`)
-					setLoading(true)
+					setLoading(false)
 				}
 			})
 			.catch(err => {
-				console.log(`Error ${err?.message}`)
-				setLoading(false)
+				console.log(err)
+				setLoading(true)
 			})
 	}
 
@@ -58,10 +58,8 @@ const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
 	}, [])
 
 	return (
-		<>
-			<Form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-				{title && <s.FormTitle>{title}</s.FormTitle>}
-				{copy && <s.FormCopy>{copy}</s.FormCopy>}
+		<s.CreateCategoryForm>
+			<Form onSubmit={handleSubmit(onSubmit)} title={title} copy={copy}>
 				<TextField
 					type="text"
 					name="name"
@@ -75,13 +73,9 @@ const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
 				/>
 				{errors.name?.message && <TextFieldWarning>{errors.name?.message}</TextFieldWarning>}
 
-				<s.FormSubmitBlock>
-					<s.FormSubmit disabled={loading} type="submit">
-						Create
-					</s.FormSubmit>
-				</s.FormSubmitBlock>
+				<FormSubmit label="Create" />
 			</Form>
-		</>
+		</s.CreateCategoryForm>
 	)
 }
 

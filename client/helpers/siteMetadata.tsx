@@ -29,6 +29,14 @@ const siteMetadata = {
 			title: 'Signup for a lifetime',
 			copy: 'Become a proud FEWCrew™ Member.',
 		},
+		forgotPasswordForm: {
+			title: 'Reset Your Password',
+			copy: "No worries. Let's get you another password!",
+		},
+		resetPasswordForm: {
+			title: 'Reset Your Password',
+			copy: "No worries. Let's get you another password!",
+		},
 	},
 }
 

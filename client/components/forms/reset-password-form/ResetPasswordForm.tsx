@@ -7,7 +7,7 @@ import * as yup from 'yup'
 // [API]
 import { authService, pathConfig as path } from 'api'
 // [Core]
-import { Form, TextField, TextFieldWarning } from 'core/inputs'
+import { Form, FormSubmit, TextField, TextFieldWarning } from 'core/inputs'
 
 // [Components]
 import { AuthContext } from '@components/providers'
@@ -15,14 +15,16 @@ import { AuthContext } from '@components/providers'
 import { useAuth } from 'hooks'
 
 // [Config]
-import { IForgotPasswordForm, IResetPasswordForm } from '@core/inputs/form/Form.interfaces'
+import { IResetPasswordForm } from './ResetPasswordForm.interfaces'
 // [Styled]
+import * as sf from '@core/inputs/form/Form.styled'
+import * as s from './ResetPasswordForm.styled'
 
-export const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
-	const { hasAuth, authRedirect } = useAuth()
+const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
+	const { hasAuth, roleBasedRedirect } = useAuth()
 	const [auth, setAuth] = useContext(AuthContext)
 
-	const [loding, setLoading] = useState(false)
+	const [loading, setLoading] = useState(false)
 
 	const schema = yup.object().shape({
 		email: yup.string().email().required('Email is a required field.'),
@@ -42,7 +44,7 @@ export const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
 				password: watch('password'),
 				passwordConfirm: watch('passwordConfirm'),
 			})
-			.then((res: { user: { username: string }; error: string }) => {
+			.then(res => {
 				if (res?.error) {
 					toast.error(`Reset password failed. Please try again.`)
 					setLoading(false)
@@ -50,7 +52,7 @@ export const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
 					setAuth(res)
 					toast.success(`Password successfully updated! Please login with yout new credentials.`)
 					setLoading(true)
-					authRedirect('/signin')
+					roleBasedRedirect()
 				}
 			})
 			.catch((err: any) => {
@@ -69,8 +71,20 @@ export const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
 		formState: { errors },
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
 
+	useEffect(() => {
+		if (hasAuth) {
+			roleBasedRedirect()
+		} else {
+			setLoading(false)
+		}
+	}, [hasAuth])
+
+	if (loading) {
+		return <>Loading...</>
+	}
+
 	return (
-		<>
+		<s.ResetPasswordForm>
 			<Form onSubmit={handleSubmit(onSubmit)} title={title} copy={copy}>
 				<TextField
 					type="email"
@@ -127,10 +141,9 @@ export const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
 					<TextFieldWarning>{errors.passwordConfirm?.message}</TextFieldWarning>
 				)}
 
-				<s.FormSubmitBlock>
-					<s.FormSubmit type="submit">Submit</s.FormSubmit>
-				</s.FormSubmitBlock>
-				<s.FormAltMessage>
+				<FormSubmit label="Submit" />
+
+				<sf.FormAltMessage>
 					Alternative options.
 					<Link href={`${path.auth.signin.href}`}>
 						<a>{path.auth.signin.label}</a>
@@ -138,94 +151,10 @@ export const ResetPasswordForm: FC<IResetPasswordForm> = ({ title, copy }) => {
 					<Link href={`${path.auth.signup.href}`}>
 						<a>{path.auth.signup.label}</a>
 					</Link>
-				</s.FormAltMessage>
+				</sf.FormAltMessage>
 			</Form>
-		</>
+		</s.ResetPasswordForm>
 	)
 }
 
-const ForgotPasswordForm: FC<IForgotPasswordForm> = ({ title, copy }) => {
-	const { hasAuth, authRedirect } = useAuth()
-	const [auth, setAuth] = useContext(AuthContext)
-	const [loding, setLoading] = useState(false)
-	const [resetPasswordVisible, setResetPasswordVisible] = useState(false)
-
-	const schema = yup.object().shape({
-		email: yup.string().email().required('Email is a required field.'),
-	})
-
-	const onSubmit = async () => {
-		authService
-			.forgotPassword({
-				email: watch('email'),
-			})
-			.then(res => {
-				if (res?.error) {
-					toast.error(`Something went wrong. Please Try again.`)
-					setLoading(false)
-				} else {
-					toast.success(`Password reset code was sent to your email.`)
-					setLoading(true)
-					setResetPasswordVisible(true)
-				}
-			})
-			.catch((err: any) => {
-				console.log(`Error ${err?.messsage}`)
-				setLoading(false)
-			})
-			.finally(() => {
-				setLoading(false)
-			})
-	}
-
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
-
-	return (
-		<>
-			{resetPasswordVisible ? (
-				<ResetPasswordForm
-					title="Reset Your Password"
-					copy="Enter the reset code along with your credentials."
-				/>
-			) : (
-				<s.Form onSubmit={handleSubmit(onSubmit)}>
-					{title && <s.FormTitle>{title}</s.FormTitle>}
-					{copy && <s.FormCopy>{copy}</s.FormCopy>}
-					<TextField
-						type="email"
-						name="email"
-						placeholder="Email"
-						register={register}
-						label="Email"
-						errors={errors}
-						autoComplete="off"
-						error={errors.email?.message}
-						required
-						watch={watch}
-					/>
-					{errors.email?.message && <TextFieldWarning>{errors.email?.message}</TextFieldWarning>}
-
-					<s.FormSubmitBlock>
-						<s.FormSubmit type="submit">Submit</s.FormSubmit>
-					</s.FormSubmitBlock>
-					<s.FormAltMessage>
-						Alternative options.
-						<Link href={`${path.auth.signin.href}`}>
-							<a>{path.auth.signup.label}</a>
-						</Link>
-						<Link href={`${path.auth.signup.href}`}>
-							<a>{path.auth.signup.label}</a>
-						</Link>
-					</s.FormAltMessage>
-				</s.Form>
-			)}
-		</>
-	)
-}
-
-export default ForgotPasswordForm
+export default ResetPasswordForm
