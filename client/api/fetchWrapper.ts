@@ -1,7 +1,5 @@
-import { AuthContext } from '@components/providers'
 import axios from 'axios'
 import { useAuth, useStorage } from 'hooks'
-import { useContext } from 'react'
 
 const client = (() => {
 	return axios.create({
