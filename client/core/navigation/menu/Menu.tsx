@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React, { FC, Fragment } from 'react'
 
 // [Interfaces]
@@ -5,13 +6,29 @@ import { IMenu, TMenuItem } from './Menu.interfaces'
 // [Styles]
 import * as s from './Menu.styled'
 
-const Menu: FC<IMenu> = ({ items, mode }) => {
+export const MenuItem: FC<TMenuItem> = ({ title, label, active, href, onClick }) => {
+	return href ? (
+		<Link key={key} href={href} data-title={title}>
+			<a onClick={onClick}>
+				<s.MenuItem>{label}</s.MenuItem>
+			</a>
+		</Link>
+	) : (
+		<s.MenuItem>{label}</s.MenuItem>
+	)
+}
+
+const Menu: FC<IMenu> = ({ items, mode, children }) => {
 	return (
-		<s.MenuContainer mode={mode}>
+		<s.Menu mode={mode}>
 			<>
-				{items && items.map((item: TMenuItem) => <Fragment key={item.key}>{item.label}</Fragment>)}
+				{items ? (
+					items.map((item: TMenuItem) => <MenuItem key={item.key} label={item.label} />)
+				) : (
+					<MenuItem label={children} />
+				)}
 			</>
-		</s.MenuContainer>
+		</s.Menu>
 	)
 }
 

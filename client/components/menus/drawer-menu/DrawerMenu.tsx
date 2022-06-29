@@ -9,12 +9,12 @@ import { Menu } from '@core/navigation/menu'
 import { IconDashboard, IconHamburger, IconSignout } from '@components/icons'
 import { AuthContext, ToggleColorMode } from '@components/providers'
 // [Interfaces]
-import { IHeaderMenu } from './HeaderMenu.interfaces'
+import { IDrawerMenu } from './DrawerMenu.interfaces'
 
 // [Styles]
-import * as s from './HeaderMenu.styled'
+import * as s from './DrawerMenu.styled'
 
-const HeaderMenu: FC<IHeaderMenu> = () => {
+const DrawerMenu: FC<IDrawerMenu> = () => {
 	const { signout } = useAuth()
 	const { hasAuth, getUserRole, roleBasedPath } = useAuth()
 	const [auth, setAuth] = useContext(AuthContext)
@@ -22,31 +22,31 @@ const HeaderMenu: FC<IHeaderMenu> = () => {
 	const unauthItems = [
 		{
 			label: (
-				<s.HeaderMenuItem>
+				<s.DrawerMenuItem>
 					<Link href="/signin">
 						<a>Signin</a>
 					</Link>
-				</s.HeaderMenuItem>
+				</s.DrawerMenuItem>
 			),
 			key: 'signin',
 		},
 		{
 			label: (
-				<s.HeaderMenuItem>
+				<s.DrawerMenuItem>
 					<Link href="/signup">
 						<a>Signup</a>
 					</Link>
-				</s.HeaderMenuItem>
+				</s.DrawerMenuItem>
 			),
 			key: 'signup',
 		},
 		{
 			label: (
-				<s.HeaderMenuItem>
-					<s.HeaderSVG>
+				<s.DrawerMenuItem>
+					<s.DrawerSVG>
 						<ToggleColorMode theme="light" />
-					</s.HeaderSVG>
-				</s.HeaderMenuItem>
+					</s.DrawerSVG>
+				</s.DrawerMenuItem>
 			),
 			key: 'open-drawer',
 		},
@@ -54,58 +54,58 @@ const HeaderMenu: FC<IHeaderMenu> = () => {
 	const authItems = [
 		{
 			label: (
-				<s.HeaderMenuItem>
+				<s.DrawerMenuItem>
 					<Link href={roleBasedPath()}>
 						<a>
 							<IconDashboard /> {auth?.user?.username || `Dashboard`}
 						</a>
 					</Link>
-				</s.HeaderMenuItem>
+				</s.DrawerMenuItem>
 			),
 			key: 'dashboard',
 		},
 		{
 			label: (
-				<s.HeaderMenuItem>
+				<s.DrawerMenuItem>
 					<Link href="/">
 						<a onClick={() => signout()}>
 							<IconSignout />
 							Signout
 						</a>
 					</Link>
-				</s.HeaderMenuItem>
+				</s.DrawerMenuItem>
 			),
 			key: 'signout',
 		},
 		{
 			label: (
-				<s.HeaderMenuItem>
-					<s.HeaderSVG>
+				<s.DrawerMenuItem>
+					<s.DrawerSVG>
 						<ToggleColorMode theme="light" />
-					</s.HeaderSVG>
-				</s.HeaderMenuItem>
+					</s.DrawerSVG>
+				</s.DrawerMenuItem>
 			),
 			key: 'open-drawer',
 		},
 		{
 			label: (
-				<s.HeaderMenuItem>
-					<s.HeaderSVG>
+				<s.DrawerMenuItem>
+					<s.DrawerSVG>
 						<DrawerTrigger>
 							<IconHamburger />
 						</DrawerTrigger>
-					</s.HeaderSVG>
-				</s.HeaderMenuItem>
+					</s.DrawerSVG>
+				</s.DrawerMenuItem>
 			),
 			key: 'toggle-color',
 		},
 	]
 
 	return (
-		<s.HeaderMenu>
+		<s.DrawerMenu>
 			<Menu items={hasAuth ? authItems : unauthItems} />
-		</s.HeaderMenu>
+		</s.DrawerMenu>
 	)
 }
 
-export default HeaderMenu
+export default DrawerMenu

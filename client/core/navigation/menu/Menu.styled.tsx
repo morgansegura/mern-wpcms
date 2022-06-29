@@ -3,7 +3,7 @@ import * as style from '@styles/config/utilities'
 // [Config]
 import { IMenu, TMenuItem } from './Menu.interfaces'
 
-export const MenuContainer = styled.div<IMenu>`
+export const Menu = styled.div<IMenu>`
 	display: flex;
 
 	${props =>

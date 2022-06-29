@@ -3,9 +3,9 @@ import * as style from '@styles/config/utilities'
 import { rem } from 'polished'
 
 // [Interfaces]
-import { MenuContainer, SVGContainer, MenuItem } from 'core/navigation'
+import { Menu, SVGContainer, MenuItem } from 'core/navigation'
 
-export const HeaderMenuContainer = styled(MenuContainer)`
+export const HeaderMenu = styled(Menu)`
 	justify-self: flex-end;
 `
 

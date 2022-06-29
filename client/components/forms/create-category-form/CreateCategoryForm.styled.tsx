@@ -4,10 +4,7 @@ import { List, ListItem, ListItemAvatar, ListItemText } from '@core/data-display
 
 export const CreateCategoryForm = styled.div``
 
-export const CreateCategoryList = styled.div`
-	padding-left: ${style.sp['3']};
-	padding-right: ${style.sp['3']};
-`
+export const CreateCategoryList = styled.div``
 
 export const CategoriesList = styled.div`
 	${List} {

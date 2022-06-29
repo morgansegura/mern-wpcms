@@ -1,14 +1,14 @@
-import { ReactNode } from 'react'
+import { MouseEventHandler, ReactNode } from 'react'
 
 export interface IMenu {
 	mode?: string
-	namg?: string
 	items?: TMenuItem[]
 	children?: ReactNode[] | ReactNode
 }
 export type TMenuItem = {
+	href?: string
+	title?: string
 	label?: ReactNode[] | ReactNode
 	active?: boolean
-	href?: string
-	key?: string
+	onClick?: MouseEventHandler<HTMLAnchorElement>
 }

@@ -10,6 +10,7 @@ import Skeleton from 'react-loading-skeleton'
 import { categoryService } from 'api'
 // [Core]
 import { TextField, TextFieldWarning, Form, FormSubmit } from '@core/inputs'
+import { List, ListItem, ListItemText, Typography } from '@core/data-display'
 // [Components]
 // [Hooks]
 import { useAuth, useStorage } from 'hooks'
@@ -17,8 +18,6 @@ import { useAuth, useStorage } from 'hooks'
 import { ICreateCategoryForm, IGetCategories } from './CreateCategoryForm.interfaces'
 // [Styled]
 import * as s from './CreateCategoryForm.styled'
-import { List, ListItem, ListItemText, Typography } from '@core/data-display'
-import { Box } from '@core/layout'
 
 export const GetCategories: FC<IGetCategories> = () => {
 	const [categories, setCategories] = useState([])
@@ -44,30 +43,23 @@ export const GetCategories: FC<IGetCategories> = () => {
 
 	return (
 		<s.CreateCategoryList>
-			<Box pt="3" mb="1">
-				<Typography as="h4" variant="h4">
-					Your Categories
-				</Typography>
-			</Box>
-			<Box ml="1">
-				{categories && (
-					<List>
-						{categories.map((cat: { name: string; slug: string }) => (
-							<ListItem key={`categories-${cat.slug}`}>
-								{loading ? (
-									<Skeleton count={categories.length} />
-								) : (
-									<Link href={`/${cat.slug}`}>
-										<a title={`${cat.name} Category`}>
-											<ListItemText primary={cat.slug} />
-										</a>
-									</Link>
-								)}
-							</ListItem>
-						))}
-					</List>
-				)}
-			</Box>
+			{categories && (
+				<List>
+					{categories.map((cat: { name: string; slug: string }) => (
+						<ListItem key={`categories-${cat.slug}`}>
+							{loading ? (
+								<Skeleton count={categories.length} />
+							) : (
+								<Link href={`/${cat.slug}`}>
+									<a title={`${cat.name} Category`}>
+										<ListItemText primary={cat.slug} />
+									</a>
+								</Link>
+							)}
+						</ListItem>
+					))}
+				</List>
+			)}
 		</s.CreateCategoryList>
 	)
 }

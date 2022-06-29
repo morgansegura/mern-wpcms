@@ -196,11 +196,3 @@ export const StyledContentBlock = styled.div`
 /*
 	Grid Layouts
 */
-
-export const Grid = styled.div<IGrid>`
-	${style.grid()};
-`
-
-export const Col = styled.div<IGridColumn>`
-	grid-column: ${props => props.start && props.start} / ${props => props.end && props.end};
-`
