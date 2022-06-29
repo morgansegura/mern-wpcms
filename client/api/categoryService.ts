@@ -1,6 +1,6 @@
 import { fetchWrapper } from './fetchWrapper'
 
-const baseUrl = 'category'
+const baseUrl = ''
 interface ICreateCategory {
 	name?: string
 	slug?: string
@@ -12,9 +12,9 @@ export const categoryService = {
 }
 
 function create(params: ICreateCategory) {
-	return fetchWrapper.post(`${baseUrl}`, params)
+	return fetchWrapper.post(`${baseUrl}/category`, params)
 }
 
 function categories() {
-	return fetchWrapper.get(`${baseUrl}`)
+	return fetchWrapper.get(`${baseUrl}/categories`)
 }

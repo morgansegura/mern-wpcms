@@ -5,16 +5,42 @@ import { IBox } from './Box.interfaces'
 // [Styles]
 import * as s from './Box.styled'
 
-/*
-	- padding (T, R, B, L)
-	- margin (T, R, B, L)
-		- mt, mr, mb, ml
-
- */
-
-const Box: FC<IBox> = ({ children, as = 'div', m = '', mt = '', p = 'unset' }) => {
+const Box: FC<IBox> = ({
+	children,
+	as = 'div',
+	m,
+	my,
+	mx,
+	mt,
+	mr,
+	mb,
+	ml,
+	p,
+	py,
+	px,
+	pt,
+	pr,
+	pb,
+	pl,
+}) => {
 	return (
-		<s.Box as={as} m={m} mt={mt} p={p}>
+		<s.Box
+			as={as}
+			m={m}
+			my={my}
+			mx={mx}
+			mt={mt}
+			mr={mr}
+			mb={mb}
+			ml={ml}
+			p={p}
+			py={py}
+			px={px}
+			pt={pt}
+			pr={pr}
+			pb={pb}
+			pl={pl}
+		>
 			{children}
 		</s.Box>
 	)
