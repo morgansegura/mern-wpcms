@@ -21,6 +21,6 @@ router.post("/signup", signup);
 router.post("/signin", signin);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", resetPassword);
-router.post("/current-admin", requireSignin, isAdmin, currentUser);
+router.get("/current-admin", requireSignin, isAdmin, currentUser);
 
 export default router;

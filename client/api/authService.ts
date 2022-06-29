@@ -13,7 +13,7 @@ export const authService = {
 }
 
 function getCurrentAdmin() {
-	return fetchWrapper.get(`${baseUrl}/current-user`)
+	return fetchWrapper.get(`${baseUrl}/current-admin`)
 }
 
 function signout() {
@@ -21,6 +21,7 @@ function signout() {
 }
 
 function signup(params: TRegister) {
+	console.log({ params })
 	return fetchWrapper.post(`${baseUrl}/signup`, params)
 }
 

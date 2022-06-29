@@ -1,9 +1,12 @@
 import axios from 'axios'
+import { useStorage } from 'hooks'
 import { siteMetadata as meta } from 'helpers'
 
-const client = (() => {
+const { getStorage } = useStorage()
+
+export const client = (() => {
 	return axios.create({
-		baseURL: `${meta.config.apiURL}`,
+		// baseURL: `${meta.config.apiURL}`,
 		withCredentials: true,
 	})
 })()

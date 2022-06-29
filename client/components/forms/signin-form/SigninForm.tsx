@@ -6,12 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 // [API]
 import { authService, pathConfig as path } from 'api'
+// [Hooks]
+import { useAuth, useStorage } from 'hooks'
 // [Core]
 import { TextField, TextFieldWarning, Form, FormSubmit } from '@core/inputs'
 // [Components]
 import { AuthContext } from '@components/providers'
-// [Hooks]
-import { useAuth, useStorage } from 'hooks'
 // [Config]
 import { ISigninForm } from './SigninForm.interfaces'
 // [Styled]
@@ -30,8 +30,8 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 		password: yup.string().min(8).max(32).required(),
 	})
 
-	const onSubmit = async () => {
-		await authService
+	const onSubmit = () => {
+		authService
 			.signin({
 				email: watch('email'),
 				password: watch('password'),
@@ -45,7 +45,7 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 					setStorage('auth', JSON.stringify(res))
 					toast.success(`Successfully signed in.`)
 					setLoading(false)
-					roleBasedRedirect()
+					// roleBasedRedirect()
 				}
 			})
 			.catch(err => {
@@ -54,6 +54,13 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 			})
 	}
 
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
+
 	useEffect(() => {
 		if (hasAuth) {
 			roleBasedRedirect()
@@ -61,13 +68,6 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 			setLoading(false)
 		}
 	}, [hasAuth])
-
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
 
 	if (loading) {
 		return <>Loading...</>

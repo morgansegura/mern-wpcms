@@ -147,23 +147,23 @@ const DrawerMenu: FC = () => {
 }
 
 const AdminLayout: FC<IAdminLayout> = ({ children }) => {
-	const { getToken, roleBasedRedirect } = useAuth()
+	const { hasAuth, roleBasedRedirect } = useAuth()
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
 		getCurrentAdmin()
-	}, [getToken()])
+	}, [hasAuth])
 
 	const getCurrentAdmin = async () => {
-		authService
+		await authService
 			.getCurrentAdmin()
 			.then(res => {
 				setLoading(false)
 			})
 			.catch(err => {
-				console.log(err)
-				roleBasedRedirect()
+				console.log('Error:', err.statusText)
 				setLoading(true)
+				roleBasedRedirect()
 			})
 	}
 

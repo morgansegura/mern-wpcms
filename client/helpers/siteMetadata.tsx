@@ -13,7 +13,8 @@ const siteMetadata = {
 	adminSecret: 'RobertIsAwesome',
 
 	config: {
-		apiURL: 'http://localhost:8000/api/',
+		localApiURL: 'http://localhost:8000/api/',
+		remoteApiURL: 'http://fewcrew/api/',
 		roleType: { admins: ['Admin', 'Author', 'Subscriber'], guest: 'Guest' },
 		paths: {
 			landing: '/',

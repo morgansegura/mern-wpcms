@@ -13,9 +13,9 @@ export const FormSubmit: FC<IFormSubmit> = ({ label }) => {
 	)
 }
 
-const Form: FC<IForm> = ({ children, title, copy }) => {
+const Form: FC<IForm> = ({ children, title, copy, onSubmit, autoComplete = 'nofill' }) => {
 	return (
-		<s.Form>
+		<s.Form onSubmit={onSubmit} autoComplete={autoComplete}>
 			{title && <s.FormTitle>{title}</s.FormTitle>}
 			{copy && <s.FormCopy>{copy}</s.FormCopy>}
 			{children}

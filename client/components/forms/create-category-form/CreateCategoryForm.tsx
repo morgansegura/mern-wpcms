@@ -17,6 +17,7 @@ import { ICreateCategoryForm } from './CreateCategoryForm.interfaces'
 import * as s from './CreateCategoryForm.styled'
 
 const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
+	const { roleBasedRedirect, hasAuth } = useAuth()
 	const [loading, setLoading] = useState(true)
 
 	const schema = yup.object().shape({
@@ -52,10 +53,16 @@ const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
 
 	useEffect(() => {
-		// if (hasAuth) {
-		// 	authRedirect(`${path.admin.base.landing.href}`)
-		// }
-	}, [])
+		if (!hasAuth) {
+			roleBasedRedirect()
+		} else {
+			setLoading(false)
+		}
+	}, [hasAuth])
+
+	if (loading) {
+		return <>Loading...</>
+	}
 
 	return (
 		<s.CreateCategoryForm>
