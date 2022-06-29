@@ -8,25 +8,34 @@ const useThemeMode = () => {
 
 	const [themeMode, setThemeMode] = useState(theme)
 
-	const setTheme = (themeOptions: string) => {
-		setThemeMode(themeOptions)
-
-		setStorage(
-			'settings',
-			JSON.stringify({
-				theme,
-			}),
-		)
-	}
-
 	const getTheme = (): string => {
 		const theme = themeMode
 		return theme
 	}
 
+	const setTheme = (themeOptions: string) => {
+		if (getTheme() === 'dark') {
+			setStorage(
+				'settings',
+				JSON.stringify({
+					theme: 'dark',
+				}),
+			)
+		} else {
+			setStorage(
+				'settings',
+				JSON.stringify({
+					theme: 'light',
+				}),
+			)
+		}
+		setThemeMode(themeOptions)
+	}
+
 	useEffect(() => {
+		console.log({ themeMode })
 		setTheme(themeMode)
-	}, [])
+	}, [getTheme()])
 
 	return { setTheme, getTheme }
 }
