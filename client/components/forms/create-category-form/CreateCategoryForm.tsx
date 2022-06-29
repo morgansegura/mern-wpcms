@@ -1,9 +1,11 @@
-import { FC, useContext, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import Skeleton from 'react-loading-skeleton'
+
 // [API]
 import { categoryService } from 'api'
 // [Core]
@@ -12,9 +14,40 @@ import { TextField, TextFieldWarning, Form, FormSubmit } from '@core/inputs'
 // [Hooks]
 import { useAuth, useStorage } from 'hooks'
 // [Config]
-import { ICreateCategoryForm } from './CreateCategoryForm.interfaces'
+import { ICreateCategoryForm, IGetCategories } from './CreateCategoryForm.interfaces'
 // [Styled]
 import * as s from './CreateCategoryForm.styled'
+
+export const GetCategories: FC<IGetCategories> = () => {
+	const [categories, setCategories] = useState([])
+	const [loading, setLoading] = useState(true)
+
+	const getCategories = async () => {
+		await categoryService
+			.categories()
+			.then(res => {
+				setCategories(res)
+				setLoading(false)
+			})
+			.catch(err => {
+				console.log(err)
+				setLoading(true)
+			})
+	}
+
+	useEffect(() => {
+		getCategories()
+	}, [])
+
+	return (
+		<s.CategoriesList>
+			<>
+				{console.log(categories)}
+				<s.ListItem>{loading ? <Skeleton count={categories.length} /> : categories}</s.ListItem>
+			</>
+		</s.CategoriesList>
+	)
+}
 
 const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
 	const { roleBasedRedirect, hasAuth } = useAuth()
@@ -25,14 +58,15 @@ const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
 	})
 
 	const onSubmit = async () => {
-		categoryService
+		await categoryService
 			.create({
 				name: watch('name'),
 				slug: watch('slug'),
 			})
-			.then((res: { user: { username: string }; error: string }) => {
+			.then(res => {
 				if (res?.error) {
 					toast.error(`The credentials given are incorrect.`)
+					setLoading(true)
 					setLoading(true)
 				} else {
 					toast.success(`Category created successfully`)
@@ -49,16 +83,16 @@ const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
 		register,
 		handleSubmit,
 		watch,
-		formState: { errors },
+		reset,
+		formState: { errors, isSubmitSuccessful },
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
 
 	useEffect(() => {
-		if (!hasAuth) {
-			roleBasedRedirect()
-		} else {
-			setLoading(false)
+		if (isSubmitSuccessful) {
+			reset({ name: '' })
 		}
-	}, [hasAuth])
+		setLoading(false)
+	}, [isSubmitSuccessful])
 
 	if (loading) {
 		return <>Loading...</>

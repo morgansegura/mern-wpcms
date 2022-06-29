@@ -6,7 +6,7 @@ import { Container } from 'core/layout'
 // [Components]
 
 import { Layout } from '@components/layouts'
-import { CreateCategoryForm } from '@components/forms'
+import { CreateCategoryForm, GetCategories } from '@components/forms'
 import { Typography } from '@core/data-display'
 
 // [Styled]
@@ -24,7 +24,7 @@ const CategoriesPage: FC = () => {
 							<CreateCategoryForm />
 						</s.Col>
 						<s.Col start={9} end={13}>
-							Other content
+							<GetCategories />
 						</s.Col>
 					</s.Grid>
 				</Container>

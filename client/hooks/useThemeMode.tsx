@@ -33,7 +33,6 @@ const useThemeMode = () => {
 	}
 
 	useEffect(() => {
-		console.log({ themeMode })
 		setTheme(themeMode)
 	}, [getTheme()])
 
