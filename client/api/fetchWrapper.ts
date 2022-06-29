@@ -6,7 +6,6 @@ const { getStorage } = useStorage()
 
 export const client = (() => {
 	return axios.create({
-		// baseURL: `${meta.config.apiURL}`,
 		withCredentials: true,
 	})
 })()

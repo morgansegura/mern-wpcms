@@ -1,2 +1,6 @@
-export { GetCategories, default as CreateCategoryForm } from './CreateCategoryForm'
+export {
+	GetCategories,
+	CreateCategoryForm,
+	default as CreateCategorCategoriesLayout,
+} from './CreateCategoryForm'
 export * from './CreateCategoryForm.styled'

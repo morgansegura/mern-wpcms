@@ -21,8 +21,12 @@ export const Row: FC<IGridRow> = ({ children, start, end }) => {
 	)
 }
 
-const Grid: FC<IGrid> = ({ children }) => {
-	return <s.Grid>{children}</s.Grid>
+const Grid: FC<IGrid> = ({ children, gap, gapCol, gapRow, size, repeat }) => {
+	return (
+		<s.Grid gapCol={gapCol} gapRow={gapRow} gap={gap} size={size} repeat={repeat}>
+			{children}
+		</s.Grid>
+	)
 }
 
 export default Grid

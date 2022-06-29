@@ -6,13 +6,12 @@ import { IBox } from './Box.interfaces'
 export const Box = styled(props => props.as)<IBox>`
 	/* [M] */
 	${props =>
-		props.m &&
+		typeof props.m === 'string' &&
 		css`
 			margin: ${style.sp[props.m]};
 		`};
 	${props =>
 		typeof props.m === 'object' &&
-		props.m &&
 		props.m.map(
 			item =>
 				item.md &&
@@ -24,7 +23,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.m === 'object' &&
-		props.m &&
 		props.m.map(
 			item =>
 				item.sm &&
@@ -36,7 +34,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.m === 'object' &&
-		props.m &&
 		props.m.map(
 			item =>
 				item.lg &&
@@ -48,7 +45,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.m === 'object' &&
-		props.m &&
 		props.m.map(
 			item =>
 				item.xl &&
@@ -60,7 +56,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.m === 'object' &&
-		props.m &&
 		props.m.map(
 			item =>
 				item.xxl &&
@@ -72,14 +67,13 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	/* [MY] */
 	${props =>
-		props.my &&
+		typeof props.my === 'string' &&
 		css`
 			margin-top: ${style.sp[props.my]};
 			margin-bottom: ${style.sp[props.my]};
 		`};
 	${props =>
 		typeof props.my === 'object' &&
-		props.my &&
 		props.my.map(
 			item =>
 				item.sm &&
@@ -92,7 +86,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.my === 'object' &&
-		props.my &&
 		props.my.map(
 			item =>
 				item.md &&
@@ -105,7 +98,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.my === 'object' &&
-		props.my &&
 		props.my.map(
 			item =>
 				item.lg &&
@@ -118,7 +110,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.my === 'object' &&
-		props.my &&
 		props.my.map(
 			item =>
 				item.xl &&
@@ -131,7 +122,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.my === 'object' &&
-		props.my &&
 		props.my.map(
 			item =>
 				item.xxl &&
@@ -144,14 +134,13 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	/* [MX] */
 	${props =>
-		props.mx &&
+		typeof props.mx === 'string' &&
 		css`
 			margin-right: ${style.sp[props.mx]};
 			margin-left: ${style.sp[props.mx]};
 		`};
 	${props =>
 		typeof props.mx === 'object' &&
-		props.mx &&
 		props.mx.map(
 			item =>
 				item.sm &&
@@ -164,7 +153,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mx === 'object' &&
-		props.mx &&
 		props.mx.map(
 			item =>
 				item.md &&
@@ -177,7 +165,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mx === 'object' &&
-		props.mx &&
 		props.mx.map(
 			item =>
 				item.lg &&
@@ -190,7 +177,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mx === 'object' &&
-		props.mx &&
 		props.mx.map(
 			item =>
 				item.xl &&
@@ -203,7 +189,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mx === 'object' &&
-		props.mx &&
 		props.mx.map(
 			item =>
 				item.xxl &&
@@ -216,13 +201,12 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	/* [MT] */
 	${props =>
-		props.mt &&
+		typeof props.mt === 'string' &&
 		css`
 			margin-top: ${style.sp[props.mt]};
 		`};
 	${props =>
 		typeof props.mt === 'object' &&
-		props.mt &&
 		props.mt.map(
 			item =>
 				item.sm &&
@@ -234,7 +218,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mt === 'object' &&
-		props.mt &&
 		props.mt.map(
 			item =>
 				item.md &&
@@ -246,7 +229,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mt === 'object' &&
-		props.mt &&
 		props.mt.map(
 			item =>
 				item.lg &&
@@ -258,7 +240,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mt === 'object' &&
-		props.mt &&
 		props.mt.map(
 			item =>
 				item.xl &&
@@ -270,7 +251,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mt === 'object' &&
-		props.mt &&
 		props.mt.map(
 			item =>
 				item.xxl &&
@@ -282,13 +262,12 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	/* [MR] */
 	${props =>
-		props.mr &&
+		typeof props.mr === 'string' &&
 		css`
 			margin-right: ${style.sp[props.mr]};
 		`};
 	${props =>
 		typeof props.mr === 'object' &&
-		props.mr &&
 		props.mr.map(
 			item =>
 				item.sm &&
@@ -300,7 +279,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mr === 'object' &&
-		props.mr &&
 		props.mr.map(
 			item =>
 				item.md &&
@@ -312,7 +290,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mr === 'object' &&
-		props.mr &&
 		props.mr.map(
 			item =>
 				item.lg &&
@@ -324,7 +301,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mr === 'object' &&
-		props.mr &&
 		props.mr.map(
 			item =>
 				item.xl &&
@@ -336,7 +312,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mr === 'object' &&
-		props.mr &&
 		props.mr.map(
 			item =>
 				item.xxl &&
@@ -348,13 +323,12 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	/* [MB] */
 	${props =>
-		props.mb &&
+		typeof props.mb === 'string' &&
 		css`
 			margin-bottom: ${style.sp[props.mb]};
 		`};
 	${props =>
 		typeof props.mb === 'object' &&
-		props.mb &&
 		props.mb.map(
 			item =>
 				item.sm &&
@@ -366,7 +340,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mb === 'object' &&
-		props.mb &&
 		props.mb.map(
 			item =>
 				item.md &&
@@ -378,7 +351,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mb === 'object' &&
-		props.mb &&
 		props.mb.map(
 			item =>
 				item.lg &&
@@ -390,7 +362,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mb === 'object' &&
-		props.mb &&
 		props.mb.map(
 			item =>
 				item.xl &&
@@ -402,7 +373,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.mb === 'object' &&
-		props.mb &&
 		props.mb.map(
 			item =>
 				item.xxl &&
@@ -414,13 +384,12 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	/* [ML] */
 	${props =>
-		props.ml &&
+		typeof props.ml === 'string' &&
 		css`
 			margin-left: ${style.sp[props.ml]};
 		`};
 	${props =>
 		typeof props.ml === 'object' &&
-		props.ml &&
 		props.ml.map(
 			item =>
 				item.sm &&
@@ -432,7 +401,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.ml === 'object' &&
-		props.ml &&
 		props.ml.map(
 			item =>
 				item.md &&
@@ -444,7 +412,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.ml === 'object' &&
-		props.ml &&
 		props.ml.map(
 			item =>
 				item.lg &&
@@ -456,7 +423,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.ml === 'object' &&
-		props.ml &&
 		props.ml.map(
 			item =>
 				item.xl &&
@@ -468,7 +434,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.ml === 'object' &&
-		props.ml &&
 		props.ml.map(
 			item =>
 				item.xxl &&
@@ -480,13 +445,12 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	/* [P] */
 	${props =>
-		props.p &&
+		typeof props.p === 'string' &&
 		css`
-			margin: ${style.sp[props.p]};
+			padding: ${style.sp[props.p]};
 		`};
 	${props =>
 		typeof props.p === 'object' &&
-		props.p &&
 		props.p.map(
 			item =>
 				item.md &&
@@ -498,7 +462,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.p === 'object' &&
-		props.p &&
 		props.p.map(
 			item =>
 				item.sm &&
@@ -510,7 +473,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.p === 'object' &&
-		props.p &&
 		props.p.map(
 			item =>
 				item.lg &&
@@ -522,7 +484,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.p === 'object' &&
-		props.p &&
 		props.p.map(
 			item =>
 				item.xl &&
@@ -534,7 +495,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.p === 'object' &&
-		props.p &&
 		props.p.map(
 			item =>
 				item.xxl &&
@@ -546,14 +506,12 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	/* [PY] */
 	${props =>
-		props.py &&
 		css`
 			padding-top: ${style.sp[props.py]};
 			padding-bottom: ${style.sp[props.py]};
 		`};
 	${props =>
 		typeof props.py === 'object' &&
-		props.py &&
 		props.py.map(
 			item =>
 				item.sm &&
@@ -566,7 +524,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.py === 'object' &&
-		props.py &&
 		props.py.map(
 			item =>
 				item.md &&
@@ -579,7 +536,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.py === 'object' &&
-		props.py &&
 		props.py.map(
 			item =>
 				item.lg &&
@@ -592,7 +548,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.py === 'object' &&
-		props.py &&
 		props.py.map(
 			item =>
 				item.xl &&
@@ -605,7 +560,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.py === 'object' &&
-		props.py &&
 		props.py.map(
 			item =>
 				item.xxl &&
@@ -618,14 +572,13 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	/* [MX] */
 	${props =>
-		props.px &&
+		typeof props.px === 'string' &&
 		css`
 			padding-right: ${style.sp[props.px]};
 			padding-left: ${style.sp[props.px]};
 		`};
 	${props =>
 		typeof props.px === 'object' &&
-		props.px &&
 		props.px.map(
 			item =>
 				item.sm &&
@@ -638,7 +591,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.px === 'object' &&
-		props.px &&
 		props.px.map(
 			item =>
 				item.md &&
@@ -651,7 +603,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.px === 'object' &&
-		props.px &&
 		props.px.map(
 			item =>
 				item.lg &&
@@ -664,7 +615,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.px === 'object' &&
-		props.px &&
 		props.px.map(
 			item =>
 				item.xl &&
@@ -677,7 +627,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.px === 'object' &&
-		props.px &&
 		props.px.map(
 			item =>
 				item.xxl &&
@@ -690,13 +639,12 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	/* [MT] */
 	${props =>
-		props.pt &&
+		typeof props.pt === 'string' &&
 		css`
 			padding-top: ${style.sp[props.pt]};
 		`};
 	${props =>
 		typeof props.pt === 'object' &&
-		props.pt &&
 		props.pt.map(
 			item =>
 				item.sm &&
@@ -708,7 +656,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pt === 'object' &&
-		props.pt &&
 		props.pt.map(
 			item =>
 				item.md &&
@@ -720,7 +667,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pt === 'object' &&
-		props.pt &&
 		props.pt.map(
 			item =>
 				item.lg &&
@@ -732,7 +678,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pt === 'object' &&
-		props.pt &&
 		props.pt.map(
 			item =>
 				item.xl &&
@@ -744,7 +689,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pt === 'object' &&
-		props.pt &&
 		props.pt.map(
 			item =>
 				item.xxl &&
@@ -756,13 +700,12 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	/* [PR] */
 	${props =>
-		props.pr &&
+		typeof props.pr === 'string' &&
 		css`
 			padding-right: ${style.sp[props.pr]};
 		`};
 	${props =>
 		typeof props.pr === 'object' &&
-		props.pr &&
 		props.pr.map(
 			item =>
 				item.sm &&
@@ -774,7 +717,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pr === 'object' &&
-		props.pr &&
 		props.pr.map(
 			item =>
 				item.md &&
@@ -786,7 +728,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pr === 'object' &&
-		props.pr &&
 		props.pr.map(
 			item =>
 				item.lg &&
@@ -798,7 +739,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pr === 'object' &&
-		props.pr &&
 		props.pr.map(
 			item =>
 				item.xl &&
@@ -810,7 +750,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pr === 'object' &&
-		props.pr &&
 		props.pr.map(
 			item =>
 				item.xxl &&
@@ -822,13 +761,12 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	/* [PB] */
 	${props =>
-		props.pb &&
+		typeof props.pb === 'string' &&
 		css`
 			padding-bottom: ${style.sp[props.pb]};
 		`};
 	${props =>
 		typeof props.pb === 'object' &&
-		props.pb &&
 		props.pb.map(
 			item =>
 				item.sm &&
@@ -840,7 +778,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pb === 'object' &&
-		props.pb &&
 		props.pb.map(
 			item =>
 				item.md &&
@@ -852,7 +789,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pb === 'object' &&
-		props.pb &&
 		props.pb.map(
 			item =>
 				item.lg &&
@@ -864,7 +800,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pb === 'object' &&
-		props.pb &&
 		props.pb.map(
 			item =>
 				item.xl &&
@@ -876,7 +811,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pb === 'object' &&
-		props.pb &&
 		props.pb.map(
 			item =>
 				item.xxl &&
@@ -888,13 +822,12 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	/* [PL] */
 	${props =>
-		props.pl &&
+		typeof props.pt === 'string' &&
 		css`
 			padding-left: ${style.sp[props.pl]};
 		`};
 	${props =>
 		typeof props.pl === 'object' &&
-		props.pl &&
 		props.pl.map(
 			item =>
 				item.sm &&
@@ -906,7 +839,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pl === 'object' &&
-		props.pl &&
 		props.pl.map(
 			item =>
 				item.md &&
@@ -918,7 +850,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pl === 'object' &&
-		props.pl &&
 		props.pl.map(
 			item =>
 				item.lg &&
@@ -930,7 +861,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pl === 'object' &&
-		props.pl &&
 		props.pl.map(
 			item =>
 				item.xl &&
@@ -942,7 +872,6 @@ export const Box = styled(props => props.as)<IBox>`
 		)};
 	${props =>
 		typeof props.pl === 'object' &&
-		props.pl &&
 		props.pl.map(
 			item =>
 				item.xxl &&

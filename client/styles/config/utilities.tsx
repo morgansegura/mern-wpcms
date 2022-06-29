@@ -132,6 +132,47 @@ export const info = {
 	dark: colors.blue40,
 }
 
+export interface ISpacing {
+	auto: string
+	0: string
+	px: string
+	0.5: string
+	1: string
+	1.25: string
+	1.5: string
+	2: string
+	2.25: string
+	2.5: string
+	3: string
+	3.5: string
+	4: string
+	4.5: string
+	5: string
+	5.5: string
+	6: string
+	6.5: string
+	7: string
+	7.5: string
+	8: string
+	9: string
+	10: string
+	11: string
+	12: string
+	13: string
+	14: string
+	14_5: string
+	15: string
+	16: string
+	17: string
+	19: string
+	20: string
+	25: string
+	30: string
+	40: string
+	60: string
+	80: string
+}
+
 export const sp = {
 	unset: 'unset',
 	auto: 'auto',

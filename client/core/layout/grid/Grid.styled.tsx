@@ -1,33 +1,154 @@
 import styled, { css } from 'styled-components'
 import * as style from '@styles/config/utilities'
-import { IGridColumn, IGridRow, IGrid } from './Grid.interfaces'
+import { IGridRow, IGrid, TGridSizes, IGridColumn } from './Grid.interfaces'
 
 export const Grid = styled.div<IGrid>`
-	${style.grid()};
+	display: grid;
+
+	${(props: IGrid) =>
+		typeof props.gap === 'string' &&
+		css`
+			gap: ${style.sp[props.gap]};
+		`}
+	${(props: IGridGrid) =>
+		typeof props.start === 'object' &&
+		props.start.map(
+			(item: TGridSizes) =>
+				item.sm &&
+				css`
+					${style.media.sm`
+						grid-column-start: ${item.sm};
+					`}
+				`,
+		)};
 `
 
 export const GridColumn = styled.div<IGridColumn>`
-	${props =>
-		props.start &&
-		props.end &&
+	/* [Default] */
+	${(props: IGridColumn) =>
+		typeof props.start === 'string' &&
 		css`
-			grid-column: 1 / 13;
-
-			${style.media.lg`
-			    grid-column: ${props.start} / ${props.end};
-            `}
+			grid-column-start: ${props.start};
 		`}
+	/* [Resonsive] */
+	/* [SM] */
+	${(props: IGridColumn) =>
+		typeof props.start === 'object' &&
+		props.start.map(
+			(item: TGridSizes) =>
+				item.sm &&
+				css`
+					${style.media.sm`
+						grid-column-start: ${item.sm};
+					`}
+				`,
+		)};
+	${(props: IGridColumn) =>
+		typeof props.start === 'object' &&
+		props.start.map(
+			(item: TGridSizes) =>
+				item.md &&
+				css`
+					${style.media.md`
+						grid-column-start: ${item.md};
+					`}
+				`,
+		)};
+	${(props: IGridColumn) =>
+		typeof props.start === 'object' &&
+		props.start.map(
+			(item: TGridSizes) =>
+				item.lg &&
+				css`
+					${style.media.lg`
+						grid-column-start: ${item.lg};
+					`}
+				`,
+		)};
+	${(props: IGridColumn) =>
+		typeof props.start === 'object' &&
+		props.start.map(
+			(item: TGridSizes) =>
+				item.xl &&
+				css`
+					${style.media.xl`
+						grid-column-start: ${item.xl};
+					`}
+				`,
+		)};
+	${(props: IGridColumn) =>
+		typeof props.start === 'object' &&
+		props.start.map(
+			(item: TGridSizes) =>
+				item.xxl &&
+				css`
+					${style.media.xxl`
+						grid-column-start: ${item.xxl};
+					`}
+				`,
+		)};
+	${(props: IGridColumn) =>
+		typeof props.end === 'string' &&
+		css`
+			grid-column-end: ${props.end};
+		`}
+	/* [Resonsive] */
+	/* [SM] */
+	${(props: IGridColumn) =>
+		typeof props.end === 'object' &&
+		props.end.map(
+			(item: TGridSizes) =>
+				item.sm &&
+				css`
+					${style.media.sm`
+						grid-column-end: ${item.sm};
+					`}
+				`,
+		)};
+	${(props: IGridColumn) =>
+		typeof props.end === 'object' &&
+		props.end.map(
+			(item: TGridSizes) =>
+				item.md &&
+				css`
+					${style.media.md`
+						grid-column-end: ${item.md};
+					`}
+				`,
+		)};
+	${(props: IGridColumn) =>
+		typeof props.end === 'object' &&
+		props.end.map(
+			(item: TGridSizes) =>
+				item.lg &&
+				css`
+					${style.media.lg`
+						grid-column-end: ${item.lg};
+					`}
+				`,
+		)};
+	${(props: IGridColumn) =>
+		typeof props.end === 'object' &&
+		props.end.map(
+			(item: TGridSizes) =>
+				item.xl &&
+				css`
+					${style.media.xl`
+						grid-column-end: ${item.xl};
+					`}
+				`,
+		)};
+	${(props: IGridColumn) =>
+		typeof props.end === 'object' &&
+		props.end.map(
+			(item: TGridSizes) =>
+				item.xxl &&
+				css`
+					${style.media.xxl`
+						grid-column-end: ${item.xxl};
+					`}
+				`,
+		)};
 `
 
-export const GridRow = styled.div<IGridRow>`
-	${props =>
-		props.start &&
-		props.end &&
-		css`
-			grid-column: 1 / 13;
-
-			${style.media.lg`
-			    row-column: ${props.start} / ${props.end};
-            `}
-		`}
-`
+export const GridRow = styled.div<IGridRow>``
