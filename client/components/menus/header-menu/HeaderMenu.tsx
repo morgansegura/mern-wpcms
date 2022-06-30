@@ -3,10 +3,17 @@ import { useAuth } from 'hooks'
 import Link from 'next/link'
 
 // [Core]
-import { DrawerProvider, DrawerTrigger } from '@core/navigation/drawer'
-import { Menu } from '@core/navigation/menu'
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import Typography from '@mui/material/Typography'
+
+// [Core]
+import { DrawerTrigger } from '@core/navigation/drawer'
+import { Menu, MenuItem } from '@core/navigation/menu'
+import Avatar from '@core/data-display/avatar/Avatar'
 // [Components]
-import { IconDashboard, IconHamburger, IconSignout } from '@components/icons'
+import { IconDashboard, IconHamburger, IconSignout, IconChevronDown } from '@components/icons'
 import { AuthContext, ToggleColorMode } from '@components/providers'
 // [Interfaces]
 import { IHeaderMenu } from './HeaderMenu.interfaces'
@@ -22,80 +29,81 @@ const HeaderMenu: FC<IHeaderMenu> = () => {
 	const unauthItems = [
 		{
 			label: (
-				<s.HeaderMenuItem>
+				<MenuItem>
 					<Link href="/signin">
 						<a>Signin</a>
 					</Link>
-				</s.HeaderMenuItem>
+				</MenuItem>
 			),
 			key: 'signin',
 		},
 		{
 			label: (
-				<s.HeaderMenuItem>
+				<MenuItem>
 					<Link href="/signup">
 						<a>Signup</a>
 					</Link>
-				</s.HeaderMenuItem>
+				</MenuItem>
 			),
 			key: 'signup',
 		},
 		{
 			label: (
-				<s.HeaderMenuItem>
+				<MenuItem>
 					<s.HeaderSVG>
 						<ToggleColorMode theme="light" />
 					</s.HeaderSVG>
-				</s.HeaderMenuItem>
+				</MenuItem>
 			),
 			key: 'open-drawer',
 		},
 	]
+
 	const authItems = [
 		{
 			label: (
-				<s.HeaderMenuItem>
+				<MenuItem>
 					<Link href={roleBasedPath()}>
 						<a>
 							<IconDashboard /> {auth?.user?.username || `Dashboard`}
 						</a>
 					</Link>
-				</s.HeaderMenuItem>
+				</MenuItem>
 			),
 			key: 'dashboard',
 		},
 		{
 			label: (
-				<s.HeaderMenuItem>
+				<MenuItem>
 					<Link href="/">
 						<a onClick={() => signout()}>
 							<IconSignout />
 							Signout
 						</a>
 					</Link>
-				</s.HeaderMenuItem>
+				</MenuItem>
 			),
 			key: 'signout',
 		},
 		{
 			label: (
-				<s.HeaderMenuItem>
+				<MenuItem>
 					<s.HeaderSVG>
 						<ToggleColorMode theme="light" />
 					</s.HeaderSVG>
-				</s.HeaderMenuItem>
+				</MenuItem>
 			),
 			key: 'open-drawer',
 		},
 		{
 			label: (
-				<s.HeaderMenuItem>
-					<s.HeaderSVG>
+				<MenuItem>
+					<Avatar>
 						<DrawerTrigger>
 							<IconHamburger />
 						</DrawerTrigger>
-					</s.HeaderSVG>
-				</s.HeaderMenuItem>
+					</Avatar>
+				</MenuItem>
 			),
 			key: 'toggle-color',
 		},
@@ -103,6 +111,21 @@ const HeaderMenu: FC<IHeaderMenu> = () => {
 
 	return (
 		<s.HeaderMenu>
+			<Accordion>
+				<AccordionSummary
+					expandIcon={<IconChevronDown />}
+					aria-controls="panel1a-content"
+					id="panel1a-header"
+				>
+					<Typography>Accordion 1</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<Typography>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+						sit amet blandit leo lobortis eget.
+					</Typography>
+				</AccordionDetails>
+			</Accordion>
 			<Menu items={hasAuth ? authItems : unauthItems} />
 		</s.HeaderMenu>
 	)

@@ -36,19 +36,13 @@ export const Layout = styled.div`
 		padding: ${style.sp['1']} ${style.sp['2']};
 		/* border-radius: ${style.radius.lg}; */
 		color: ${props =>
-			props.theme.palette.name === 'light'
-				? props.theme.palette.neutral['06']
-				: props.theme.palette.neutral['70']};
+			props.theme.palette.name === 'light' ? style.colors.neutral06 : style.colors.neutral70};
 		background-color: ${props =>
-			props.theme.palette.name === 'light'
-				? props.theme.palette.neutral['60']
-				: props.theme.palette.neutral['05']};
+			props.theme.palette.name === 'light' ? style.colors.neutral60 : style.colors.neutral05};
 
 		border-bottom: 1px solid
 			${props =>
-				props.theme.palette.name === 'light'
-					? props.theme.palette.neutral['60']
-					: props.theme.palette.neutral['07']};
+				props.theme.palette.name === 'light' ? style.colors.neutral60 : style.colors.neutral07};
 
 		${AccordionTabTitleIcon} {
 			svg {
@@ -63,15 +57,11 @@ export const Layout = styled.div`
 				padding-top: ${style.sp['1.5']};
 				padding-bottom: ${style.sp['1.5']};
 				color: ${props =>
-					props.theme.palette.name === 'light'
-						? props.theme.palette.neutral['06']
-						: props.theme.palette.neutral['60']};
+					props.theme.palette.name === 'light' ? style.colors.neutral06 : style.colors.neutral60};
 
 				&:hover {
 					color: ${props =>
-						props.theme.palette.name === 'light'
-							? props.theme.palette.neutral['06']
-							: props.theme.palette.neutral['60']};
+						props.theme.palette.name === 'light' ? style.colors.neutral06 : style.colors.neutral60};
 				}
 			}
 		}
@@ -92,24 +82,21 @@ export const Layout = styled.div`
 
 	${DrawerContainer} => {
 		transform: translateX(100%) translateY(0);
-		${props => props};
 		${props =>
 			props.open &&
 			css`
 				background-color: ${props =>
-					props.theme.palette.name === 'light'
-						? props.theme.palette.neutral['00']
-						: props.theme.palette.neutral['05']};
+					props.theme.palette.name === 'light' ? style.colors.neutral00 : style.colors.neutral05};
 				box-shadow: 0 0 60px
 						${props =>
 							props.theme.palette.name === 'light'
-								? props.theme.palette.neutral['20']
-								: props.theme.palette.neutral['00']},
+								? style.colors.neutral20
+								: style.colors.neutral00},
 					0 0 30px
 						${props =>
 							props.theme.palette.name === 'light'
-								? props.theme.palette.neutral['08']
-								: props.theme.palette.neutral['06']};
+								? style.colors.neutral08
+								: style.colors.neutral06};
 				transform: translateX(0) translateY(0);
 				transition: transform 0.3s ease-in;
 			`};

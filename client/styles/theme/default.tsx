@@ -14,9 +14,8 @@ import {
 } from 'styles/theme/settings'
 
 // [Interfaces]
-import { Theme } from 'config/interfaces/Theme'
 
-const baseTheme: Theme = {
+const baseTheme = {
 	breakpoints: {
 		...Breakpoints,
 	},
@@ -45,34 +44,16 @@ const baseTheme: Theme = {
 	typography: {},
 }
 
-export const themeLight: Theme = {
+export const themeLight = {
 	...baseTheme,
 	palette: {
 		...Palette.light,
 	},
-	typography: {
-		...Typography,
-		body1: {
-			color: Palette.light.text.secondary,
-		},
-		body2: { color: Palette.light.text.secondary },
-		subtitle1: { color: Palette.light.text.secondary },
-		subtitle2: { color: Palette.light.text.secondary },
-	},
 }
 
-export const themeDark: Theme = {
+export const themeDark = {
 	...baseTheme,
 	palette: {
 		...Palette.dark,
-	},
-	typography: {
-		...Typography,
-		body1: {
-			color: Palette.dark.text.secondary,
-		},
-		body2: { color: Palette.dark.text.secondary },
-		subtitle1: { color: Palette.dark.text.secondary },
-		subtitle2: { color: Palette.dark.text.secondary },
 	},
 }

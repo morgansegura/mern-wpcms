@@ -1,19 +1,22 @@
 import { ScrollBar } from 'core/surfaces/accordion/Accordion.styled'
 import { css } from 'styled-components'
+import * as style from '@styles/config/utilities'
 
 export const setup = css`
 	html,
 	body {
 		padding: 0;
 		margin: 0;
-		font-family: ${props => props.theme.typography.fontBase};
-		font-size: ${props => props.theme.typography.fontSizeBase};
-		background-color: ${props => props.theme.palette.background.body};
+		font-family: ${style.font.family.sans};
+		font-size: ${style.font.base};
+		background-color: ${props =>
+			props.theme.palette.name === 'light' ? style.colors.neutral05 : style.colors.neutral80};
 		${ScrollBar};
 		-webkit-text-size-adjust: 100%;
 		-moz-osx-font-smoothing: grayscale;
 		-webkit-font-smoothing: antialiased;
-		color: ${props => props.theme.palette.text.primary};
+		color: ${props =>
+			props.theme.palette.name === 'light' ? style.colors.neutral90 : style.colors.neutral05};
 	}
 
 	div,

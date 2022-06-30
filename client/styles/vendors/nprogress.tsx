@@ -8,9 +8,7 @@ export const nprogress = css`
 
   #nprogress .bar {
     background: ${props =>
-			props.theme.palette.name === 'light'
-				? props.theme.palette.primary.main
-				: props.theme.palette.primary.main};
+			props.theme.palette.name === 'light' ? style.colors.primary50 : style.colors.primary50};
     position: fixed;
     z-index: 1031;
     top: 0;
@@ -28,9 +26,7 @@ export const nprogress = css`
     width: 100px;
     height: 100%;
     box-shadow: 0 0 10px ${props =>
-			props.theme.palette.name === 'light'
-				? props.theme.palette.primary.main
-				: props.theme.palette.primary.main}
+			props.theme.palette.name === 'light' ? style.colors.primary50 : style.colors.primary50}
     opacity: 1;
     -webkit-transform: rotate(3deg) translate(0px, -4px);
     -ms-transform: rotate(3deg) translate(0px, -4px);
@@ -53,13 +49,9 @@ export const nprogress = css`
 
     border: solid 2px transparent;
     border-top-color: ${props =>
-			props.theme.palette.name === 'light'
-				? props.theme.palette.primary.main
-				: props.theme.palette.primary.main};
+			props.theme.palette.name === 'light' ? style.colors.primary50 : style.colors.primary50};
     border-left-color: ${props =>
-			props.theme.palette.name === 'light'
-				? props.theme.palette.primary.main
-				: props.theme.palette.primary.main};
+			props.theme.palette.name === 'light' ? style.colors.primary50 : style.colors.primary50};
     border-radius: 50%;
 
     -webkit-animation: nprogress-spinner 400ms linear infinite;

@@ -1,6 +1,8 @@
 import { createContext, FC, useContext, useMemo, useState } from 'react'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { useThemeMode } from 'hooks'
+// [Components]
+import DefaultTheme from '@components/themes/default-theme/DefaultTheme'
 // [Icons]
 import { IconDarkMode, IconLightMode } from '@components/icons'
 // [Interfaces]
@@ -66,7 +68,7 @@ const ThemesProvider: FC<IThemesProvider> = ({ children }) => {
 		<ColorModeContext.Provider value={colorMode}>
 			<ThemeProvider theme={themeMode === 'light' ? themeLight : themeDark}>
 				<GlobalStyles />
-				{children}
+				<DefaultTheme>{children}</DefaultTheme>
 			</ThemeProvider>
 		</ColorModeContext.Provider>
 	)

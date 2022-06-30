@@ -106,30 +106,36 @@ export const colors = {
 	purple80: '#48119a',
 	purple90: '#300c67',
 	purple100: '#180633',
-}
 
-export const success = {
-	light: colors.green10,
-	main: colors.green50,
-	dark: colors.green70,
-}
+	// [Success]
+	success10: '#abf9e5',
+	success50: '#0fe3ab',
+	success100: '#0a9772',
 
-export const warning = {
-	light: colors.yellow10,
-	main: colors.yellow50,
-	dark: colors.yellow70,
-}
+	// [Success]
+	warning10: '#ffeab0',
+	warning50: '#ffbf13',
+	warning100: '#b78500',
 
-export const danger = {
-	light: colors.red10,
-	main: colors.red50,
-	dark: colors.red70,
-}
+	// [Success]
+	danger10: '#fdb6c5',
+	danger50: '#f92552',
+	danger100: '#ba052b',
 
-export const info = {
-	light: colors.blue10,
-	main: colors.blue20,
-	dark: colors.blue40,
+	// [Success]
+	info10: '#b4e0fb',
+	info50: '#1da1f2',
+	info100: '#0a6eab',
+
+	// [Primary]
+	primary10: '#ff4747',
+	primary50: '#cc0000',
+	primary100: '#8f0000',
+
+	// [Secondary]
+	secondary10: '#abd2ff',
+	secondary50: '#2e8eff',
+	secondary100: '#002a5b',
 }
 
 export interface ISpacing {

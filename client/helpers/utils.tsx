@@ -4,14 +4,10 @@ const formatDate = (date: any) =>
 		year: '2-digit',
 	}).format(date)
 
-const userInitials = (name: string) => {
-	let initials = name.length ? name : 'Morgan'
-
-	return initials
-		.split(' ')
-		.map(n => n[0])
-		.join(' ')
-		.toUpperCase()
+const useInitials = (nameString: string) => {
+	const fullName = nameString.split(' ')
+	const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0)
+	return initials.toUpperCase()
 }
 
 const emptyObject = (obj: {}) => {
@@ -22,4 +18,4 @@ const readStringValue = (string: string, value: string) => {
 	return string.includes(value)
 }
 
-export { formatDate, userInitials, emptyObject, readStringValue }
+export { formatDate, useInitials, emptyObject, readStringValue }
