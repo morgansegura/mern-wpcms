@@ -111,21 +111,6 @@ const HeaderMenu: FC<IHeaderMenu> = () => {
 
 	return (
 		<s.HeaderMenu>
-			<Accordion>
-				<AccordionSummary
-					expandIcon={<IconChevronDown />}
-					aria-controls="panel1a-content"
-					id="panel1a-header"
-				>
-					<Typography>Accordion 1</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
-					<Typography>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-						sit amet blandit leo lobortis eget.
-					</Typography>
-				</AccordionDetails>
-			</Accordion>
 			<Menu items={hasAuth ? authItems : unauthItems} />
 		</s.HeaderMenu>
 	)
