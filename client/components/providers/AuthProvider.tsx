@@ -7,6 +7,7 @@ import { useStorage } from 'hooks'
 import { siteMetadata as meta } from 'helpers'
 // [Interfaces]
 import { IAuthProvider } from '@components/providers/Provider.interfaces'
+import axios from 'axios'
 
 const AuthContext = createContext<any | null>(null)
 

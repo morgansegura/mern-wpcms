@@ -5,19 +5,65 @@ import { IGridRow, IGrid, TGridSizes, IGridColumn } from './Grid.interfaces'
 export const Grid = styled.div<IGrid>`
 	display: grid;
 
+	gird-template-columns: repeat(1fr, ${props => props.repeat && props.repeat});
+
 	${(props: IGrid) =>
 		typeof props.gap === 'string' &&
 		css`
 			gap: ${style.sp[props.gap]};
 		`}
-	${(props: IGridGrid) =>
-		typeof props.start === 'object' &&
-		props.start.map(
+	${(props: IGrid) =>
+		typeof props.gap === 'object' &&
+		props.gap.map(
 			(item: TGridSizes) =>
 				item.sm &&
 				css`
 					${style.media.sm`
-						grid-column-start: ${item.sm};
+						gap: ${item.sm};
+					`}
+				`,
+		)};
+	${(props: IGrid) =>
+		typeof props.gap === 'object' &&
+		props.gap.map(
+			(item: TGridSizes) =>
+				item.md &&
+				css`
+					${style.media.md`
+						gap: ${item.md};
+					`}
+				`,
+		)};
+	${(props: IGrid) =>
+		typeof props.gap === 'object' &&
+		props.gap.map(
+			(item: TGridSizes) =>
+				item.lg &&
+				css`
+					${style.media.lg`
+						gap: ${item.lg};
+					`}
+				`,
+		)};
+	${(props: IGrid) =>
+		typeof props.gap === 'object' &&
+		props.gap.map(
+			(item: TGridSizes) =>
+				item.xl &&
+				css`
+					${style.media.xl`
+						gap: ${item.xl};
+					`}
+				`,
+		)};
+	${(props: IGrid) =>
+		typeof props.gap === 'object' &&
+		props.gap.map(
+			(item: TGridSizes) =>
+				item.xxl &&
+				css`
+					${style.media.xxl`
+						gap: ${item.xxl};
 					`}
 				`,
 		)};

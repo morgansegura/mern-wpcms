@@ -19,3 +19,23 @@ export const categories = async (req, res) => {
     console.log(err);
   }
 };
+
+export const remove = async (req, res) => {
+  try {
+    const { slug } = req.params;
+    const category = await Category.findOneAndDelete({ slug });
+    res.json(category);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const update = async (req, res) => {
+  try {
+    const { slug } = req.params;
+    const category = await Category.findOneAndUpdate({ slug });
+    res.json(category);
+  } catch (err) {
+    console.log(err);
+  }
+};

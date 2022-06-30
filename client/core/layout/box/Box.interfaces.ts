@@ -17,4 +17,9 @@ export interface IBox {
 	pr?: string | object
 	pb?: string | object
 	pl?: string | object
+	row?: string | object
+	column?: string | object
+	align?: string | object
+	justify?: string | object
+	flex?: string | object
 }

@@ -15,8 +15,8 @@ export default function App({ Component, pageProps, ...delegated }: AppProps) {
 		<div {...delegated}>
 			<AppProvider>
 				<Component {...pageProps} />
+				<Toaster />
 			</AppProvider>
-			<Toaster />
 		</div>
 	)
 }

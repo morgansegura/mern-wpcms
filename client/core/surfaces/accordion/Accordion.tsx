@@ -125,7 +125,7 @@ const Accordion: FC<IAccordionContext> = ({ items }) => {
 			<s.AccordionContainer>
 				{items &&
 					items.map((item: TAccordionItem) => (
-						<AccordionContext key={item.key} tab={item.tab} content={item.content} />
+						<>{item && <AccordionContext key={item.key} tab={item.tab} content={item.content} />}</>
 					))}
 			</s.AccordionContainer>
 		</s.Accordion>

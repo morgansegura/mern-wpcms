@@ -32,4 +32,4 @@ app.use(morgan("dev"));
 app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
 
-app.listen(3001, () => console.log("Server running on port 8000"));
+app.listen(3001, () => console.log("Server running on port 3001"));

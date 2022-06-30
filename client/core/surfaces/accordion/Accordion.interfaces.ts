@@ -2,10 +2,10 @@ import { MouseEventHandler, ReactNode } from 'react'
 
 export type TAccordionTab = {
 	key?: string | number
-	title?: ReactNode[] | ReactNode | null
-	content?: ReactNode[] | ReactNode | null
-	titleIcon?: ReactNode[] | ReactNode | null
-	actionIcon?: ReactNode[] | ReactNode | null
+	title?: ReactNode[] | ReactNode
+	content?: ReactNode[] | ReactNode
+	titleIcon?: ReactNode[] | ReactNode
+	actionIcon?: ReactNode[] | ReactNode | any
 	onClick?: MouseEventHandler<HTMLDivElement>
 	open?: boolean
 	close?: boolean
@@ -16,6 +16,7 @@ export type TAccordionContent = {
 	open?: boolean
 	close?: boolean
 	data?: ReactNode[] | ReactNode
+	map?: any
 }
 
 export type TAccordionItem = {

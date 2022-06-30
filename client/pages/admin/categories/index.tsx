@@ -4,19 +4,19 @@ import { FC, useEffect, useState } from 'react'
 import { Container } from '@core/layout'
 import { Typography } from '@core/data-display'
 // [Components]
-import { Layout } from '@components/layouts'
+import { AdminLayout } from '@components/layouts'
 import { CreateCategorCategoriesLayout } from '@components/forms'
 
 const CategoriesPage: FC = () => {
 	return (
 		<>
-			<Layout>
+			<AdminLayout>
 				<Container contain="xxl">
 					<Container contain="xl">
 						<CreateCategorCategoriesLayout />
 					</Container>
 				</Container>
-			</Layout>
+			</AdminLayout>
 		</>
 	)
 }

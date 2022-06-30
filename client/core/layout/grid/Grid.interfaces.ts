@@ -5,9 +5,10 @@ export interface IGrid {
 	children?: ReactNode[] | ReactNode
 	size?: string | object
 	repeat?: string | object
-	gap?: string | CSSObject | object
+	gap?: string | CSSObject | any
 	gapCol?: string | object
 	gapRow?: string | object
+	map?: any | null
 }
 
 export interface TGridSizes {

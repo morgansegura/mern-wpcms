@@ -1,13 +1,12 @@
 import styled, { css } from 'styled-components'
 import * as style from '@styles/config/utilities'
-import { math } from 'polished'
 
 import {
 	DrawerMenuItem,
 	DrawerMenuIcon,
 	DrawerContainer,
 	DrawerFrame,
-} from 'core/navigation/drawer'
+} from '@core/navigation/drawer/Drawer.styled'
 
 import {
 	AccordionContainer,
@@ -18,10 +17,11 @@ import {
 	AccordionTabContentMenuLink,
 	AccordionContentItem,
 	Accordion,
-} from 'core/surfaces/accordion'
-import { IGrid, IGridColumn } from './Layout.interfaces'
+} from '@core/surfaces/accordion/Accordion.styled'
 
 export const Layout = styled.div`
+	position: relative;
+
 	${AccordionContainer} => {
 		position: absolute;
 		top: ${style.sp['8']};
@@ -91,18 +91,15 @@ export const Layout = styled.div`
 	/* [Drawer] */
 
 	${DrawerContainer} => {
-		position: fixed;
-		top: ${style.sp['11']};
-		bottom: 0;
-		left: auto;
-		right: 0;
-		border-radius: ${style.radius.lg} 0 0 0;
-		height: calc(100vh - ${style.sp['11']});
 		transform: translateX(100%) translateY(0);
-
+		${props => props};
 		${props =>
 			props.open &&
 			css`
+				background-color: ${props =>
+					props.theme.palette.name === 'light'
+						? props.theme.palette.neutral['00']
+						: props.theme.palette.neutral['05']};
 				box-shadow: 0 0 60px
 						${props =>
 							props.theme.palette.name === 'light'
@@ -139,50 +136,6 @@ export const LayoutContainer = styled.div`
 	main {
 		flex: 1 0 auto;
 	}
-`
-
-export const StyledH1 = styled.h2`
-	${style.h1}
-`
-
-export const StyledH2 = styled.h2`
-	${style.h2}
-`
-
-export const StyledH3 = styled.h3`
-	${style.h2}
-`
-
-export const StyledH4 = styled.h4`
-	${style.h2}
-`
-
-export const StyledH5 = styled.h5`
-	${style.h5}
-`
-
-export const StyledH6 = styled.h6`
-	${style.body.bold}
-`
-
-export const StyledCopy = styled.p`
-	${style.body.base}
-`
-
-export const StyledCopyBold = styled.p`
-	${style.body.bold}
-`
-
-export const StyledCopySmall = styled.p`
-	${style.body.small}
-`
-
-export const StyledCopySmallBold = styled.p`
-	${style.body['small-bold']}
-`
-
-export const StyledCopyLarge = styled.p`
-	${style.body.large}
 `
 
 export const StyledContentBlock = styled.div`

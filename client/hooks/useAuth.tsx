@@ -38,11 +38,15 @@ const useAuth = () => {
 	const roleBasedRedirect = () => {
 		if (hasAuth) {
 			meta?.config.roleType.admins.includes(getUserRole())
-				? authRedirect('/admin')
-				: authRedirect('/')
+				? router.push('/admin')
+				: router.push('/')
 		} else {
-			authRedirect('/')
+			router.push('/')
 		}
+	}
+
+	const hasAdminAccess = () => {
+		return hasAuth && meta?.config.roleType.admins.includes(getUserRole()) ? true : false
 	}
 
 	const hasToken = () => {
@@ -62,6 +66,7 @@ const useAuth = () => {
 		getUserRole,
 		roleBasedPath,
 		roleBasedRedirect,
+		hasAdminAccess,
 	}
 }
 

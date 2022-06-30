@@ -106,8 +106,10 @@ export const AccordionTabContentMenuLink = styled.div`
 `
 
 export const AccordionContent = styled.div<TAccordionContent>`
+	display: flex;
+	flex-direction: column;
 	overflow-y: scroll;
-	transition: height 0.3s ease-out;
+	transition: overflow 0.3s ease-out;
 
 	${props =>
 		props.open &&

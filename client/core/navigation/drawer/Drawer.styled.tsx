@@ -34,11 +34,6 @@ export const DrawerContainer = styled.div<IDrawer>`
 	z-index: ${style.zindex.top};
 	box-shadow: none;
 	padding-top: ${style.sp['8']};
-	background-color: ${props =>
-		props.theme.palette.name === 'light'
-			? props.theme.palette.neutral['05']
-			: props.theme.palette.neutral['50']};
-
 	transition: transform 0.4s ease-out;
 
 	/* [TOP] */
@@ -96,18 +91,18 @@ export const DrawerContainer = styled.div<IDrawer>`
 	${props =>
 		props.direction === 'bottom' &&
 		css`
-			top: auto;
+			/* top: 80%; */
 			left: 0;
 			right: 0;
 			bottom: 0;
 			width: 100%;
-			transform: translateX(0) translateY(0);
+			transform: translateX(0) translateY(100%);
 		`}
 	${props =>
 		props.open &&
 		props.direction === 'bottom' &&
 		css`
-			transform: translateX(0) translateY(-100%);
+			transform: translateX(0) translateY(0);
 		`}
 	${props =>
 		props.close &&

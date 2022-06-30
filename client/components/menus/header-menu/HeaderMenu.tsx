@@ -3,7 +3,7 @@ import { useAuth } from 'hooks'
 import Link from 'next/link'
 
 // [Core]
-import { DrawerTrigger } from '@core/navigation/drawer'
+import { DrawerProvider, DrawerTrigger } from '@core/navigation/drawer'
 import { Menu } from '@core/navigation/menu'
 // [Components]
 import { IconDashboard, IconHamburger, IconSignout } from '@components/icons'

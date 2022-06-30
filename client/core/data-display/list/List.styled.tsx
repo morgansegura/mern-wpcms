@@ -40,4 +40,19 @@ export const ListItemTextPrimary = styled.p`
 export const ListItemTextSecondary = styled.p`
 	${style.body.base};
 `
+
+export const ListItemIcons = styled.div<IListItemAvatar>`
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	svg {
+	}
+`
+export const ListItemIcon = styled.div<IListItemAvatar>`
+	display: flex;
+	cursor: pointer;
+	svg {
+	}
+`
+
 export const ListItemAvatar = styled.div<IListItemAvatar>``

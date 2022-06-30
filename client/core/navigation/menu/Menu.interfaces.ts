@@ -6,6 +6,7 @@ export interface IMenu {
 	children?: ReactNode[] | ReactNode
 }
 export type TMenuItem = {
+	key?: string
 	href?: string
 	title?: string
 	label?: ReactNode[] | ReactNode

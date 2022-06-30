@@ -1,25 +1,35 @@
-import { BsPinAngle } from 'react-icons/bs'
-import { FaLongArrowAltLeft, FaBars } from 'react-icons/fa'
-import { GoChevronUp, GoChevronRight, GoChevronDown, GoChevronLeft } from 'react-icons/go'
 import {
-	MdOutlineAdminPanelSettings,
-	MdOutlineSpaceDashboard,
-	MdLogout,
-	MdClose,
-} from 'react-icons/md'
+	TbChevronRight,
+	TbSun,
+	TbSettings,
+	TbLogout,
+	TbEditCircle,
+	TbTrash,
+	TbMoon,
+	TbChevronLeft,
+	TbChevronUp,
+	TbChevronDown,
+	TbPin,
+	TbMenu2,
+	TbX,
+	TbArrowNarrowRight,
+} from 'react-icons/tb'
 
 export {
-	GoChevronUp as IconChevronUp,
-	GoChevronRight as IconChevronRight,
-	GoChevronDown as IconChevronDown,
-	GoChevronLeft as IconChevronLeft,
-	FaLongArrowAltLeft as IconLongArrowLeft,
-	FaBars as IconHamburger,
-	BsPinAngle as IconThumbTack,
-	MdOutlineAdminPanelSettings as IconAdmin,
-	MdOutlineSpaceDashboard as IconDashboard,
-	MdLogout as IconSignout,
-	MdClose as IconClose,
+	TbChevronUp as IconChevronUp,
+	TbChevronRight as IconChevronRight,
+	TbChevronDown as IconChevronDown,
+	TbChevronLeft as IconChevronLeft,
+	TbArrowNarrowRight as IconLongArrowLeft,
+	TbMenu2 as IconHamburger,
+	TbPin as IconThumbTack,
+	TbSettings as IconDashboard,
+	TbLogout as IconSignout,
+	TbX as IconClose,
+	TbTrash as IconDelete,
+	TbEditCircle as IconUpdate,
+	TbMoon as IconDarkMode,
+	TbSun as IconLightMode,
 }
 
 export * from './logo'

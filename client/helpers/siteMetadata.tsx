@@ -15,7 +15,7 @@ const siteMetadata = {
 	config: {
 		localApiURL: 'http://localhost:3001/api/',
 		remoteApiURL: 'http://fewcrew/api/',
-		roleType: { admins: ['Admin', 'Author', 'Subscriber'], guest: 'Guest' },
+		roleType: { admins: ['Admin', 'Author'], guest: ['Subscriber', 'Guest'] },
 		paths: {
 			landing: '/',
 			adminLanding: '/admin',

@@ -23,7 +23,7 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 	const { setStorage } = useStorage()
 	const [auth, setAuth] = useContext(AuthContext)
 
-	const [loading, setLoading] = useState(true)
+	const [loading, setLoading] = useState(false)
 
 	const schema = yup.object().shape({
 		email: yup.string().email().required('Email is a required field.'),
@@ -39,18 +39,17 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 			.then(res => {
 				if (res?.error) {
 					toast.error(`The credentials given are incorrect.`)
-					setLoading(true)
 				} else {
 					setAuth(res)
 					setStorage('auth', JSON.stringify(res))
 					toast.success(`Successfully signed in.`)
 					setLoading(false)
-					// roleBasedRedirect()
+					roleBasedRedirect()
 				}
 			})
 			.catch(err => {
-				console.log(err)
-				setLoading(true)
+				console.log('Error:', err.statusText)
+				setLoading(false)
 			})
 	}
 

@@ -3,21 +3,54 @@ import Link from 'next/link'
 import { useAuth } from 'hooks'
 import { authService } from 'api'
 // [Core]
-import { Drawer, DrawerProvider } from 'core/navigation'
-import { Accordion } from 'core/surfaces'
+import { Drawer, DrawerProvider } from '@core/navigation'
+
 // [Components]
 import { Header, Footer } from '@components/layouts'
 import { IconChevronDown, IconClose, IconThumbTack } from '@components/icons'
+import { DrawerMenu } from '@components/menus'
 // [Interfaces]
 import { IAdminLayout } from './AdminLayout.interfaces'
 // [Styles]
-import * as s from '@components/layouts/layout/Layout.styled'
 import * as ac from 'core/surfaces/accordion/Accordion.styled'
+import * as s from '@components/layouts/layout/Layout.styled'
 
-const DrawerMenu: FC = () => {
-	const { hasAuth } = useAuth()
+const AdminLayout: FC<IAdminLayout> = ({ children, role }) => {
+	const { hasAuth, roleBasedRedirect, hasAdminAccess, authRedirect } = useAuth()
+	const [loading, setLoading] = useState(true)
 
-	const accordionItems = [
+	useEffect(() => {
+		if (hasAdminAccess()) {
+			getCurrentAdmin()
+		} else {
+			roleBasedRedirect()
+		}
+	}, [hasAuth])
+
+	const getCurrentAdmin = async () => {
+		await authService
+			.getCurrentAdmin()
+			.then(res => {
+				if (res.error) {
+					roleBasedRedirect()
+				} else {
+					authRedirect('/')
+				}
+			})
+			.catch(err => {
+				console.log('Error:', err.statusText)
+				roleBasedRedirect()
+			})
+			.then(() => {
+				setLoading(false)
+			})
+	}
+
+	if (loading) {
+		return <>Loading...</>
+	}
+
+	const authMenu = [
 		{
 			key: 'posts',
 			tab: {
@@ -143,33 +176,7 @@ const DrawerMenu: FC = () => {
 		},
 	]
 
-	return <Accordion items={accordionItems} />
-}
-
-const AdminLayout: FC<IAdminLayout> = ({ children }) => {
-	const { hasAuth, roleBasedRedirect } = useAuth()
-	const [loading, setLoading] = useState(true)
-
-	useEffect(() => {
-		getCurrentAdmin()
-	}, [hasAuth])
-
-	const getCurrentAdmin = async () => {
-		await authService
-			.getCurrentAdmin()
-			.then(res => {
-				setLoading(false)
-			})
-			.catch(err => {
-				console.log('Error:', err.statusText)
-				setLoading(true)
-				roleBasedRedirect()
-			})
-	}
-
-	if (loading) {
-		return <>Loading...</>
-	}
+	const unauthMenu = [{}]
 
 	return (
 		<s.Layout>
@@ -183,7 +190,7 @@ const AdminLayout: FC<IAdminLayout> = ({ children }) => {
 							<Footer />
 						</s.LayoutContainer>
 					}
-					menu={<DrawerMenu />}
+					menu={<DrawerMenu items={authMenu} />}
 					closeIcon={<IconClose />}
 				></Drawer>
 			</DrawerProvider>

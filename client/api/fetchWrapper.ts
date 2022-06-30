@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useStorage } from 'hooks'
-import { siteMetadata as meta } from 'helpers'
 
 const { getStorage } = useStorage()
 

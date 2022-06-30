@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { createContext, FC, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
@@ -10,24 +10,69 @@ import Skeleton from 'react-loading-skeleton'
 import { categoryService } from 'api'
 // [Core]
 import { TextField, TextFieldWarning, Form, FormSubmit } from '@core/inputs'
-import { List, ListItem, ListItemText, Typography } from '@core/data-display'
-// [Components]
-// [Hooks]
-import { useAuth, useStorage } from 'hooks'
-// [Config]
 import {
-	ICreateCategoriesLayout,
-	ICreateCategoryForm,
-	IGetCategories,
-} from './CreateCategoryForm.interfaces'
-// [Styled]
-import * as s from './CreateCategoryForm.styled'
+	List,
+	ListItem,
+	ListItemIcon,
+	ListItemIcons,
+	ListItemText,
+	Typography,
+} from '@core/data-display'
 import { Col, Grid } from '@core/layout/grid'
 import { Box } from '@core/layout/box'
 
-export const GetCategories: FC<IGetCategories> = ({ updateFormState }) => {
+// [Config]
+import {
+	ICategory,
+	ICreateCategoriesLayout,
+	ICreateCategoryForm,
+	IGetCategories,
+	IUpdateCategoriesProvider,
+	TCategory,
+} from './CreateCategoryForm.interfaces'
+// [Styled]
+import * as s from './CreateCategoryForm.styled'
+import { IconDelete, IconUpdate, IconRemove } from '@components/icons'
+import { rmSync } from 'fs'
+
+export const UpdateCategoriesContext = createContext<any | null>(null)
+
+export const UpdateCategoriesProvider: FC<IUpdateCategoriesProvider> = ({ children }) => {
+	const [update, setUpdate] = useState(false)
+	return (
+		<UpdateCategoriesContext.Provider value={[update, setUpdate]}>
+			{children}
+		</UpdateCategoriesContext.Provider>
+	)
+}
+
+export const RemoveCategory: FC<ICategory> = ({ item }) => {
+	return (
+		<>
+			<ListItemIcon onClick={() => handleRemove(item)}>
+				<IconDelete />
+			</ListItemIcon>
+		</>
+	)
+}
+
+export const UpdateCategory: FC<ICategory> = ({ item }) => {
+	const handleUpdate = (item: ICategory) => {
+		console.log(item)
+	}
+	return (
+		<>
+			<ListItemIcon onClick={() => handleUpdate(item)}>
+				<IconUpdate />
+			</ListItemIcon>
+		</>
+	)
+}
+
+export const GetCategories: FC<IGetCategories> = () => {
 	const [categories, setCategories] = useState([])
 	const [loading, setLoading] = useState(true)
+	const [update, setUpdate] = useContext(UpdateCategoriesContext)
 
 	const getCategories = async () => {
 		await categoryService
@@ -37,21 +82,33 @@ export const GetCategories: FC<IGetCategories> = ({ updateFormState }) => {
 				setLoading(false)
 			})
 			.catch(err => {
-				// toast.error(`${err}`)
 				console.log(err)
 				setLoading(true)
 			})
 	}
 
+	const handleRemove = async (item: TCategory) => {
+		await categoryService
+			.remove({ slug: item.slug })
+			.then(res => {
+				setCategories(categories.filter((cat: TCategory) => cat._id !== res._id))
+				toast.success(`Successfully deleted category ${item.name}`)
+			})
+			.catch(err => {
+				console.log(err)
+				toast.error(`Failed to delete category ${item.name}`)
+			})
+	}
+
 	useEffect(() => {
 		getCategories()
-	}, [updateFormState])
+	}, [update])
 
 	return (
 		<s.CreateCategoryList>
 			{categories && (
 				<List>
-					{categories.map((cat: { name: string; slug: string }) => (
+					{categories.map((cat: TCategory) => (
 						<ListItem key={`categories-${cat.slug}`}>
 							{loading ? (
 								<Skeleton count={categories.length} />
@@ -62,6 +119,14 @@ export const GetCategories: FC<IGetCategories> = ({ updateFormState }) => {
 									</a>
 								</Link>
 							)}
+							<ListItemIcons>
+								<ListItemIcon onClick={() => handleRemove(cat)}>
+									<IconUpdate />
+								</ListItemIcon>
+								<ListItemIcon onClick={() => handleRemove(cat)}>
+									<IconDelete />
+								</ListItemIcon>
+							</ListItemIcons>
 						</ListItem>
 					))}
 				</List>
@@ -71,6 +136,7 @@ export const GetCategories: FC<IGetCategories> = ({ updateFormState }) => {
 }
 
 export const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
+	const [update, setUpdate] = useContext(UpdateCategoriesContext)
 	const [loading, setLoading] = useState(true)
 	const [formSubmitState, setFormSubmitState] = useState(false)
 
@@ -88,10 +154,10 @@ export const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => 
 				if (res?.error) {
 					toast.error(`The credentials given are incorrect.`)
 					setLoading(true)
-					setLoading(true)
 				} else {
 					toast.success(`Category created successfully`)
 					setLoading(false)
+					setUpdate(true)
 				}
 			})
 			.catch(err => {
@@ -112,8 +178,10 @@ export const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => 
 		if (isSubmitSuccessful) {
 			reset({ name: '' })
 			setFormSubmitState(true)
+			setUpdate(true)
 		}
-		setFormSubmitState(true)
+		setFormSubmitState(false)
+		setUpdate(false)
 		setLoading(false)
 	}, [isSubmitSuccessful])
 
@@ -122,7 +190,7 @@ export const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => 
 	}
 
 	return (
-		<p>
+		<>
 			<s.CreateCategoryForm>
 				<Form onSubmit={handleSubmit(onSubmit)} title={title} copy={copy}>
 					<TextField
@@ -141,15 +209,15 @@ export const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => 
 					<FormSubmit label="Create" />
 				</Form>
 			</s.CreateCategoryForm>
-		</p>
+		</>
 	)
 }
 
 const CreatateCategoriesLayout: FC<ICreateCategoriesLayout> = () => {
 	return (
-		<>
-			<Grid gap="2">
-				<Col start={[{ sm: '1', lg: '4' }]} end="9">
+		<UpdateCategoriesProvider>
+			<Grid gap="6">
+				<Col start={'1'} end={[{ sm: '13', lg: '9', xl: '5' }]}>
 					<Box mt={[{ lg: '4', xl: '11' }]}>
 						<Typography as="h3" variant="h4" children="Categories" />
 					</Box>
@@ -160,18 +228,22 @@ const CreatateCategoriesLayout: FC<ICreateCategoriesLayout> = () => {
 						<CreateCategoryForm />
 					</Box>
 				</Col>
-				<Col start={'9'} end={'13'}>
+				<Col start={[{ sm: '1', lg: '9', xl: '5' }]} end={'13'}>
 					<Box mt={[{ sm: '8', lg: '4', xl: '11' }]}>
 						<Typography as="h4" variant="h4">
 							Your Categories
 						</Typography>
 					</Box>
 					<Box ml-xl="1">
-						<GetCategories />
+						<Grid repeat="3">
+							<Col>
+								<GetCategories />
+							</Col>
+						</Grid>
 					</Box>
 				</Col>
 			</Grid>
-		</>
+		</UpdateCategoriesProvider>
 	)
 }
 

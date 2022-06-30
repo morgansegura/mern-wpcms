@@ -8,7 +8,7 @@ import * as s from './Menu.styled'
 
 export const MenuItem: FC<TMenuItem> = ({ title, label, active, href, onClick }) => {
 	return href ? (
-		<Link key={key} href={href} data-title={title}>
+		<Link href={href} data-title={title}>
 			<a onClick={onClick}>
 				<s.MenuItem>{label}</s.MenuItem>
 			</a>

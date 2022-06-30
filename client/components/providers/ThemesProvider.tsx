@@ -1,11 +1,13 @@
 import { createContext, FC, useContext, useMemo, useState } from 'react'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
-import { GlobalStyle } from '@styles/config/globalStyles'
-import { useStorage, useThemeMode } from 'hooks'
-import { themeLight, themeDark } from 'styles/theme/default'
-import { MdBrightness4, MdBrightness7 } from 'react-icons/md'
-
+import { useThemeMode } from 'hooks'
+// [Icons]
+import { IconDarkMode, IconLightMode } from '@components/icons'
+// [Interfaces]
 import { IThemesProvider, IThemesProviderToggle } from '@components/providers/Provider.interfaces'
+// [Styles]
+import { GlobalStyle } from '@styles/config/globalStyles'
+import { themeLight, themeDark } from '@styles/theme/default'
 
 type ThemeType = { theme: 'light' | 'dark' }
 
@@ -37,9 +39,9 @@ export function ToggleColorMode(props?: IThemesProviderToggle) {
 			}}
 		>
 			{themeMode === 'dark' ? (
-				<MdBrightness7 fontSize="small" />
+				<IconLightMode fontSize="small" />
 			) : (
-				<MdBrightness4 fontSize="small" />
+				<IconDarkMode fontSize="small" />
 			)}
 		</div>
 	)

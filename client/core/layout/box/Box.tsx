@@ -22,6 +22,11 @@ const Box: FC<IBox> = ({
 	pr,
 	pb,
 	pl,
+	flex,
+	row,
+	column,
+	align,
+	justify,
 }) => {
 	return (
 		<s.Box
@@ -40,6 +45,11 @@ const Box: FC<IBox> = ({
 			pr={pr}
 			pb={pb}
 			pl={pl}
+			flex={flex}
+			row={row}
+			column={column}
+			align={align}
+			justify={justify}
 		>
 			{children}
 		</s.Box>

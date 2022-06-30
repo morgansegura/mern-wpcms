@@ -1,22 +1,22 @@
-import { FC, useEffect } from 'react'
-import Link from 'next/link'
+import { FC, useEffect, useState } from 'react'
 import { useAuth } from 'hooks'
 // [Core]
-import { Drawer, DrawerProvider, Menu } from 'core/navigation'
-import { Accordion } from 'core/surfaces'
+import { DrawerProvider, Drawer } from '@core/navigation/drawer'
 // [Components]
 import { Header, Footer } from '@components/layouts'
-import { IconAdmin, IconChevronDown, IconClose, IconThumbTack } from '@components/icons'
+import { DrawerMenu } from '@components/menus'
+import { IconChevronDown, IconClose, IconThumbTack } from '@components/icons'
 // [Interfaces]
 import { ILayout } from './Layout.interfaces'
 // [Styles]
-import * as s from './Layout.styled'
 import * as ac from 'core/surfaces/accordion/Accordion.styled'
+import * as s from './Layout.styled'
+import Link from 'next/link'
 
-const DrawerMenu: FC = () => {
-	const { hasAuth } = useAuth()
+const Layout: FC<ILayout> = ({ children }) => {
+	const [loading, setLoading] = useState(true)
 
-	const accordionItems = [
+	const unauthMenu = [
 		{
 			key: 'posts',
 			tab: {
@@ -142,15 +142,11 @@ const DrawerMenu: FC = () => {
 		},
 	]
 
-	return <Accordion items={accordionItems} />
-}
-
-const Layout: FC<ILayout> = ({ children }) => {
 	return (
 		<s.Layout>
 			<DrawerProvider>
 				<Drawer
-					direction="bottom"
+					direction="left"
 					content={
 						<s.LayoutContainer>
 							<Header />
@@ -158,7 +154,7 @@ const Layout: FC<ILayout> = ({ children }) => {
 							<Footer />
 						</s.LayoutContainer>
 					}
-					menu={<DrawerMenu />}
+					menu={<DrawerMenu items={unauthMenu} />}
 					closeIcon={<IconClose />}
 				></Drawer>
 			</DrawerProvider>
