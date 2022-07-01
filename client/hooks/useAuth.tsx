@@ -46,7 +46,10 @@ const useAuth = () => {
 	}
 
 	const hasAdminAccess = () => {
-		return hasAuth && meta?.config.roleType.admins.includes(getUserRole()) ? true : false
+		if (hasAuth && meta?.config.roleType.admins.includes(getUserRole())) {
+			return true
+		}
+		return false
 	}
 
 	const hasToken = () => {

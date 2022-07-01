@@ -88,16 +88,16 @@ export const GetCategories: FC<IGetCategories> = () => {
 	}
 
 	const handleRemove = async (item: TCategory) => {
-		await categoryService
-			.remove({ slug: item.slug })
-			.then(res => {
-				setCategories(categories.filter((cat: TCategory) => cat._id !== res._id))
-				toast.success(`Successfully deleted category ${item.name}`)
+		const { slug } = item
+		try {
+			await categoryService.remove(slug).then(res => {
+				setCategories(categories.filter((cat: TCategory) => cat.slug !== res.slug))
+				toast.success(`Successfully deleted category.`)
 			})
-			.catch(err => {
-				console.log(err)
-				toast.error(`Failed to delete category ${item.name}`)
-			})
+		} catch (err) {
+			console.log(err)
+			toast.error(`Failed to delete category ${item.name}`)
+		}
 	}
 
 	useEffect(() => {
@@ -138,32 +138,30 @@ export const GetCategories: FC<IGetCategories> = () => {
 export const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
 	const [update, setUpdate] = useContext(UpdateCategoriesContext)
 	const [loading, setLoading] = useState(true)
-	const [formSubmitState, setFormSubmitState] = useState(false)
+	const [_, setFormSubmitState] = useState(false)
 
 	const schema = yup.object().shape({
 		name: yup.string().required(),
 	})
 
 	const onSubmit = async () => {
-		await categoryService
-			.create({
-				name: watch('name'),
-				slug: watch('slug'),
-			})
-			.then(res => {
-				if (res?.error) {
-					toast.error(`The credentials given are incorrect.`)
-					setLoading(true)
-				} else {
-					toast.success(`Category created successfully`)
-					setLoading(false)
-					setUpdate(true)
-				}
-			})
-			.catch(err => {
-				console.log(err)
-				setLoading(true)
-			})
+		try {
+			await categoryService
+				.create({
+					name: watch('name'),
+					slug: watch('slug'),
+				})
+				.then(res => {
+					if (res?.data === undefined) {
+						toast.error(`Categories must be unique.`)
+					} else {
+						toast.success(`Category created successfully`)
+						setUpdate(true)
+					}
+				})
+		} catch (err) {
+			console.log('Error:', err)
+		}
 	}
 
 	const {
@@ -219,10 +217,10 @@ const CreatateCategoriesLayout: FC<ICreateCategoriesLayout> = () => {
 			<Grid gap="6">
 				<Col start={'1'} end={[{ sm: '13', lg: '9', xl: '5' }]}>
 					<Box mt={[{ lg: '4', xl: '11' }]}>
-						<Typography as="h3" variant="h4" children="Categories" />
+						<Typography as="h3" variant="h4" copy="Categories" />
 					</Box>
 					<Box mt="0.5">
-						<Typography as="p" variant="p" children="Add New Category" />
+						<Typography as="p" variant="p" copy="Add New Category" />
 					</Box>
 					<Box mt="3">
 						<CreateCategoryForm />
@@ -230,9 +228,7 @@ const CreatateCategoriesLayout: FC<ICreateCategoriesLayout> = () => {
 				</Col>
 				<Col start={[{ sm: '1', lg: '9', xl: '5' }]} end={'13'}>
 					<Box mt={[{ sm: '8', lg: '4', xl: '11' }]}>
-						<Typography as="h4" variant="h4">
-							Your Categories
-						</Typography>
+						<Typography as="h4" variant="h4" copy="Your Categories" />
 					</Box>
 					<Box ml-xl="1">
 						<Grid repeat="3">

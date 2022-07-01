@@ -30,7 +30,7 @@ storybook-static/
 .DS_Store
 .idea/
 # next.config.js
-/core
+# /core
 
 # debug
 npm-debug.log*

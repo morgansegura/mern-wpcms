@@ -12,7 +12,7 @@ export interface ICreateCategoriesLayout {}
 export type TCategory = {
 	_id?: string
 	name?: string
-	slug?: string
+	slug?: any
 }
 
 export interface ICategory {

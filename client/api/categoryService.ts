@@ -9,9 +9,7 @@ interface IUpdateCategory {
 	slug?: string
 }
 
-interface IRemoveCategory {
-	slug?: string
-}
+interface IRemoveCategory {}
 
 export const categoryService = {
 	create,
@@ -25,7 +23,7 @@ function create(params: ICreateCategory) {
 }
 
 function remove(params: IRemoveCategory) {
-	return fetchWrapper.delete(`${baseUrl}/category/:slug`, params)
+	return fetchWrapper.delete(`${baseUrl}/category/${params}`)
 }
 
 function update(params: IUpdateCategory) {

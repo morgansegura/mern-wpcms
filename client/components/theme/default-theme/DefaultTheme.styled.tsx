@@ -194,19 +194,25 @@ export const DefaultTheme = styled.div`
 				border-color: ${style.colors.neutral10};
 			}
 		}
+
 		&.error {
-			border-color: ${style.colors.danger50};
+			${Input} {
+				border-color: ${style.colors.danger50};
+			}
 		}
+
 		&.success {
-			border-color: ${style.colors.success50};
+			${Input} {
+				border-color: ${style.colors.success50};
+			}
 		}
 	}
 
 	${Label} {
 		color: ${props =>
-			props.theme.palette.name === 'light' ? style.colors.neutral50 : style.colors.white};
+			props.theme.palette.name === 'light' ? style.colors.neutral50 : style.colors.neutral80};
 		background-color: ${props =>
-			props.theme.palette.name === 'light' ? style.colors.neutral07 : style.colors.neutral00};
+			props.theme.palette.name === 'light' ? style.colors.neutral07 : style.colors.neutral05};
 	}
 
 	${TextFieldWarning} {

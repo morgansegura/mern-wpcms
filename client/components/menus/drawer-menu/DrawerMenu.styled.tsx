@@ -1,14 +1,15 @@
 import styled, { css } from 'styled-components'
 import * as style from '@styles/config/utilities'
 import { rgba } from 'polished'
-import { DrawerMenuClose, DrawerMenuItem } from '@core/navigation/drawer/Drawer.styled'
+// [Core]
+import { DrawerMenuItem } from '@core/navigation/drawer/Drawer.styled'
 import {
 	AccordionContent,
 	AccordionContentItem,
 	AccordionTab,
 	AccordionTabContentMenuLink,
 	AccordionTabTitle,
-} from '@core/surfaces'
+} from '@core/surfaces/accordion/Accordion.styled'
 
 export const DrawerMenu = styled.div`
 	${DrawerMenuItem} {

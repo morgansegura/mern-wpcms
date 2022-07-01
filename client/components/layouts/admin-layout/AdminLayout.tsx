@@ -16,7 +16,7 @@ import * as ac from 'core/surfaces/accordion/Accordion.styled'
 import * as s from '@components/layouts/layout/Layout.styled'
 
 const AdminLayout: FC<IAdminLayout> = ({ children, role }) => {
-	const { hasAuth, roleBasedRedirect, hasAdminAccess, authRedirect } = useAuth()
+	const { roleBasedRedirect, hasAdminAccess, authRedirect } = useAuth()
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
@@ -25,15 +25,13 @@ const AdminLayout: FC<IAdminLayout> = ({ children, role }) => {
 		} else {
 			roleBasedRedirect()
 		}
-	}, [hasAuth])
+	}, [])
 
 	const getCurrentAdmin = async () => {
 		await authService
 			.getCurrentAdmin()
 			.then(res => {
 				if (res.error) {
-					roleBasedRedirect()
-				} else {
 					authRedirect('/')
 				}
 			})
@@ -175,8 +173,6 @@ const AdminLayout: FC<IAdminLayout> = ({ children, role }) => {
 			],
 		},
 	]
-
-	const unauthMenu = [{}]
 
 	return (
 		<s.Layout>
