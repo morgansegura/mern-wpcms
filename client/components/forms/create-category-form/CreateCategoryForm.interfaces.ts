@@ -22,3 +22,29 @@ export interface ICategory {
 export interface IUpdateCategoriesProvider {
 	children?: ReactNode[] | ReactNode
 }
+export interface ICreateCategoryForm {
+	children?: ReactNode[] | ReactNode
+}
+
+export interface IUpdateCategoryForm {
+	children?: ReactNode[] | ReactNode
+}
+
+export interface ICategoryList {
+	children?: ReactNode[] | ReactNode
+}
+
+export interface ICreateCategoryList {
+	children?: ReactNode[] | ReactNode
+}
+
+export interface ICategoryListItem {
+	children?: ReactNode[] | ReactNode
+}
+export interface ICategoryListItemText {
+	children?: ReactNode[] | ReactNode
+}
+
+export interface ICategoryListItemAvatar {
+	children?: ReactNode[] | ReactNode
+}

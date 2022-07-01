@@ -34,6 +34,8 @@ import {
 import * as s from './CreateCategoryForm.styled'
 import { IconDelete, IconUpdate, IconRemove } from '@components/icons'
 import { rmSync } from 'fs'
+import { Dialog, DialogProvider, DialogTrigger } from '@core/feedback/dialog'
+import { ActiveDialogContext } from '@core/feedback/dialog/Dialog'
 
 export const UpdateCategoriesContext = createContext<any | null>(null)
 
@@ -56,16 +58,63 @@ export const RemoveCategory: FC<ICategory> = ({ item }) => {
 	)
 }
 
-export const UpdateCategory: FC<ICategory> = ({ item }) => {
-	const handleUpdate = (item: ICategory) => {
-		console.log(item)
+export const UpdateCategoryForm: FC<ICategory> = ({ item }) => {
+	const [update, setUpdate] = useContext(UpdateCategoriesContext)
+	const [loading, setLoading] = useState(true)
+	const [_, setFormSubmitState] = useState(false)
+
+	const schema = yup.object().shape({
+		name: yup.string().required(),
+	})
+
+	const onSubmit = async () => {
+		try {
+			await categoryService
+				.update({
+					name: watch('name'),
+					slug: watch('slug'),
+				})
+				.then(res => {
+					if (res?.data === undefined) {
+						toast.error(`Categories must be unique.`)
+					} else {
+						toast.success(`Category updated successfully`)
+						setUpdate(true)
+					}
+				})
+		} catch (err) {
+			console.log('Error:', err)
+		}
 	}
+
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors, isSubmitSuccessful },
+	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
+
+	useEffect(() => {}, [])
+
 	return (
-		<>
-			<ListItemIcon onClick={() => handleUpdate(item)}>
-				<IconUpdate />
-			</ListItemIcon>
-		</>
+		<s.UpdateCategoryForm>
+			<Form onSubmit={handleSubmit(onSubmit)} variant="light" copy="Update Category">
+				<TextField
+					type="text"
+					name="name"
+					placeholder="Updated Category Name"
+					register={register}
+					label="Updated Category Name"
+					errors={errors}
+					error={errors.name?.message}
+					required
+					watch={watch}
+				/>
+				{errors.name?.message && <TextFieldWarning>{errors.name?.message}</TextFieldWarning>}
+
+				<FormSubmit label="Update" />
+			</Form>
+		</s.UpdateCategoryForm>
 	)
 }
 
@@ -96,7 +145,20 @@ export const GetCategories: FC<IGetCategories> = () => {
 			})
 		} catch (err) {
 			console.log(err)
-			toast.error(`Failed to delete category ${item.name}`)
+			toast.error(`Failed to delete category.`)
+		}
+	}
+
+	const handleUpdate = async (item: TCategory) => {
+		const { slug } = item
+		try {
+			await categoryService.update(slug).then(res => {
+				setCategories(categories.filter((cat: TCategory) => cat.slug !== res.slug))
+				toast.success(`Successfully deleted category.`)
+			})
+		} catch (err) {
+			console.log(err)
+			toast.error(`Failed to add category.`)
 		}
 	}
 
@@ -120,8 +182,13 @@ export const GetCategories: FC<IGetCategories> = () => {
 								</Link>
 							)}
 							<ListItemIcons>
-								<ListItemIcon onClick={() => handleRemove(cat)}>
-									<IconUpdate />
+								<ListItemIcon>
+									<DialogProvider>
+										<DialogTrigger>
+											<IconUpdate />
+										</DialogTrigger>
+										<Dialog content={<UpdateCategoryForm item={cat} />} />
+									</DialogProvider>
 								</ListItemIcon>
 								<ListItemIcon onClick={() => handleRemove(cat)}>
 									<IconDelete />

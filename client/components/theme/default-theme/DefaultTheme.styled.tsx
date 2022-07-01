@@ -16,7 +16,7 @@ import {
 	TextField,
 } from '@core/inputs/textfield/TextField.styled'
 import { Menu, SVGContainer, MenuItem } from '@core/navigation/menu/Menu.styled'
-import { FormAltMessage, FormSubmit } from '@core/inputs/form/Form.styled'
+import { Form, FormAltMessage, FormSubmit } from '@core/inputs/form/Form.styled'
 
 // [Components]
 import { Header, LogoBlock } from '@components/layouts/header/Header.styled'
@@ -134,10 +134,10 @@ export const DefaultTheme = styled.div`
 
 	/* [Form] */
 	${FormSubmit} {
-		background-color: ${props =>
-			props.theme.palette.name === 'light' ? style.colors.black : style.colors.white};
 		color: ${props =>
 			props.theme.palette.name === 'light' ? style.colors.white : style.colors.black};
+		background-color: ${props =>
+			props.theme.palette.name === 'light' ? style.colors.black : style.colors.white};
 
 		&:hover {
 			background-color: ${props =>
@@ -156,11 +156,11 @@ export const DefaultTheme = styled.div`
 			props.theme.palette.name === 'light' ? style.colors.neutral50 : style.colors.white};
 
 		a {
-			border-color: ${props =>
-				props.theme.palette.name === 'light' ? style.colors.neutral10 : style.colors.neutral60};
-
 			color: ${props =>
 				props.theme.palette.name === 'light' ? style.colors.neutral60 : style.colors.neutral08};
+
+			border-color: ${props =>
+				props.theme.palette.name === 'light' ? style.colors.neutral10 : style.colors.neutral60};
 
 			&:hover {
 				color: ${props =>
@@ -174,16 +174,57 @@ export const DefaultTheme = styled.div`
 						? style.colors.secondary50
 						: style.colors.secondary50};
 			}
+
+			&:active {
+				color: ${props =>
+					props.theme.palette.name === 'light' ? style.colors.white : style.colors.white};
+				border-color: ${props =>
+					props.theme.palette.name === 'light'
+						? style.colors.secondary50
+						: style.colors.secondary100};
+				background-color: ${props =>
+					props.theme.palette.name === 'light'
+						? style.colors.secondary50
+						: style.colors.secondary50};
+			}
+
+			&.light,
+			.light & {
+				color: ${style.colors.neutral50};
+			}
+
+			&.dark,
+			.dark & {
+				color: ${style.colors.white};
+			}
 		}
 	}
 	${TextField} {
+		color: ${props =>
+			props.theme.palette.name === 'light' ? style.colors.neutral90 : style.colors.neutral10};
+
 		&.blur {
 			${Placeholder} {
 				color: ${props =>
 					props.theme.palette.name === 'light' ? style.colors.neutral90 : style.colors.neutral10};
 			}
 			${Input} {
+				color: ${props =>
+					props.theme.palette.name === 'light' ? style.colors.neutral90 : style.colors.neutral10};
 				border-color: ${rgba(style.colors.neutral10, 0.5)};
+			}
+
+			.light &,
+			&.light {
+				${Placeholder} {
+					color: ${style.colors.neutral90};
+				}
+			}
+			.dark &,
+			&.dark {
+				${Placeholder} {
+					color: ${style.colors.neutral10};
+				}
 			}
 		}
 		&.focus {
@@ -212,11 +253,55 @@ export const DefaultTheme = styled.div`
 		color: ${props =>
 			props.theme.palette.name === 'light' ? style.colors.neutral50 : style.colors.neutral80};
 		background-color: ${props =>
-			props.theme.palette.name === 'light' ? style.colors.neutral07 : style.colors.neutral05};
+			props.theme.palette.name === 'light' ? style.colors.neutral05 : style.colors.neutral05};
 	}
 
 	${TextFieldWarning} {
 		color: ${style.colors.danger50};
+	}
+
+	${Form} {
+		&.light,
+		.light & {
+			${FormSubmit} {
+				color: ${style.colors.white};
+				background-color: ${style.colors.black};
+
+				&:hover {
+					background-color: ${rgba(style.colors.black, 0.75)};
+				}
+				&:active {
+					background-color: ${style.colors.black};
+				}
+			}
+			${Label} {
+				color: ${style.colors.neutral50};
+				background-color: ${style.colors.neutral05};
+			}
+			${TextField} {
+				color: ${style.colors.neutral90};
+			}
+		}
+		&.dark,
+		.dark & {
+			${FormSubmit} {
+				color: ${style.colors.black};
+				background-color: ${style.colors.white};
+				&:hover {
+					background-color: rgba(style.colors.white, 0.75);
+				}
+				&:active {
+					background-color: ${style.colors.white};
+				}
+			}
+			${Label} {
+				color: ${style.colors.neutral80};
+				background-color: ${style.colors.neutral05};
+			}
+			${TextField} {
+				color: ${style.colors.neutral10};
+			}
+		}
 	}
 `
 
