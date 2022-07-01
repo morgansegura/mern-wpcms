@@ -2,7 +2,7 @@ import { createContext, FC, useContext, useMemo, useState } from 'react'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { useThemeMode } from 'hooks'
 // [Components]
-import DefaultTheme from '@components/themes/default-theme/DefaultTheme'
+import DefaultTheme from '@components/theme/default-theme/DefaultTheme'
 // [Icons]
 import { IconDarkMode, IconLightMode } from '@components/icons'
 // [Interfaces]

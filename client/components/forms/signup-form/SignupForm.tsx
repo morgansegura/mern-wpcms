@@ -56,7 +56,7 @@ const SignupForm: FC<ISignupForm> = ({ title, copy }) => {
 				}
 			})
 			.catch(err => {
-				console.log(err)
+				console.log('Error:', err.statusText)
 				setLoading(false)
 			})
 	}

@@ -9,6 +9,7 @@ export const HeaderMenu = styled(Menu)`
 	justify-self: flex-end;
 	${MenuItem} {
 		display: flex;
+		gap: ${style.sp['0.5']};
 
 		&:not(:first-child) {
 			margin-left: ${style.sp['0.5']};
@@ -17,7 +18,7 @@ export const HeaderMenu = styled(Menu)`
 		${SVGContainer},
 		a {
 			color: ${props =>
-				props.theme.palette.name === 'light' ? style.colors.neutral40 : style.colors.neutral40};
+				props.theme.palette.name === 'light' ? style.colors.neutral80 : style.colors.neutral90};
 
 			&::after {
 				content: '';
@@ -34,20 +35,20 @@ export const HeaderMenu = styled(Menu)`
 
 			&:hover {
 				color: ${props =>
-					props.theme.palette.name === 'light' ? style.colors.neutral80 : style.colors.white};
+					props.theme.palette.name === 'light' ? style.colors.neutral70 : style.colors.neutral70};
 
 				&::after {
 					background-color: ${props =>
-						props.theme.palette.name === 'light' ? style.colors.neutral00 : style.colors.neutral06};
+						props.theme.palette.name === 'light' ? style.colors.neutral06 : style.colors.neutral06};
 				}
 			}
 			&:active {
 				color: ${props =>
-					props.theme.palette.name === 'light' ? style.colors.neutral80 : style.colors.white};
+					props.theme.palette.name === 'light' ? style.colors.neutral30 : style.colors.neutral30};
 
 				&::after {
 					background-color: ${props =>
-						props.theme.palette.name === 'light' ? style.colors.neutral05 : style.colors.neutral07};
+						props.theme.palette.name === 'light' ? style.colors.neutral07 : style.colors.neutral07};
 				}
 			}
 		}

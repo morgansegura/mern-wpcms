@@ -3,12 +3,6 @@ import { useAuth } from 'hooks'
 import Link from 'next/link'
 
 // [Core]
-import Accordion from '@mui/material/Accordion'
-import AccordionSummary from '@mui/material/AccordionSummary'
-import AccordionDetails from '@mui/material/AccordionDetails'
-import Typography from '@mui/material/Typography'
-
-// [Core]
 import { DrawerTrigger } from '@core/navigation/drawer'
 import { Menu, MenuItem } from '@core/navigation/menu'
 import Avatar from '@core/data-display/avatar/Avatar'
@@ -98,11 +92,11 @@ const HeaderMenu: FC<IHeaderMenu> = () => {
 		{
 			label: (
 				<MenuItem>
-					<Avatar>
+					<s.HeaderSVG>
 						<DrawerTrigger>
 							<IconHamburger />
 						</DrawerTrigger>
-					</Avatar>
+					</s.HeaderSVG>
 				</MenuItem>
 			),
 			key: 'toggle-color',

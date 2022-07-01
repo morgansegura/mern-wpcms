@@ -30,6 +30,13 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 		password: yup.string().min(8).max(32).required(),
 	})
 
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
+
 	const onSubmit = () => {
 		authService
 			.signin({
@@ -52,13 +59,6 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 				setLoading(false)
 			})
 	}
-
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
 
 	useEffect(() => {
 		if (hasAuth) {
