@@ -29,7 +29,7 @@ storybook-static/
 # misc
 .DS_Store
 .idea/
-next.config.js
+# next.config.js
 /core
 
 # debug
