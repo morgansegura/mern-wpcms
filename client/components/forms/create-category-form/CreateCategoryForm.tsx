@@ -220,65 +220,50 @@ export const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => 
 
 	return (
 		<>
-			<Grid gap="6">
-				<Col start={'1'} end={[{ sm: '13', lg: '9', xl: '5' }]}>
-					<Box mt={[{ lg: '4', xl: '11' }]}>
-						<Typography as="h3" variant="h4" copy="Categories" />
-					</Box>
-					<Box mt="0.5">
-						<Typography as="p" variant="p" copy="Add New Category" />
-					</Box>
-					<Box mt="3">
-						<s.CreateCategoryForm>
-							<Form onSubmit={handleSubmit(onCreateCategory)} title={title} copy={copy}>
-								<TextField
-									type="text"
-									name="name"
-									placeholder="Category Name"
-									register={register}
-									label="Category Name"
-									errors={errors}
-									error={errors.name?.message}
-									required
-									watch={watch}
-								/>
-								{errors.name?.message && (
-									<TextFieldWarning>{errors.name?.message}</TextFieldWarning>
-								)}
+			<s.CategoryContainer>
+				<s.CategoryFormContainer>
+					<s.CategoryFormTitle>Category</s.CategoryFormTitle>
 
-								<FormSubmit label="Create" />
-							</Form>
-						</s.CreateCategoryForm>
-					</Box>
-				</Col>
-				<Col start={[{ sm: '1', lg: '9', xl: '5' }]} end={'13'}>
-					<Box mt={[{ sm: '8', lg: '4', xl: '11' }]}>
-						<Typography as="h4" variant="h4" copy="Your Categories" />
-					</Box>
-					<Box ml-xl="1">
-						<Grid repeat="3">
-							<Col>
-								<CategoryList
-									categories={categories}
-									setCategories={setCategories}
-									edit={handleEdit}
-									remove={handleRemove}
-								/>
-								<Dialog
-									toggle={toggleDialog}
-									setToggle={() =>
-										setToggleDialog({ open: !toggleDialog.open, close: !toggleDialog.close })
-									}
-									content={
-										<UpdateCategoryForm item={updatingCategory} handleUpdate={handleUpdate} />
-									}
-									closeIcon={<IconClose />}
-								/>
-							</Col>
-						</Grid>
-					</Box>
-				</Col>
-			</Grid>
+					<s.CategoryFormCopy>Add New Category</s.CategoryFormCopy>
+
+					<s.CreateCategoryForm>
+						<Form onSubmit={handleSubmit(onCreateCategory)} title={title} copy={copy}>
+							<TextField
+								type="text"
+								name="name"
+								placeholder="Category Name"
+								register={register}
+								label="Category Name"
+								errors={errors}
+								error={errors.name?.message}
+								required
+								watch={watch}
+							/>
+							{errors.name?.message && <TextFieldWarning>{errors.name?.message}</TextFieldWarning>}
+
+							<FormSubmit label="Create" />
+						</Form>
+					</s.CreateCategoryForm>
+				</s.CategoryFormContainer>
+				<s.CategoryListContainer>
+					<s.CategoryFormTitle>Your Categories</s.CategoryFormTitle>
+
+					<CategoryList
+						categories={categories}
+						setCategories={setCategories}
+						edit={handleEdit}
+						remove={handleRemove}
+					/>
+					<Dialog
+						toggle={toggleDialog}
+						setToggle={() =>
+							setToggleDialog({ open: !toggleDialog.open, close: !toggleDialog.close })
+						}
+						content={<UpdateCategoryForm item={updatingCategory} handleUpdate={handleUpdate} />}
+						closeIcon={<IconClose />}
+					/>
+				</s.CategoryListContainer>
+			</s.CategoryContainer>
 		</>
 	)
 }

@@ -30,29 +30,28 @@ export const LayoutContainer = styled.div`
 		flex: 1 0 auto;
 	}
 
-	${AccordionTab} {
+	/* ${AccordionTab} {
 		user-select: none;
 		padding: ${style.sp['1']} ${style.sp['2']};
-		/* border-radius: ${style.radius.lg}; */
 		color: ${props =>
-			props.theme.palette.name === 'light'
-				? props.theme.palette.neutral['06']
-				: props.theme.palette.neutral['70']};
+		props.theme.palette.name === 'light'
+			? props.theme.palette.neutral['06']
+			: props.theme.palette.neutral['70']};
 		background-color: ${props =>
-			props.theme.palette.name === 'light'
-				? props.theme.palette.neutral['60']
-				: props.theme.palette.neutral['05']};
+		props.theme.palette.name === 'light'
+			? props.theme.palette.neutral['60']
+			: props.theme.palette.neutral['05']};
 
 		border-bottom: 1px solid
 			${props =>
-				props.theme.palette.name === 'light'
-					? props.theme.palette.neutral['60']
-					: props.theme.palette.neutral['07']};
+		props.theme.palette.name === 'light'
+			? props.theme.palette.neutral['60']
+			: props.theme.palette.neutral['07']};
 
 		${AccordionTabTitleIcon} {
 			svg {
 				width: ${style.sp['2']};
 			}
 		}
-	}
+	} */
 `
