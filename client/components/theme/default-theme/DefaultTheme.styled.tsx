@@ -4,29 +4,30 @@ import { rgba } from 'polished'
 // [Core]
 import { Backdrop } from '@core/feedback/backdrop/Backdrop.styled'
 import {
-	DrawerContainer,
-	DrawerMenuItem,
-	DrawerMenuClose,
-} from '@core/navigation/drawer/Drawer.styled'
-import {
 	Input,
 	Label,
 	Placeholder,
 	TextFieldWarning,
 	TextField,
+	TextFieldControl,
 } from '@core/inputs/textfield/TextField.styled'
 import { Menu, SVGContainer, MenuItem } from '@core/navigation/menu/Menu.styled'
-import { Form, FormAltMessage, FormSubmit } from '@core/inputs/form/Form.styled'
+import {
+	Form,
+	FormAltMessage,
+	FormCopy,
+	FormSubmit,
+	FormTitle,
+} from '@core/inputs/form/Form.styled'
+import {
+	DrawerContainer,
+	DrawerMenuItem,
+	DrawerMenuClose,
+} from '@core/navigation/drawer/Drawer.styled'
 
 // [Components]
 import { Header, LogoBlock } from '@components/layouts/header/Header.styled'
-
-export const HTMLBody = css`
-	background-color: ${props =>
-		props.theme.palette.name === 'light' ? style.colors.neutral06 : style.colors.neutral80};
-	color: ${props =>
-		props.theme.palette.name === 'light' ? style.colors.neutral90 : style.colors.neutral05};
-`
+import { DialogClose, DialogContainer } from '@core/feedback'
 
 export const ScrollBar = css`
 	/* width */
@@ -62,6 +63,17 @@ export const ScrollBar = css`
 	}
 `
 
+export const HTMLBody = css`
+	background-color: ${props =>
+		props.theme.palette.name === 'light' ? style.colors.neutral05 : style.colors.neutral80};
+
+	&:not(input) {
+		color: ${props =>
+			props.theme.palette.name === 'light' ? style.colors.neutral70 : style.colors.neutral05};
+	}
+
+	${ScrollBar};
+`
 export const DefaultTheme = styled.div`
 	${Backdrop} {
 		background-color: ${props =>
@@ -70,6 +82,40 @@ export const DefaultTheme = styled.div`
 				: rgba(style.colors.neutral60, 0.95)};
 	}
 
+	/* [Dialog] */
+	${DialogContainer} {
+		background-color: ${props =>
+			props.theme.palette.name === 'light' ? style.colors.neutral00 : style.colors.neutral00};
+	}
+	${DialogClose} {
+		color: ${props =>
+			props.theme.palette.name === 'light' ? style.colors.neutral60 : style.colors.neutral60};
+
+		&::after {
+			/* background-color: ${props =>
+				props.theme.palette.name === 'light'
+					? rgba(style.colors.neutral05, 0)
+					: rgba(style.colors.neutral30, 0)}; */
+		}
+		&:hover {
+			color: ${props =>
+				props.theme.palette.name === 'light' ? style.colors.neutral90 : style.colors.neutral90};
+			&::after {
+				background-color: ${props =>
+					props.theme.palette.name === 'light'
+						? rgba(style.colors.neutral00, 0.75)
+						: rgba(style.colors.neutral00, 0.75)};
+			}
+		}
+		&:active {
+			color: ${props =>
+				props.theme.palette.name === 'light' ? style.colors.neutral50 : style.colors.neutral50};
+			&::after {
+				background-color: ${props =>
+					props.theme.palette.name === 'light' ? style.colors.neutral06 : style.colors.neutral06};
+			}
+		}
+	}
 	/* [Drawer] */
 	${DrawerContainer} {
 		background-color: ${props =>
@@ -82,7 +128,7 @@ export const DefaultTheme = styled.div`
 				${props =>
 					props.theme.palette.name === 'light' ? style.colors.neutral06 : style.colors.neutral70};
 	}
-	${DrawerMenuClose} {
+	${DrawerMenuClose}, ${DialogClose} {
 		color: ${props =>
 			props.theme.palette.name === 'light' ? style.colors.neutral60 : style.colors.neutral60};
 
@@ -123,108 +169,48 @@ export const DefaultTheme = styled.div`
 
 		svg {
 			fill: ${props =>
-				props.theme.palette.name === 'light' ? style.colors.neutral70 : style.colors.neutral60};
+				props.theme.palette.name === 'light' ? style.colors.neutral20 : style.colors.neutral60};
 
 			&:hover {
 				fill: ${props =>
-					props.theme.palette.name === 'light' ? style.colors.neutral10 : style.colors.neutral50};
+					props.theme.palette.name === 'light' ? style.colors.neutral30 : style.colors.neutral50};
 			}
 		}
 	}
 
-	/* [Form] */
-	${FormSubmit} {
+	/*  [Themed Form Elements] */
+	${Label} {
+		letter-spacing: 0.25px;
 		color: ${props =>
-			props.theme.palette.name === 'light' ? style.colors.white : style.colors.black};
+			props.theme.palette.name === 'light' ? style.colors.neutral00 : style.colors.neutral80};
 		background-color: ${props =>
-			props.theme.palette.name === 'light' ? style.colors.black : style.colors.white};
-
-		&:hover {
-			background-color: ${props =>
-				props.theme.palette.name === 'light'
-					? rgba(style.colors.black, 0.75)
-					: rgba(style.colors.white, 0.75)};
-		}
-		&:active {
-			background-color: ${props =>
-				props.theme.palette.name === 'light' ? style.colors.black : style.colors.white};
-		}
+			props.theme.palette.name === 'light' ? style.colors.neutral90 : style.colors.neutral05};
 	}
 
-	${FormAltMessage} {
-		color: ${props =>
-			props.theme.palette.name === 'light' ? style.colors.neutral50 : style.colors.white};
+	${TextFieldWarning} {
+		color: ${style.colors.danger50};
+	}
 
-		a {
-			color: ${props =>
-				props.theme.palette.name === 'light' ? style.colors.neutral60 : style.colors.neutral08};
-
-			border-color: ${props =>
-				props.theme.palette.name === 'light' ? style.colors.neutral10 : style.colors.neutral60};
-
-			&:hover {
-				color: ${props =>
-					props.theme.palette.name === 'light' ? style.colors.white : style.colors.white};
-				border-color: ${props =>
-					props.theme.palette.name === 'light'
-						? style.colors.secondary50
-						: style.colors.secondary100};
-				background-color: ${props =>
-					props.theme.palette.name === 'light'
-						? style.colors.secondary50
-						: style.colors.secondary50};
-			}
-
-			&:active {
-				color: ${props =>
-					props.theme.palette.name === 'light' ? style.colors.white : style.colors.white};
-				border-color: ${props =>
-					props.theme.palette.name === 'light'
-						? style.colors.secondary50
-						: style.colors.secondary100};
-				background-color: ${props =>
-					props.theme.palette.name === 'light'
-						? style.colors.secondary50
-						: style.colors.secondary50};
-			}
-
-			&.light,
-			.light & {
-				color: ${style.colors.neutral50};
-			}
-
-			&.dark,
-			.dark & {
-				color: ${style.colors.white};
-			}
+	/* [Themed Dialog] */
+	${DialogContainer} {
+		${FormTitle}, ${FormCopy} {
+			align-self: flex-start;
+			${style.fontSizing('20px', '40px', 600)};
 		}
 	}
 	${TextField} {
 		color: ${props =>
-			props.theme.palette.name === 'light' ? style.colors.neutral90 : style.colors.neutral10};
+			props.theme.palette.name === 'light' ? style.colors.neutral50 : style.colors.neutral05};
 
 		&.blur {
 			${Placeholder} {
 				color: ${props =>
-					props.theme.palette.name === 'light' ? style.colors.neutral90 : style.colors.neutral10};
+					props.theme.palette.name === 'light' ? style.colors.neutral50 : style.colors.neutral05};
 			}
 			${Input} {
 				color: ${props =>
-					props.theme.palette.name === 'light' ? style.colors.neutral90 : style.colors.neutral10};
+					props.theme.palette.name === 'light' ? style.colors.neutral50 : style.colors.neutral05};
 				border-color: ${rgba(style.colors.neutral10, 0.5)};
-			}
-
-			.light &,
-			&.light {
-				${Placeholder} {
-					color: ${style.colors.neutral90};
-				}
-			}
-			.dark &,
-			&.dark {
-				${Placeholder} {
-					color: ${style.colors.neutral10};
-				}
 			}
 		}
 		&.focus {
@@ -233,6 +219,15 @@ export const DefaultTheme = styled.div`
 			}
 			${Input} {
 				border-color: ${style.colors.neutral10};
+			}
+
+			.light &,
+			&.light {
+				background-color: ${style.colors.neutral00};
+			}
+			.dark &,
+			&.dark {
+				background-color: ${style.colors.neutral50};
 			}
 		}
 
@@ -248,21 +243,70 @@ export const DefaultTheme = styled.div`
 			}
 		}
 	}
-
-	${Label} {
-		color: ${props =>
-			props.theme.palette.name === 'light' ? style.colors.neutral50 : style.colors.neutral80};
-		background-color: ${props =>
-			props.theme.palette.name === 'light' ? style.colors.neutral05 : style.colors.neutral05};
-	}
-
-	${TextFieldWarning} {
-		color: ${style.colors.danger50};
-	}
-
 	${Form} {
+		${FormSubmit} {
+			color: ${props =>
+				props.theme.palette.name === 'light' ? style.colors.white : style.colors.black};
+			background-color: ${props =>
+				props.theme.palette.name === 'light' ? style.colors.black : style.colors.white};
+
+			&:hover {
+				background-color: ${props =>
+					props.theme.palette.name === 'light'
+						? rgba(style.colors.black, 0.75)
+						: rgba(style.colors.white, 0.75)};
+			}
+			&:active {
+				background-color: ${props =>
+					props.theme.palette.name === 'light' ? style.colors.black : style.colors.white};
+			}
+		}
+		${FormAltMessage} {
+			color: ${props =>
+				props.theme.palette.name === 'light' ? style.colors.neutral50 : style.colors.white};
+
+			a {
+				color: ${props =>
+					props.theme.palette.name === 'light' ? style.colors.neutral60 : style.colors.neutral08};
+
+				border-color: ${props =>
+					props.theme.palette.name === 'light' ? style.colors.neutral10 : style.colors.neutral60};
+
+				&:hover {
+					color: ${props =>
+						props.theme.palette.name === 'light' ? style.colors.white : style.colors.white};
+					border-color: ${props =>
+						props.theme.palette.name === 'light'
+							? style.colors.secondary50
+							: style.colors.secondary100};
+					background-color: ${props =>
+						props.theme.palette.name === 'light'
+							? style.colors.secondary50
+							: style.colors.secondary50};
+				}
+
+				&:active {
+					color: ${props =>
+						props.theme.palette.name === 'light' ? style.colors.white : style.colors.white};
+					border-color: ${props =>
+						props.theme.palette.name === 'light'
+							? style.colors.secondary50
+							: style.colors.secondary100};
+					background-color: ${props =>
+						props.theme.palette.name === 'light'
+							? style.colors.secondary50
+							: style.colors.secondary50};
+				}
+			}
+		}
+
+		/* [Force Variant] */
+
 		&.light,
 		.light & {
+			${FormAltMessage}, ${FormTitle}, ${FormCopy}, ${Label} {
+				color: ${style.colors.neutral50};
+			}
 			${FormSubmit} {
 				color: ${style.colors.white};
 				background-color: ${style.colors.black};
@@ -279,11 +323,24 @@ export const DefaultTheme = styled.div`
 				background-color: ${style.colors.neutral05};
 			}
 			${TextField} {
-				color: ${style.colors.neutral90};
+				&.blur {
+					${Placeholder}, ${Input} {
+						color: ${style.colors.neutral90};
+					}
+				}
+				&.focus {
+					${Input} {
+						color: ${style.colors.neutral90};
+					}
+				}
 			}
 		}
+
 		&.dark,
 		.dark & {
+			${FormAltMessage}, ${FormTitle}, ${FormCopy} {
+				color: ${style.colors.white};
+			}
 			${FormSubmit} {
 				color: ${style.colors.black};
 				background-color: ${style.colors.white};
@@ -299,7 +356,16 @@ export const DefaultTheme = styled.div`
 				background-color: ${style.colors.neutral05};
 			}
 			${TextField} {
-				color: ${style.colors.neutral10};
+				&.blur {
+					${Placeholder}, ${Input} {
+						color: ${style.colors.neutral10};
+					}
+				}
+				&.focus {
+					${Input} {
+						color: ${style.colors.neutral10};
+					}
+				}
 			}
 		}
 	}

@@ -24,68 +24,81 @@ import { Box } from '@core/layout/box'
 // [Config]
 import {
 	ICategory,
+	ICategoryList,
 	ICreateCategoriesLayout,
 	ICreateCategoryForm,
 	IGetCategories,
-	IUpdateCategoriesProvider,
+	IRemoveCategory,
+	IUpdateCategory,
 	TCategory,
 } from './CreateCategoryForm.interfaces'
 // [Styled]
 import * as s from './CreateCategoryForm.styled'
-import { IconDelete, IconUpdate, IconRemove } from '@components/icons'
-import { rmSync } from 'fs'
-import { Dialog, DialogProvider, DialogTrigger } from '@core/feedback/dialog'
-import { ActiveDialogContext } from '@core/feedback/dialog/Dialog'
+import { IconClose, IconDelete, IconUpdate } from '@components/icons'
+import { Dialog } from '@core/feedback/dialog'
 
-export const UpdateCategoriesContext = createContext<any | null>(null)
+import axios from 'axios'
 
-export const UpdateCategoriesProvider: FC<IUpdateCategoriesProvider> = ({ children }) => {
-	const [update, setUpdate] = useState(false)
-	return (
-		<UpdateCategoriesContext.Provider value={[update, setUpdate]}>
-			{children}
-		</UpdateCategoriesContext.Provider>
-	)
-}
-
-export const RemoveCategory: FC<ICategory> = ({ item }) => {
+export const UpdateCategory: FC<IUpdateCategory> = ({ icon, handleUpdate }) => {
 	return (
 		<>
-			<ListItemIcon onClick={() => handleRemove(item)}>
-				<IconDelete />
-			</ListItemIcon>
+			<ListItemIcon onClick={handleUpdate}>{icon ? icon : <IconUpdate />}</ListItemIcon>
 		</>
 	)
 }
 
-export const UpdateCategoryForm: FC<ICategory> = ({ item }) => {
-	const [update, setUpdate] = useContext(UpdateCategoriesContext)
+export const RemoveCategory: FC<IRemoveCategory> = ({ icon, handleRemove }) => {
+	return (
+		<>
+			<ListItemIcon onClick={handleRemove}>{icon ? icon : <IconDelete />}</ListItemIcon>
+		</>
+	)
+}
+
+export const CategoryList: FC<ICategoryList> = ({ setCategories, categories, edit, remove }) => {
+	const getCategories = async () => {
+		try {
+			const { data } = await axios.get('/categories')
+			setCategories(data)
+		} catch (err) {
+			console.log(err)
+		}
+	}
+	useEffect(() => {
+		getCategories()
+	}, [])
+
+	return (
+		<>
+			<s.CreateCategoryList>
+				<List>
+					{categories.map((cat: TCategory) => (
+						<ListItem key={`categories-${cat.slug}`}>
+							<Link href={`/${cat.slug}`}>
+								<a title={`${cat.name} Category`}>
+									<ListItemText primary={cat.name} />
+								</a>
+							</Link>
+
+							<ListItemIcons>
+								<UpdateCategory handleUpdate={() => edit(cat)} />
+								<RemoveCategory handleRemove={() => remove(cat)} />
+							</ListItemIcons>
+						</ListItem>
+					))}
+				</List>
+			</s.CreateCategoryList>
+		</>
+	)
+}
+
+export const UpdateCategoryForm: FC<IUpdateCategory> = ({ item, handleUpdate }) => {
 	const [loading, setLoading] = useState(true)
 	const [_, setFormSubmitState] = useState(false)
 
 	const schema = yup.object().shape({
 		name: yup.string().required(),
 	})
-
-	const onSubmit = async () => {
-		try {
-			await categoryService
-				.update({
-					name: watch('name'),
-					slug: watch('slug'),
-				})
-				.then(res => {
-					if (res?.data === undefined) {
-						toast.error(`Categories must be unique.`)
-					} else {
-						toast.success(`Category updated successfully`)
-						setUpdate(true)
-					}
-				})
-		} catch (err) {
-			console.log('Error:', err)
-		}
-	}
 
 	const {
 		register,
@@ -98,13 +111,13 @@ export const UpdateCategoryForm: FC<ICategory> = ({ item }) => {
 
 	return (
 		<s.UpdateCategoryForm>
-			<Form onSubmit={handleSubmit(onSubmit)} variant="light" copy="Update Category">
+			<Form onSubmit={handleSubmit(handleUpdate)} variant="light" copy="Update Category">
 				<TextField
 					type="text"
 					name="name"
-					placeholder="Updated Category Name"
+					placeholder={`${item?.name}`}
 					register={register}
-					label="Updated Category Name"
+					label={`${item?.name}`}
 					errors={errors}
 					error={errors.name?.message}
 					required
@@ -118,116 +131,32 @@ export const UpdateCategoryForm: FC<ICategory> = ({ item }) => {
 	)
 }
 
-export const GetCategories: FC<IGetCategories> = () => {
-	const [categories, setCategories] = useState([])
-	const [loading, setLoading] = useState(true)
-	const [update, setUpdate] = useContext(UpdateCategoriesContext)
-
-	const getCategories = async () => {
-		await categoryService
-			.categories()
-			.then(res => {
-				setCategories(res)
-				setLoading(false)
-			})
-			.catch(err => {
-				console.log(err)
-				setLoading(true)
-			})
-	}
-
-	const handleRemove = async (item: TCategory) => {
-		const { slug } = item
-		try {
-			await categoryService.remove(slug).then(res => {
-				setCategories(categories.filter((cat: TCategory) => cat.slug !== res.slug))
-				toast.success(`Successfully deleted category.`)
-			})
-		} catch (err) {
-			console.log(err)
-			toast.error(`Failed to delete category.`)
-		}
-	}
-
-	const handleUpdate = async (item: TCategory) => {
-		const { slug } = item
-		try {
-			await categoryService.update(slug).then(res => {
-				setCategories(categories.filter((cat: TCategory) => cat.slug !== res.slug))
-				toast.success(`Successfully deleted category.`)
-			})
-		} catch (err) {
-			console.log(err)
-			toast.error(`Failed to add category.`)
-		}
-	}
-
-	useEffect(() => {
-		getCategories()
-	}, [update])
-
-	return (
-		<s.CreateCategoryList>
-			{categories && (
-				<List>
-					{categories.map((cat: TCategory) => (
-						<ListItem key={`categories-${cat.slug}`}>
-							{loading ? (
-								<Skeleton count={categories.length} />
-							) : (
-								<Link href={`/${cat.slug}`}>
-									<a title={`${cat.name} Category`}>
-										<ListItemText primary={cat.name} />
-									</a>
-								</Link>
-							)}
-							<ListItemIcons>
-								<ListItemIcon>
-									<DialogProvider>
-										<DialogTrigger>
-											<IconUpdate />
-										</DialogTrigger>
-										<Dialog content={<UpdateCategoryForm item={cat} />} />
-									</DialogProvider>
-								</ListItemIcon>
-								<ListItemIcon onClick={() => handleRemove(cat)}>
-									<IconDelete />
-								</ListItemIcon>
-							</ListItemIcons>
-						</ListItem>
-					))}
-				</List>
-			)}
-		</s.CreateCategoryList>
-	)
-}
-
 export const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => {
-	const [update, setUpdate] = useContext(UpdateCategoriesContext)
-	const [loading, setLoading] = useState(true)
+	const [loading, setLoading] = useState(false)
 	const [_, setFormSubmitState] = useState(false)
+
+	const [categories, setCategories] = useState([])
+	const [toggleDialog, setToggleDialog] = useState({ open: false, close: true })
+	const [updatingCategory, setUpdatingCategory] = useState({})
 
 	const schema = yup.object().shape({
 		name: yup.string().required(),
 	})
 
-	const onSubmit = async () => {
+	const onCreateCategory = async () => {
 		try {
-			await categoryService
-				.create({
-					name: watch('name'),
-					slug: watch('slug'),
-				})
-				.then(res => {
-					if (res?.data === undefined) {
-						toast.error(`Categories must be unique.`)
-					} else {
-						toast.success(`Category created successfully`)
-						setUpdate(true)
-					}
-				})
+			setLoading(true)
+			const { data } = await axios.post('/category', {
+				name: watch('name'),
+				slug: watch('slug'),
+			})
+			setCategories([data, ...categories])
+			toast.success(`Category created successfully`)
+			setLoading(false)
 		} catch (err) {
-			console.log('Error:', err)
+			console.log(err)
+			toast.error(`Category creation failed.`)
+			setLoading(false)
 		}
 	}
 
@@ -239,15 +168,50 @@ export const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => 
 		formState: { errors, isSubmitSuccessful },
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
 
+	const handleRemove = async (item: TCategory) => {
+		const { slug } = item
+		try {
+			const { data } = await axios.delete(`/category/${slug}`)
+
+			setCategories(categories.filter((cat: TCategory) => cat.slug !== data.slug))
+			toast.success(`Successfully deleted category.`)
+			setLoading(false)
+		} catch (err) {
+			console.log(err)
+			toast.error(`Successfully deleted category.`)
+			setLoading(false)
+		}
+	}
+
+	const handleEdit = (item: TCategory) => {
+		setUpdatingCategory(item)
+		setToggleDialog({ open: true, close: false })
+	}
+
+	const handleUpdate = async (item: TCategory) => {
+		const { slug } = item
+		try {
+			const { data } = await axios.put(`/category/${updatingCategory?.slug}`, item)
+			const newCategories: any = categories.map((cat: any) => {
+				if (cat?._id === data?._id) {
+					return data
+				}
+				return cat
+			})
+			setCategories(newCategories)
+			toast.success(`Successfully updated category.`)
+			setToggleDialog({ open: false, close: true })
+			setUpdatingCategory({})
+		} catch (err) {
+			console.log(err)
+			toast.error(`Failed to update category.`)
+		}
+	}
+
 	useEffect(() => {
 		if (isSubmitSuccessful) {
 			reset({ name: '' })
-			setFormSubmitState(true)
-			setUpdate(true)
 		}
-		setFormSubmitState(false)
-		setUpdate(false)
-		setLoading(false)
 	}, [isSubmitSuccessful])
 
 	if (loading) {
@@ -256,31 +220,6 @@ export const CreateCategoryForm: FC<ICreateCategoryForm> = ({ title, copy }) => 
 
 	return (
 		<>
-			<s.CreateCategoryForm>
-				<Form onSubmit={handleSubmit(onSubmit)} title={title} copy={copy}>
-					<TextField
-						type="text"
-						name="name"
-						placeholder="Category Name"
-						register={register}
-						label="Category Name"
-						errors={errors}
-						error={errors.name?.message}
-						required
-						watch={watch}
-					/>
-					{errors.name?.message && <TextFieldWarning>{errors.name?.message}</TextFieldWarning>}
-
-					<FormSubmit label="Create" />
-				</Form>
-			</s.CreateCategoryForm>
-		</>
-	)
-}
-
-const CreatateCategoriesLayout: FC<ICreateCategoriesLayout> = () => {
-	return (
-		<UpdateCategoriesProvider>
 			<Grid gap="6">
 				<Col start={'1'} end={[{ sm: '13', lg: '9', xl: '5' }]}>
 					<Box mt={[{ lg: '4', xl: '11' }]}>
@@ -290,7 +229,26 @@ const CreatateCategoriesLayout: FC<ICreateCategoriesLayout> = () => {
 						<Typography as="p" variant="p" copy="Add New Category" />
 					</Box>
 					<Box mt="3">
-						<CreateCategoryForm />
+						<s.CreateCategoryForm>
+							<Form onSubmit={handleSubmit(onCreateCategory)} title={title} copy={copy}>
+								<TextField
+									type="text"
+									name="name"
+									placeholder="Category Name"
+									register={register}
+									label="Category Name"
+									errors={errors}
+									error={errors.name?.message}
+									required
+									watch={watch}
+								/>
+								{errors.name?.message && (
+									<TextFieldWarning>{errors.name?.message}</TextFieldWarning>
+								)}
+
+								<FormSubmit label="Create" />
+							</Form>
+						</s.CreateCategoryForm>
 					</Box>
 				</Col>
 				<Col start={[{ sm: '1', lg: '9', xl: '5' }]} end={'13'}>
@@ -300,14 +258,29 @@ const CreatateCategoriesLayout: FC<ICreateCategoriesLayout> = () => {
 					<Box ml-xl="1">
 						<Grid repeat="3">
 							<Col>
-								<GetCategories />
+								<CategoryList
+									categories={categories}
+									setCategories={setCategories}
+									edit={handleEdit}
+									remove={handleRemove}
+								/>
+								<Dialog
+									toggle={toggleDialog}
+									setToggle={() =>
+										setToggleDialog({ open: !toggleDialog.open, close: !toggleDialog.close })
+									}
+									content={
+										<UpdateCategoryForm item={updatingCategory} handleUpdate={handleUpdate} />
+									}
+									closeIcon={<IconClose />}
+								/>
 							</Col>
 						</Grid>
 					</Box>
 				</Col>
 			</Grid>
-		</UpdateCategoriesProvider>
+		</>
 	)
 }
 
-export default CreatateCategoriesLayout
+export default CreateCategoryForm

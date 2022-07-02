@@ -8,6 +8,7 @@ const siteMetadata = {
 	facebook: 'https://www.facebook.com/example.page',
 	instagram: 'https://www.instagram.com/example.page',
 	linkedin: 'https://www.linkedin.com/in/example.page',
+	googlefonts: 'family=Merriweather+Sans:wght@400;700;800&family=Source+Sans+Pro:wght@400;600;700',
 	siteLogoSquare: '',
 	cssResetType: 'normalize',
 	adminSecret: 'RobertIsAwesome',

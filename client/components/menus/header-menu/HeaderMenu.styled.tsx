@@ -18,7 +18,7 @@ export const HeaderMenu = styled(Menu)`
 		${SVGContainer},
 		a {
 			color: ${props =>
-				props.theme.palette.name === 'light' ? style.colors.neutral80 : style.colors.neutral90};
+				props.theme.palette.name === 'light' ? style.colors.neutral60 : style.colors.neutral90};
 
 			&::after {
 				content: '';

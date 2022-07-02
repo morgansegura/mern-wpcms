@@ -17,9 +17,10 @@ import { ISigninForm } from './SigninForm.interfaces'
 // [Styled]
 import * as sf from '@core/inputs/form/Form.styled'
 import * as s from './SigninForm.styled'
+import axios from 'axios'
 
 const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
-	const { roleBasedRedirect, hasAuth } = useAuth()
+	const { roleBasedRedirect, authRedirect } = useAuth()
 	const { setStorage } = useStorage()
 	const [auth, setAuth] = useContext(AuthContext)
 
@@ -37,39 +38,35 @@ const SigninForm: FC<ISigninForm> = ({ title, copy }) => {
 		formState: { errors },
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
 
-	const onSubmit = () => {
-		authService
-			.signin({
+	useEffect(() => {
+		if (auth?.token) {
+			authRedirect('/')
+		}
+	}, [auth])
+
+	const onSubmit = async () => {
+		try {
+			setLoading(true)
+			const { data } = await axios.post('/signin', {
 				email: watch('email'),
 				password: watch('password'),
 			})
-			.then(res => {
-				if (res?.error) {
-					toast.error(`The credentials given are incorrect.`)
-				} else {
-					setAuth(res)
-					setStorage('auth', JSON.stringify(res))
-					toast.success(`Successfully signed in.`)
-					setLoading(false)
-					roleBasedRedirect()
-				}
-			})
-			.catch(err => {
-				console.log('Error:', err.statusText)
+
+			if (data?.error) {
+				toast.error(data.error)
 				setLoading(false)
-			})
-	}
+			} else {
+				setAuth(data)
+				setStorage('auth', JSON.stringify(data))
+				toast.success(`Successfully signed in.`)
 
-	useEffect(() => {
-		if (hasAuth) {
-			roleBasedRedirect()
-		} else {
+				roleBasedRedirect()
+			}
+		} catch (err) {
+			console.log('err => ', err)
 			setLoading(false)
+			toast.error(`The credentials given are incorrect.`)
 		}
-	}, [hasAuth])
-
-	if (loading) {
-		return <>Loading...</>
 	}
 
 	return (

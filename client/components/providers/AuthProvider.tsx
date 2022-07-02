@@ -1,13 +1,12 @@
 import { createContext, FC, useEffect, useState } from 'react'
-// [API]
-import { client } from '@api/fetchWrapper'
+import axios from 'axios'
+
 // [Hooks]
 import { useStorage } from 'hooks'
 // [Helpers]
 import { siteMetadata as meta } from 'helpers'
 // [Interfaces]
 import { IAuthProvider } from '@components/providers/Provider.interfaces'
-import axios from 'axios'
 
 const AuthContext = createContext<any | null>(null)
 
@@ -19,12 +18,12 @@ const AuthProvider: FC<IAuthProvider> = ({ children }) => {
 		token: '',
 	})
 
-	if (typeof window === 'undefined') {
-		client.defaults.baseURL = `${meta.config.remoteApiURL}`
-		client.defaults.headers.common['Authorization'] = `Bearer ${auth?.token}`
+	if (typeof window !== 'undefined') {
+		axios.defaults.baseURL = `${meta.config.localApiURL}`
+		axios.defaults.headers.common['Authorization'] = `Bearer ${auth?.token}`
 	} else {
-		client.defaults.baseURL = `${meta.config.localApiURL}`
-		client.defaults.headers.common['Authorization'] = `Bearer ${auth?.token}`
+		axios.defaults.baseURL = `${meta.config.remoteApiURL}`
+		axios.defaults.headers.common['Authorization'] = `Bearer ${auth?.token}`
 	}
 
 	useEffect(() => {

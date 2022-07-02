@@ -18,20 +18,27 @@ export type TCategory = {
 export interface ICategory {
 	item?: TCategory
 }
-
-export interface IUpdateCategoriesProvider {
-	children?: ReactNode[] | ReactNode
+export interface IRemoveCategory {
+	item?: TCategory
+	handleRemove: Function
+	icon?: ReactNode[] | ReactNode
 }
+export interface IUpdateCategory {
+	item?: TCategory
+	handleUpdate: any
+	icon?: ReactNode[] | ReactNode
+}
+
 export interface ICreateCategoryForm {
-	children?: ReactNode[] | ReactNode
-}
-
-export interface IUpdateCategoryForm {
 	children?: ReactNode[] | ReactNode
 }
 
 export interface ICategoryList {
 	children?: ReactNode[] | ReactNode
+	setCategories: Function
+	categories: Object[]
+	edit: Function
+	remove: Function
 }
 
 export interface ICreateCategoryList {
@@ -46,5 +53,8 @@ export interface ICategoryListItemText {
 }
 
 export interface ICategoryListItemAvatar {
+	children?: ReactNode[] | ReactNode
+}
+export interface ICategories {
 	children?: ReactNode[] | ReactNode
 }

@@ -1,10 +1,13 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import useAuth from '@hooks/useAuth'
+import { AuthContext } from '@components/providers'
+import axios from 'axios'
+import { useStorage, useAuth } from 'hooks'
+
 // [API]
 import { authService, pathConfig as path } from 'api'
 // [Core]
@@ -27,8 +30,10 @@ const schema = yup.object().shape({
 })
 
 const SignupForm: FC<ISignupForm> = ({ title, copy }) => {
-	const { roleBasedRedirect, hasAuth } = useAuth()
-	const [loading, setLoading] = useState(true)
+	const [auth, setAuth] = useContext(AuthContext)
+	const { setStorage } = useStorage()
+	const { roleBasedRedirect, authRedirect, hasAuth } = useAuth()
+	const [loading, setLoading] = useState(false)
 
 	const {
 		register,
@@ -37,37 +42,38 @@ const SignupForm: FC<ISignupForm> = ({ title, copy }) => {
 		formState: { errors },
 	} = useForm({ mode: 'onSubmit', resolver: yupResolver(schema) })
 
-	const onSubmit = () => {
-		authService
-			.signup({
+	useEffect(() => {
+		if (auth?.token) {
+			authRedirect('/')
+		}
+	}, [auth])
+
+	const onSubmit = async () => {
+		setLoading(true)
+		try {
+			const { data } = await axios.post('/signup', {
 				fullName: watch('fullName'),
 				username: watch('username'),
 				email: watch('email'),
 				password: watch('password'),
 				passwordConfirm: watch('passwordConfirm'),
 			})
-			.then(res => {
-				if (res?.error) {
-					toast.error(`Something went wrong. Please try again.`)
-					setLoading(false)
-					roleBasedRedirect()
-				} else {
-					setLoading(true)
-				}
-			})
-			.catch(err => {
-				console.log('Error:', err.statusText)
+			if (data?.error) {
+				toast.error(`Something went wrong. Please try again.`)
 				setLoading(false)
-			})
-	}
-
-	useEffect(() => {
-		if (hasAuth) {
-			roleBasedRedirect()
-		} else {
+			} else {
+				setAuth(data)
+				setStorage('auth', JSON.stringify(data))
+				toast.success(`Successfully signed in.`)
+				setLoading(false)
+				roleBasedRedirect()
+			}
+		} catch (err) {
+			toast.error('Signup failed. Try again.')
+			console.log(err)
 			setLoading(false)
 		}
-	}, [hasAuth])
+	}
 
 	if (loading) {
 		return <>Loading...</>

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useAuth } from 'hooks'
 import { authService } from 'api'
@@ -14,34 +14,26 @@ import { IAdminLayout } from './AdminLayout.interfaces'
 // [Styles]
 import * as ac from 'core/surfaces/accordion/Accordion.styled'
 import * as s from '@components/layouts/layout/Layout.styled'
+import { AuthContext } from '@components/providers'
+import axios from 'axios'
 
 const AdminLayout: FC<IAdminLayout> = ({ children, role }) => {
-	const { roleBasedRedirect, hasAdminAccess, authRedirect } = useAuth()
+	const [auth, _] = useContext(AuthContext)
+	const { authRedirect } = useAuth()
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
-		if (hasAdminAccess()) {
-			getCurrentAdmin()
-		} else {
-			roleBasedRedirect()
-		}
-	}, [])
+		if (auth?.token) getCurrentAdmin()
+	}, [auth?.token])
 
 	const getCurrentAdmin = async () => {
-		await authService
-			.getCurrentAdmin()
-			.then(res => {
-				if (res.error) {
-					authRedirect('/')
-				}
-			})
-			.catch(err => {
-				console.log('Error:', err.statusText)
-				roleBasedRedirect()
-			})
-			.then(() => {
-				setLoading(false)
-			})
+		try {
+			const { data } = await axios.get('/current-admin')
+			setLoading(false)
+		} catch (err) {
+			console.log(err)
+			authRedirect('/')
+		}
 	}
 
 	if (loading) {

@@ -1,7 +1,4 @@
 import axios from 'axios'
-import { useStorage } from 'hooks'
-
-const { getStorage } = useStorage()
 
 export const client = (() => {
 	return axios.create({
@@ -78,4 +75,4 @@ async function request(options: any, store?: any) {
 	return client(options).then(onSuccess).catch(onError)
 }
 
-// export default request
+export default request
